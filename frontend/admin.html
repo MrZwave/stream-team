@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin - Stream Team</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <h1>🔒 Dashboard Admin</h1>
+    <p>Gérez les cartes et les membres de la communauté.</p>
+    <div class="dropdown-container">
+      <div class="dropdown-wrapper" id="auth-wrapper">
+        <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
+        <div class="dropdown-menu" id="auth-dropdown">
+          <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
+          <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
+          <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
+          <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
+          <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
+          <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="stats">
+    <p><strong>Membres inscrits :</strong> <span id="totalMembers">0</span></p>
+    <p><strong>Total cartes différentes :</strong> <span id="totalCards">0</span></p>
+  </div>
+
+  <form id="addCardForm" class="card-form">
+    <h2>➕ Ajouter une Carte</h2>
+    <div class="form-group">
+      <input type="text" id="cardName" placeholder="Nom de la carte" required>
+      <input type="text" id="cardRarity" placeholder="Rareté (common, rare...)" required>
+    </div>
+    <div class="form-group">
+      <input type="text" id="cardImage" placeholder="URL image (facultatif)">
+    </div>
+    <textarea id="cardDescription" placeholder="Description..." rows="3"></textarea>
+    <button type="submit" class="submit-btn">💾 Ajouter</button>
+  </form>
+
+  <hr>
+
+  <h2>📢 Envoyer une notification</h2>
+<form id="notifForm">
+  <select id="notifType" required>
+    <option value="">-- Type de notification --</option>
+    <option value="update">✅ Mise à jour</option>
+    <option value="mission">🎯 Mission</option>
+    <option value="tip">🧠 Astuce</option>
+    <option value="reward">🎁 Récompense</option>
+  </select>
+  <textarea id="notifMessage" placeholder="Message de la notification..." required></textarea>
+  <button type="submit">Envoyer la Notification</button>
+</form>
+
+<hr>
+
+<div class="admin-block">
+  <h2>📜 Ajouter une quête</h2>
+  <form id="questForm" class="admin-form">
+    <input type="text" id="questName" placeholder="Nom de la quête" required>
+
+    <textarea id="questDescription" placeholder="Description de la quête" required></textarea>
+
+    <select id="questType" required>
+      <option value="daily">Quotidienne</option>
+      <option value="weekly">Hebdomadaire</option>
+    </select>
+
+    <input type="number" id="questXP" placeholder="XP récompensé" min="0" required>
+
+    <input type="text" id="questRequirement" placeholder='Conditions (ex: {"stream_time":30})' required>
+
+    <input type="number" id="questCardReward" placeholder="ID de carte (optionnel)">
+
+    <button type="submit">➕ Ajouter la quête</button>
+  </form>
+</div>
+  
+  <hr>
+
+  <h2 style="margin-top: 40px;">📋 Quêtes existantes</h2>
+<table id="questTable" style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>📜 Nom</th>
+      <th>📖 Description</th>
+      <th>📆 Type</th>
+      <th>⭐ XP</th>
+      <th>🎯 Condition</th>
+      <th>🃏 Carte</th>
+      <th>❌</th>
+    </tr>
+  </thead>
+  <tbody id="questTableBody">
+    <!-- Les quêtes seront injectées ici dynamiquement -->
+  </tbody>
+</table>
+
+
+  <hr>
+
+  <div class="streamer-grid" id="streamersList"></div>
+
+  <script src="admin.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

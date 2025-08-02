@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Stream Team</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <style>
+    .contact-wrapper {
+      max-width: 700px;
+      margin: 100px auto 60px;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid #00fff7;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00fff7;
+    }
+
+    .contact-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #00fff7;
+      text-shadow: 0 0 10px #00fff7;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #ccc;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #111;
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.95rem;
+      box-shadow: 0 0 8px rgba(0, 255, 247, 0.3);
+      transition: 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      box-shadow: 0 0 12px #00fff7;
+    }
+
+    .contact-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00fff7, #0088ff);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: none;
+      transition: 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      background: linear-gradient(90deg, #00ccff, #0055ff);
+      box-shadow: 0 0 10px #00fff7;
+    }
+
+    .contact-note {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dropdown-container">
+    <div class="dropdown-wrapper" id="auth-wrapper">
+      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
+      <div class="dropdown-menu" id="auth-dropdown">
+        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
+        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
+        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
+        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
+        <a href="/contact.html" class="dropdown-item">📩 Contact</a>
+        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="contact-wrapper">
+    <h1 class="contact-title">📩 Contacte l’équipe Stream Team</h1>
+    <form action="mailto:contact@stream-team.site" method="POST" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">👤 Nom / Pseudo</label>
+        <input type="text" id="name" name="name" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="email">📧 Adresse e-mail</label>
+        <input type="email" id="email" name="email" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="message">📝 Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="contact-btn">Envoyer</button>
+    </form>
+
+    <p class="contact-note">Nous répondons généralement sous 48h. Pour les urgences, passe par Discord.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
+        <span class="footer-name">Stream Team</span>
+      </div>
+      <div class="footer-nav">
+        <a href="/mentions-legales.html">📜 Mentions Légales</a>
+        <a href="/confidentialite.html">🔒 Confidentialité</a>
+        <a href="/cgu.html">📘 Conditions</a>
+        <a href="/cookies.html">🍪 Cookies</a>
+        <a href="/contact.html">📩 Contact</a>
+      </div>
+      <div class="footer-copy">
+        © 2025 Stream Team. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= userData.display_name %> - Stream Team</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="glow-bg">
+  <div class="profile-container">
+    <div class="profile-card neon-border">
+      <img src="<%= userData.profile_image_url %>" alt="Avatar" class="profile-avatar">
+      <h1><%= userData.display_name %></h1>
+      <p class="profile-bio"><%= userData.description || 'Aucune description disponible.' %></p>
+
+      <div class="profile-stats">
+        <h3>📊 Statistiques rapides</h3>
+        <ul>
+          <li>📍 Clics sur le profil : <%= userStats.clicks || 0 %></li>
+          <li>⭐ Salves envoyées : <%= userStats.salves || 0 %></li>
+        </ul>
+      </div>
+
+      <div class="profile-buttons">
+        <% if (userData.is_live) { %>
+          <span class="live-badge">🔴 En live</span>
+        <% } %>
+        <a href="https://twitch.tv/<%= userData.login %>" class="btn btn-follow" target="_blank">Suivre ce streamer</a>
+        <button class="btn btn-salve">Envoyer une salve</button>
+      </div>
+    </div>
+
+    <div class="clips-section">
+      <h2>📺 Derniers clips Twitch</h2>
+      <div class="clips-grid">
+        <% if (clips && clips.length > 0) { %>
+          <% clips.forEach(clip => { %>
+            <div class="clip-card">
+              <a href="<%= clip.url %>" target="_blank">
+                <img src="<%= clip.thumbnail_url %>" alt="Clip">
+                <p class="clip-title"><%= clip.title %></p>
+              </a>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p class="no-clips">Aucun clip disponible.</p>
+        <% } %>
+      </div>
+
+      <div class="view-all-clips">
+        <a href="https://twitch.tv/<%= userData.login %>/clips" target="_blank">✨ Voir tous les clips sur Twitch</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>⚡ Stream Team</p>
+  </footer>
+</body>
+</html>

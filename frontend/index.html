@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🚀 Retour du QG - Stream Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <!-- Twitch performance optimizations -->
+  <link rel="preconnect" href="https://player.twitch.tv">
+  <link rel="preconnect" href="https://www.twitch.tv">
+  <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin>
+  <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin>
+  <link rel="dns-prefetch" href="https://player.twitch.tv">
+  <link rel="dns-prefetch" href="https://www.twitch.tv">
+  <link rel="dns-prefetch" href="https://static-cdn.jtvnw.net">
+  <link rel="dns-prefetch" href="https://clips-media-assets2.twitch.tv">
+  
+  <style>
+
+    .fade-out {
+      animation: fadeOut 2s ease-in forwards;
+}
+
+    @keyframes fadeOut {
+      to {
+      opacity: 0;
+      transform: scale(1.1);
+  }
+}
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #1e0057 0%, #000027 100%);
+      font-family: 'Share Tech Mono', monospace;
+      color: white;
+      scroll-behavior: smooth;
+    }
+
+    .intro-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 4rem;
+      background: linear-gradient(90deg, #f0f, #0ff, #f0f);
+      background-size: 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: wave 5s linear infinite;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+    }
+
+    .tagline {
+      font-size: 1.6rem;
+      color: #99ffe0;
+      margin-bottom: 2rem;
+      animation: slideUp 2s ease-out forwards;
+      text-shadow: 0 0 10px rgba(0,255,255,0.3);
+    }
+
+    .scroll-arrow {
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      color: #00ffffaa;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+    }
+
+    .enter-button {
+      background: #00f0ff;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 0 20px #00f0ff88;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .enter-button:hover {
+      transform: scale(1.05);
+      background: #0ff;
+      box-shadow: 0 0 30px #00f0ff;
+    }
+
+    section.info-block {
+      padding: 10vh 5vw;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    section.info-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: gold;
+      border-radius: 50%;
+      animation: fall 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes wave {
+      0% { background-position: 0% }
+      100% { background-position: 400% }
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0 }
+      100% { transform: translateY(0); opacity: 1 }
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particules -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Intro -->
+  <div class="intro-container">
+    <h1>🔥 LE QG EST DE RETOUR</h1>
+    <p class="tagline">Une nouvelle ère de streaming commence maintenant.</p>
+    <div class="scroll-arrow">⬇️</div>
+  </div>
+
+  <!-- Sections de présentation -->
+  <section class="info-block">
+    <h2>🎥 Une équipe, une passion</h2>
+    <p>Stream Team, c’est bien plus qu’un site : c’est un QG pour les créateurs, les passionnés, les viewers curieux et les joueurs acharnés.</p>
+  </section>
+
+  <section class="info-block">
+    <h2>🚀 Rejoignez l’élite</h2>
+    <p>Chaque membre est un pilier de la communauté. Stats, dashboards, cartes à collectionner et clips à revivre : tout est centralisé ici.</p>
+  </section>
+
+  <section class="info-block">
+    <h2>📡 En direct de l’action</h2>
+    <p>Suivez les streamers en live, découvrez les pépites montantes, envoyez des salves et faites partie de l'histoire.</p>
+  </section>
+
+  <section class="info-block">
+    <h2>💾 Un QG en évolution constante</h2>
+    <p>Nous ajoutons régulièrement des fonctionnalités : cartes uniques, classements, mini-jeux, et bien plus à venir !</p>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="info-block">
+    <h2>🧠 Tu as tout lu ?</h2>
+    <p>Alors soldat, il est temps d’entrer dans le QG et découvrir qui sont les vrais streamers du front.</p>
+    <button class="enter-button" onclick="enterSite()">🎮 Accéder au QG</button>
+  </section>
+
+  <script>
+    // Génère les particules
+    const particles = document.getElementById('particles');
+    for (let i = 0; i < 60; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      p.style.animationDelay = (Math.random() * 4) + 's';
+      p.style.opacity = Math.random();
+      particles.appendChild(p);
+    }
+
+    // Apparition progressive des sections
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.info-block').forEach(block => {
+      observer.observe(block);
+    });
+
+    function enterSite() {
+  const body = document.body;
+  body.classList.add('fade-out');
+  setTimeout(() => {
+    window.location.href = 'home.html';
+  }, 2000);
+}
+    // Animation de la flèche de défilement
+    const scrollArrow = document.querySelector('.scroll-arrow');
+    setInterval(() => {
+      scrollArrow.classList.toggle('bounce');
+    }, 2000);
+
+  </script>
+</body>
+</html>

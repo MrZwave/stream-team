@@ -1,0 +1,305 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(ellipse at center, #0d0d2b, #000);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e3e3f3;
+  overflow-x: hidden;
+}
+
+header {
+  background: rgba(20, 20, 50, 0.9);
+  padding: 30px 40px;
+  border-bottom: 2px solid #4e00c2;
+  box-shadow: 0 0 20px #4e00c288;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #ad8cff;
+  text-shadow: 0 0 8px #8239ff;
+}
+
+header p {
+  color: #ccc;
+  font-size: 1em;
+}
+
+.dropdown-container {
+  margin-top: 10px;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  background: #4e00c2;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #8239ff;
+  transition: 0.2s;
+}
+
+.dropdown-trigger:hover {
+  background: #6d00ff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #1a1a2f;
+  border: 1px solid #4e00c2;
+  border-radius: 8px;
+  display: none;
+  z-index: 10;
+  min-width: 180px;
+}
+
+.dropdown-wrapper:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  color: white;
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  border-bottom: 1px solid #4e00c255;
+}
+
+.dropdown-item:hover {
+  background-color: #330066;
+}
+
+/* Statistiques */
+#stats {
+  text-align: center;
+  margin: 30px auto;
+  font-size: 1.2em;
+}
+
+#stats span {
+  font-weight: bold;
+  color: #9e7bff;
+}
+
+/* Liste des streamers */
+#streamersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 30px auto;
+  padding: 0 40px;
+  max-width: 1200px;
+}
+
+.streamer-block {
+  background: #1a1a2f;
+  border: 1px solid #4e00c244;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px #8239ff33;
+  transition: transform 0.2s;
+}
+
+.streamer-block:hover {
+  transform: translateY(-5px);
+}
+
+.streamer-block h3 {
+  color: #ad8cff;
+  margin-bottom: 10px;
+}
+
+.streamer-block ul {
+  padding-left: 20px;
+  list-style: square;
+}
+
+/* Formulaire d'ajout de carte */
+form#addCardForm {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #1a1a2f;
+  border: 1px solid #4e00c255;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #4e00c288;
+}
+
+form#addCardForm input,
+form#addCardForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  background: #0f0f1c;
+  color: white;
+  border: 1px solid #4e00c288;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+form#addCardForm button {
+  background: #4e00c2;
+  color: white;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #8239ff;
+  transition: 0.2s;
+}
+
+form#addCardForm button:hover {
+  background: #6d00ff;
+}
+
+.admin-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+
+.admin-popup.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.admin-popup.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.admin-popup.error {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Liste des cartes existantes */
+#streamersList + div {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #1a1a2f;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #8239ff44;
+}
+
+#streamersList + div strong {
+  color: #9e7bff;
+}
+
+#streamersList + div button {
+  background: #c70039;
+  color: white;
+  padding: 6px 12px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#streamersList + div button:hover {
+  background: #ff0033;
+}
+
+#notifForm {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #1a1a2f;
+  border: 1px solid #4e00c255;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #4e00c288;
+}
+
+#notifForm select,
+#notifForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  background: #0f0f1c;
+  color: white;
+  border: 1px solid #4e00c288;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+#notifForm button {
+  background: #4e00c2;
+  color: white;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #8239ff;
+  transition: 0.2s;
+}
+
+#notifForm button:hover {
+  background: #6d00ff;
+}
+
+.admin-block {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #1c1c2c;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 255, 159, 0.1);
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #2d2d4f;
+  color: #eee;
+  font-size: 14px;
+}
+
+.admin-form button {
+  padding: 10px 20px;
+  background: #00ff9f;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.admin-form button:hover {
+  background: #00cc80;
+}
+
+#questTable tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+#questTable td {
+  padding: 8px;
+  text-align: left;
+}

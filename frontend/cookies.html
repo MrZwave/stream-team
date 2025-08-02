@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestion des Cookies</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dropdown-container">
+    <div class="dropdown-wrapper" id="auth-wrapper">
+      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
+      <div class="dropdown-menu" id="auth-dropdown">
+        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
+                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
+        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
+        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
+        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
+        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+      </div>
+    </div>
+  </div>
+
+  <main style="max-width: 800px; margin: 5rem auto 3rem; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
+    <h1 style="color: var(--primary); text-shadow: 0 0 5px var(--primary-glow);">🍪 Gestion des Cookies</h1>
+
+    <p>Cette page vous informe sur l’usage des cookies sur le site <strong>Stream Team</strong> et vos droits en matière de gestion des données.</p>
+
+    <h2>1. Qu'est-ce qu'un cookie ?</h2>
+    <p>Un cookie est un petit fichier stocké sur votre terminal (ordinateur, mobile, etc.) lors de la consultation d’un site. Il permet de reconnaître votre appareil et d’améliorer votre expérience utilisateur.</p>
+
+    <h2>2. Cookies utilisés sur Stream Team</h2>
+    <ul>
+      <li><strong>Cookies de session :</strong> nécessaires pour gérer votre connexion après l'authentification Twitch.</li>
+      <li><strong>Cookies de sécurité :</strong> pour assurer une navigation sécurisée.</li>
+      <li><strong>Cookies de personnalisation :</strong> (à venir) pour adapter certaines fonctionnalités selon vos préférences.</li>
+    </ul>
+
+    <h2>3. Consentement</h2>
+    <p>
+  Conformément au RGPD, seuls les cookies strictement nécessaires (comme ceux liés à l’authentification ou à la sécurité) sont déposés sans consentement préalable.<br>
+  Une bannière de cookies vous permet d’accepter ou refuser les cookies facultatifs si de tels services venaient à être ajoutés (comme des outils de statistiques ou des services tiers).
+  </p>
+
+    <h2>4. Gérer les cookies</h2>
+    <p>Vous pouvez gérer ou désactiver les cookies depuis les paramètres de votre navigateur :</p>
+    <ul>
+      <li>Chrome : <a href="https://support.google.com/chrome/answer/95647" target="_blank">support.google.com/chrome</a></li>
+      <li>Firefox : <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies" target="_blank">support.mozilla.org</a></li>
+      <li>Safari : <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank">support.apple.com</a></li>
+    </ul>
+
+    <h2>5. Durée de vie des cookies</h2>
+    <p>Les cookies de session expirent automatiquement lorsque vous vous déconnectez ou quittez le site. Les autres (si présents) auront une durée maximale de 13 mois.</p>
+    <p>Pour en savoir plus sur la manière dont nous utilisons vos données personnelles, veuillez consulter notre <a href="/confidentialite.html">politique de confidentialité</a>.</p>
+
+    <h2>6. Contact</h2>
+    <p>Pour toute question concernant notre politique de cookies, contactez-nous à : <a href="mailto:support@stream-team.site">support@stream-team.site</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
+        <span class="footer-name">Stream Team</span>
+      </div>
+      <div class="footer-nav">
+        <a href="/mentions-legales.html">📜 Mentions Légales</a>
+        <a href="/confidentialite.html">🔒 Confidentialité</a>
+        <a href="/cgu.html">📘 Conditions</a>
+        <a href="/cookies.html">🍪 Cookies</a>
+        <a href="/contact.html">📩 Contact</a>
+      </div>
+      <div class="footer-copy">
+        © 2025 Stream Team. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

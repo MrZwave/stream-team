@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap - Stream Team</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    .roadmap-wrapper {
+      max-width: 900px;
+      margin: 100px auto 40px;
+      padding: 20px;
+      color: #ccc;
+      position: relative;
+    }
+
+    .roadmap-title {
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      color: #00fff7;
+      text-shadow: 0 0 10px #00fff7;
+    }
+
+    .timeline {
+      position: relative;
+      margin-left: 30px;
+      padding-left: 30px;
+      border-left: 3px dashed #00fff7;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      background-color: rgba(0,0,0,0.3);
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #00fff744;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 10px;
+      width: 20px;
+      height: 20px;
+      background: #00fff7;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00fff7;
+    }
+
+    .timeline-item.future::before {
+      background: #8888ff;
+      box-shadow: 0 0 10px #8888ff;
+    }
+
+    .timeline-item.removed::before {
+      background: #ff4444;
+      box-shadow: 0 0 10px #ff4444;
+    }
+
+    .timeline-item.removed {
+      background-color: rgba(70, 0, 0, 0.6);
+      border-left: 4px solid #ff4444;
+      color: #ffaaaa;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 5px;
+      font-size: 1.3rem;
+      color: #fff;
+    }
+
+    .timeline-item.removed h3 {
+      color: #ff8888;
+    }
+
+    .timeline-category {
+      font-size: 1.6rem;
+      color: #00fff7;
+      border-bottom: 1px solid #00fff7;
+      padding-bottom: 10px;
+      margin-top: 60px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropdown-container">
+    <div class="dropdown-wrapper" id="auth-wrapper">
+      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
+      <div class="dropdown-menu" id="auth-dropdown">
+        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
+        <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
+        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
+        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
+        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
+        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="roadmap-wrapper">
+    <h1 class="roadmap-title">🗺️ Roadmap Stream Team</h1>
+
+    <div class="timeline">
+      <div class="timeline-category">✅ Déjà en ligne</div>
+
+      <div class="timeline-item">
+        <h3>🎨 Nouveau design néon/futuriste</h3>
+        <p>Refonte complète de toutes les pages avec ambiance HQ et animations.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>💥 Bouton “Envoyer une salve”</h3>
+        <p>Explosion, débris, son de grenade, compteur et message d'encouragement.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>🎞️ Intégration des clips Twitch</h3>
+        <p>Affichage automatique des clips récents pour chaque profil streamer.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>👁️ Compteur de clics sur les profils</h3>
+        <p>Mesure de popularité visible publiquement.</p>
+      </div>
+
+      <div class="timeline-item removed">
+        <h3>📊 Dashboard personnel retiré</h3>
+        <p>Statistiques internes détaillées temporairement désactivées.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>🔔 Système de notifications</h3>
+        <p>Ajout d'un onglet de notifications pour suivre les activités importantes.</p>
+      </div>
+
+      <div class="timeline-category">🔮 Fonctionnalités à venir</div>
+
+      <div class="timeline-item future">
+        <h3>🧠 IA de suggestion de streamers</h3>
+        <p>Proposition de créateurs en fonction de ton activité.</p>
+      </div>
+
+      <div class="timeline-item future">
+        <h3>📦 Boutique de badges & skins</h3>
+        <p>Personnalise ton profil avec des effets visuels et cartes rares.</p>
+      </div>
+
+      <div class="timeline-item future">
+        <h3>🎁 Coffres et récompenses</h3>
+        <p>Bonus aléatoires débloqués par l'activité.</p>
+      </div>
+
+      <div class="timeline-item future">
+        <h3>🗣️ Chat vocal communautaire</h3>
+        <p>Mini vocaux entre viewers d'un même live.</p>
+      </div>
+
+      <div class="timeline-item future">
+        <h3>📅 Missions & événements</h3>
+        <p>Objectifs communautaires pour obtenir des badges uniques.</p>
+      </div>
+
+      <div class="timeline-item future">
+        <h3>🧪 Outil de test de stream</h3>
+        <p>Diagnostic live : image, son, titre et qualité de diffusion.</p>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-size: 0.85rem; color: #888; margin-top: 50px;">
+      🛈 Cette roadmap est exhaustive. Les mises à jour ne seront pas forcément faites dans l'ordre présenté.<br>
+      🔁 Revenez souvent pour découvrir les nouveautés ajoutées !
+    </p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+ <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
+        <span class="footer-name">Stream Team</span>
+      </div>
+      <div class="footer-nav">
+        <a href="/mentions-legales.html">📜 Mentions Légales</a>
+        <a href="/confidentialite.html">🔒 Politique de Confidentialité</a>
+        <a href="/cgu.html">📘 Conditions</a>
+        <a href="/cookies.html">🍪 Cookies</a>
+        <a href="/contact.html">📩 Contact</a>
+      </div>
+      <div class="footer-copy">
+        © 2025 Stream Team. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+</html>
