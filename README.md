@@ -88,6 +88,7 @@ Distribué sous licence [MIT](https://github.com/MrZwave/stream-team?tab=MIT-1-o
 © 2025 MrZwave & Stream Team.
 
 🔗 Liens utiles
+
 🌐 [Twitch Developers](https://dev.twitch.tv/)
 
 🛠️ [Twitch OAuth Docs](https://dev.twitch.tv/docs/authentication/)
