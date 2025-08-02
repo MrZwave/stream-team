@@ -1,160 +1,94 @@
-# ⚡ Stream Team
+# 🚀 Stream Team
 
-> Plateforme web interactive pour les streamers, conçue pour mettre en valeur leurs lives, statistiques, clips et missions de progression.  
-> Projet communautaire propulsé par Node.js, Express, EJS, MariaDB, OAuth Twitch et une interface full responsive en HTML/CSS/JS.
-
----
-
-## 🌐 Objectif du projet
-
-Créer un **hub centralisé** où chaque membre de l'équipe Stream Team peut :
-- Afficher ses infos Twitch dynamiquement.
-- Suivre ses statistiques (clics, lives, viewers, quêtes, cartes, etc).
-- Participer à des missions journalières et hebdo pour gagner des récompenses.
-- Mettre en valeur ses meilleurs clips Twitch.
-- Être repéré par les autres créateurs et partenaires.
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Node.js](https://img.shields.io/badge/Node.js-18.x-brightgreen.svg)
+![Contributions welcome](https://img.shields.io/badge/Contributions-Welcome-ff69b4.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
+![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-red)
+![GitHub repo size](https://img.shields.io/github/repo-size/MrZwave/stream-team)
+![Last Commit](https://img.shields.io/github/last-commit/MrZwave/stream-team)
+![Issues](https://img.shields.io/github/issues/MrZwave/stream-team)
+![Pull Requests](https://img.shields.io/github/issues-pr/MrZwave/stream-team)
 
 ---
 
-## 📁 Structure du projet
+## 🎯 Objectif
+
+**Stream Team** est une plateforme communautaire et dynamique pour les streamers Twitch francophones. Elle offre des profils publics, des statistiques en temps réel, un système de quêtes, des cartes à collectionner et bien plus à venir !
+
+---
+
+## 🧩 Fonctionnalités
+
+- 🔐 Authentification via OAuth Twitch
+- 📊 Dashboard personnalisé par streamer
+- 💬 Système de notifications dynamiques
+- 🎁 Cartes à collectionner & missions
+- 📺 Intégration clips Twitch + live viewer
+- ⚙️ Admin panel complet
+- 🧪 Backend Node.js + Express + MariaDB
+- 💻 Frontend responsive, style néon violet/bleu
+
+---
+
+## 📂 Arborescence du projet
+
+stream-team/
+├── frontend/ # Fichiers front (HTML/CSS/JS)
+├── views/ # Templates EJS dynamiques
+├── app.js # Serveur Node.js principal
+├── .env # Variables d'environnement (non versionnées)
+├── package.json
+├── README.md
+├── .gitignore
+├── LICENSE
+├── SECURITY.md
+├── CODE_OF_CONDUCT.md
+└── CONTRIBUTING.md
+
+
+---
+
+## 🚀 Installation rapide (dev)
 
 ```bash
-stream-team/
-├── app.js                 # Backend principal (Express)
-├── .env                  # Variables d’environnement (Twitch, DB, etc.)
-├── frontend/             # Tous les fichiers frontend (HTML, CSS, JS, images)
-│   ├── style.css
-│   ├── index.html
-│   ├── script.js
-│   └── ...
-├── views/                # Templates EJS dynamiques (streamer.ejs, etc.)
-├── routes/               # (si utilisé) Routes Express séparées
-├── database/             # (si utilisé) Scripts SQL, fichiers init
-├── .gitignore
-└── README.md
-⚙️ Prérequis
-Node.js 18+
-
-MariaDB / MySQL
-
-Compte développeur Twitch
-
-PM2 (en prod)
-
-🧪 Installation (dev)
-Cloner le dépôt :
-
-bash
-Copier
-Modifier
-git clone https://github.com/<ton-pseudo>/stream-team.git
+# Clone le repo
+git clone https://github.com/MrZwave/stream-team.git
 cd stream-team
-Installer les dépendances :
 
-bash
-Copier
-Modifier
+# Installe les dépendances
 npm install
-Créer un fichier .env :
 
-dotenv
-Copier
-Modifier
-TWITCH_CLIENT_ID=xxxxxxxx
-TWITCH_CLIENT_SECRET=xxxxxxxx
-TWITCH_REDIRECT_URI=http://localhost:3000/auth/twitch/callback
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=streamteam
-SESSION_SECRET=devsecret
-Démarrer le serveur :
+# Crée un fichier .env avec tes clés
+cp .env.example .env
 
-bash
-Copier
-Modifier
+# Lance le serveur
 node app.js
-🚀 Lancer en production
-Utilise PM2 :
 
-bash
-Copier
-Modifier
-pm2 start app.js --name streamteam-v2
-pm2 save
-pm2 startup
-🧠 Pour les contributeurs
-Merci de respecter les règles suivantes :
 
-Toujours travailler sur une branche dédiée :
+🤝 Contribuer
+Nous accueillons toutes les contributions !
+👉 Lis le guide [CONTRIBUTING.md](https://github.com/MrZwave/stream-team/blob/main/CONTRIBUTING.md) avant de proposer un changement.
 
-bash
-Copier
-Modifier
-git checkout -b feat/ma-fonction
-Suivre la convention de nommage pour les commits :
+Tu peux aussi :
 
-makefile
-Copier
-Modifier
-feat: ajout de fonctionnalité
-fix: correction d’un bug
-style: modifications visuelles
-refactor: amélioration de code sans changement de comportement
-Toujours tester en local avant push.
+⭐ Mettre une étoile au projet
 
-Ne pas modifier app.js en prod sans validation.
+📢 Parler du projet autour de toi
 
-✨ Fonctionnalités clés
-Authentification Twitch via OAuth
+🐛 Signaler un bug ou une idée via les [issues](https://github.com/MrZwave/stream-team/issues)
 
-Affichage des streamers en live
+🛡️ Sécurité
+Si tu découvres une faille de sécurité, merci de consulter [SECURITY.md](https://github.com/MrZwave/stream-team/blob/main/SECURITY.md) pour savoir comment la signaler de façon responsable.
 
-Dashboard personnel avec statistiques Twitch réelles
+🧭 Roadmap
+Consulte [ROADMAP.md](https://github.com/MrZwave/stream-team/blob/main/ROADMAP.md) pour connaître les prochaines étapes du projet.
 
-Cartes à collectionner
+💼 Licence
+Distribué sous licence [MIT](https://github.com/MrZwave/stream-team?tab=MIT-1-ov-file).
+© 2025 MrZwave & Stream Team.
 
-Notifications dynamiques (mises à jour, récompenses, missions)
+🔗 Liens utiles
+🌐 [Twitch Developers](https://dev.twitch.tv/)
 
-Missions & quêtes quotidiennes/hebdomadaires
-
-Système de salves, clics, XP
-
-Intégration clips Twitch
-
-Mode admin pour ajouter des cartes / modifier les profils
-
-🔐 Sécurité
-Les routes sensibles (admin, dashboard) sont protégées par session.
-
-Les tokens Twitch sont stockés temporairement.
-
-Les variables sensibles sont chargées depuis .env.
-
-🧩 Contribution
-Envie d’ajouter une fonctionnalité ? Rejoins le Discord de la team ou fais une PR :
-
-Fork le repo
-
-Crée une branche : git checkout -b feat/nouvelle-feature
-
-Code ➕ Test ➕ Commit
-
-Push et fais une pull request
-
-👥 Crédits
-Projet imaginé par la communauté Cornet E-sport
-
-Développé par l'équipe tech Stream Team
-
-Technologies : Twitch API, Node.js, Express, MariaDB, EJS, CSS3, HTML5
-
-🛰️ Lien de production (si déployé)
-🌍 https://stream-team.site/
-
-📫 Contact
-Pour toute question, bug ou idée :
-
-✉️ contact@cornetdev.com
-
-💬 Discord Stream Team
+🛠️ [Twitch OAuth Docs](https://dev.twitch.tv/docs/authentication/)
