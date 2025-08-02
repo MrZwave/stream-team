@@ -51,7 +51,6 @@ stream-team/
 
 ## 🚀 Installation rapide (dev)
 
-```bash
 # Clone le repo
 git clone https://github.com/MrZwave/stream-team.git
 cd stream-team
