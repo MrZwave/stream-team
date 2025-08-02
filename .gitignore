@@ -1,0 +1,48 @@
+# 📦 Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 🔧 Environnement
+.env
+.env.* 
+
+# 💾 Logs
+logs/
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# 📁 Systèmes d'exploitation
+.DS_Store
+Thumbs.db
+
+# 🔧 PM2
+.pids
+*.pm2.log
+.pm2/
+
+# 🧪 Tests
+coverage/
+*.lcov
+
+# 💻 IDEs / éditeurs
+.vscode/
+.idea/
+*.swp
+
+# ⚙️ OS/Linux
+*.bak
+*~
+*.tmp
+
+# 🚀 Déploiement / build
+dist/
+build/
+.cache/
+.next/
+out/
+
