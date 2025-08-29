@@ -1,19 +1,19 @@
 /* Nouveau style visuel unifié et futuriste pour Stream Team */
 
 :root {
-  --primary: #00FF9F;
+  --primary: #00ff9f;
   --primary-glow: rgba(0, 255, 159, 0.3);
-  --accent: #7F00FF;
+  --accent: #7f00ff;
   --background: radial-gradient(circle at center, #1e0057, #000027 90%);
   --surface: rgba(10, 10, 30, 0.9);
   --surface-hover: rgba(30, 0, 60, 0.95);
-  --text: #E6E6FA;
-  --text-secondary: #D8B4FE;
+  --text: #e6e6fa;
+  --text-secondary: #d8b4fe;
   --border: rgba(0, 255, 159, 0.2);
   --shadow: 0 0 20px rgba(0, 255, 159, 0.2);
   --offline-bg: rgba(40, 40, 60, 0.7);
   --offline-border: rgba(255, 50, 50, 0.3);
-  --button-bg: #00FF9F;
+  --button-bg: #00ff9f;
   --button-text: #000000;
   --button-hover: #00c280;
   --button-shadow: 0 0 10px rgba(0, 255, 159, 0.5);
@@ -22,7 +22,7 @@
 
 body {
   position: relative;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   background: var(--background);
   color: var(--text);
   margin: 0;
@@ -48,7 +48,11 @@ body::before {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, rgba(255, 0, 255, 0.05), transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 255, 0.05),
+    transparent 70%
+  );
   animation: pulseBackground 6s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
@@ -58,7 +62,8 @@ body::before {
 }
 
 @keyframes pulseBackground {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.4;
   }
@@ -69,7 +74,7 @@ body::before {
 }
 
 h1 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 2.5rem;
   color: var(--primary);
   text-shadow: 0 0 12px var(--primary-glow);
@@ -77,7 +82,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 2rem;
   color: var(--primary);
   text-shadow: 0 0 10px var(--primary-glow);
@@ -85,15 +90,16 @@ h2 {
 }
 
 h3 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 1.6rem;
   color: var(--primary);
   text-shadow: 0 0 8px var(--primary-glow);
   margin: 0.6rem 0;
 }
 
-h4, h5 {
-  font-family: 'Orbitron', sans-serif;
+h4,
+h5 {
+  font-family: "Orbitron", sans-serif;
   font-size: 1.2rem;
   color: var(--primary);
   text-shadow: 0 0 6px var(--primary-glow);
@@ -118,6 +124,15 @@ a:hover {
   text-shadow: 0 0 8px var(--accent);
 }
 
+i {
+  color: var(--primary);
+}
+
+.fa-xmark,
+.fa-gear {
+  color: var(--button-text);
+}
+
 .site-footer {
   background: linear-gradient(90deg, #0f0f2d, #1c1c3c);
   color: var(--primary);
@@ -127,7 +142,6 @@ a:hover {
   width: 100%;
   margin-top: auto;
 }
-
 
 .logo {
   width: 120px;
@@ -143,7 +157,11 @@ a:hover {
   margin: 3rem auto;
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(145deg, rgba(30,0,60,0.9), rgba(10,10,30,0.9));
+  background: linear-gradient(
+    145deg,
+    rgba(30, 0, 60, 0.9),
+    rgba(10, 10, 30, 0.9)
+  );
   border: 1px solid var(--border);
   border-radius: 20px;
   box-shadow: 0 0 25px var(--primary-glow), 0 0 40px rgba(127, 0, 255, 0.2);
@@ -168,7 +186,7 @@ a:hover {
 
 .event-text h2 {
   font-size: 2rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: var(--primary);
   text-shadow: 0 0 12px var(--primary-glow);
   margin-bottom: 0.5rem;
@@ -178,7 +196,7 @@ a:hover {
   color: var(--text-secondary);
   font-size: 1.1rem;
   margin: 0.4rem 0;
-  text-shadow: 0 0 6px rgba(255,255,255,0.05);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
 }
 
 .event-text strong {
@@ -192,11 +210,10 @@ a:hover {
   right: 10px;
 }
 
-.dropdown-wrapper {
-  position: relative;
-}
-
 .dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: var(--button-bg);
   color: var(--button-text);
   border: none;
@@ -209,38 +226,66 @@ a:hover {
   z-index: 90;
 }
 
+.dropdown-trigger.active {
+  padding: 0.7rem 0.7rem;
+}
+
+.dropdown-trigger.active .fa-xmark {
+  rotate: 90deg;
+}
+
+.dropdown-trigger .icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
 .dropdown-trigger:hover {
   background: var(--button-hover);
   transform: scale(1.05) rotate(2deg);
 }
 
+.dropdown-trigger .fa-gear {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  transform-origin: 50% 50%;
+}
+
+.dropdown-trigger:hover .fa-gear {
+  transform: rotate(180deg);
+}
+
 .dropdown-menu {
   background: var(--surface);
-  border: 1px solid var(--border);
-  margin-top: 0.5rem;
+  border: 2px solid var(--border);
+  box-shadow: 0 0 5px 4px var(--border);
   border-radius: 10px;
   padding: 0.5rem;
   display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  left: 0;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
   z-index: 99;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-.dropdown-wrapper.active .dropdown-menu {
-  display: flex;
+@media (max-width: 750px) {
+  .dropdown-menu {
+    flex-direction: column;
+  }
 }
 
 .dropdown-item {
   color: var(--text);
   text-decoration: none;
   padding: 0.4rem 0;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
 }
 
 .dropdown-item:hover {
   color: var(--primary);
-  text-shadow: 0 0 6px var(--primary-glow);
+  filter: drop-shadow(0 0 6px var(--primary-glow));
 }
 
 section.streamers {
@@ -373,7 +418,7 @@ section.streamers {
 }
 
 .footer-name {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: var(--primary);
   font-size: 1.2rem;
 }
@@ -385,8 +430,14 @@ section.streamers {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-header {
@@ -404,15 +455,26 @@ section.streamers {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, rgba(127, 0, 255, 0.15), transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(127, 0, 255, 0.15),
+    transparent 70%
+  );
   animation: headerPulse 6s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
 }
 
 @keyframes headerPulse {
-  0%, 100% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.05); opacity: 0.5; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.5;
+  }
 }
 
 .hero-content {
@@ -599,14 +661,14 @@ section.streamers {
 /* Profil utilisateur */
 #displayName {
   font-size: 2rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: #fff;
 }
 
 /* Bouton Suivre */
 #followBtn {
   display: inline-block;
-  background: linear-gradient(45deg, #9146FF, #6441A5);
+  background: linear-gradient(45deg, #9146ff, #6441a5);
   padding: 10px 18px;
   border-radius: 25px;
   color: #fff;
@@ -679,7 +741,7 @@ section.streamers {
 
 .login-popup-button {
   display: inline-block;
-  background: linear-gradient(45deg, #9146FF, #6441A5);
+  background: linear-gradient(45deg, #9146ff, #6441a5);
   color: #fff;
   padding: 12px 24px;
   border-radius: 25px;
@@ -739,7 +801,7 @@ section.streamers {
   background: rgba(255, 255, 255, 0.03);
   text-align: left;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
 }
 
 @media screen and (max-width: 600px) {
@@ -810,7 +872,7 @@ section.streamers {
   border-left: 3px solid #00f0ff;
   padding: 1rem;
   margin-bottom: 1rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .profile-stats h3 {
@@ -885,7 +947,7 @@ section.streamers {
   position: fixed;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(255,255,0,0.9), transparent);
+  background: radial-gradient(circle, rgba(255, 255, 0, 0.9), transparent);
   top: -200px;
   left: -200px;
   pointer-events: none;
@@ -911,11 +973,21 @@ section.streamers {
 }
 
 @keyframes shake {
-  0% { transform: translate(2px, 1px); }
-  25% { transform: translate(-2px, -1px); }
-  50% { transform: translate(3px, 0); }
-  75% { transform: translate(-1px, 2px); }
-  100% { transform: translate(1px, -2px); }
+  0% {
+    transform: translate(2px, 1px);
+  }
+  25% {
+    transform: translate(-2px, -1px);
+  }
+  50% {
+    transform: translate(3px, 0);
+  }
+  75% {
+    transform: translate(-1px, 2px);
+  }
+  100% {
+    transform: translate(1px, -2px);
+  }
 }
 
 body.shake {
@@ -1009,7 +1081,8 @@ body.shake {
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 10px #ff00c8, 0 0 20px #00f0ff;
   }
   50% {
@@ -1043,8 +1116,12 @@ body.shake {
 }
 
 @keyframes glowline {
-  from { filter: drop-shadow(0 0 4px #00f0ff); }
-  to   { filter: drop-shadow(0 0 10px #8000ff); }
+  from {
+    filter: drop-shadow(0 0 4px #00f0ff);
+  }
+  to {
+    filter: drop-shadow(0 0 10px #8000ff);
+  }
 }
 
 .timeline-item {
@@ -1058,10 +1135,11 @@ body.shake {
   z-index: 2;
   backdrop-filter: blur(5px);
   transition: transform 0.3s ease;
+  transform: scale(1.025);
 }
 
 .timeline-item:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
   box-shadow: 0 0 20px #00f0ff88;
 }
 
@@ -1086,9 +1164,15 @@ body.shake {
 }
 
 @keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(0,240,255, 0.7); }
-  70%  { box-shadow: 0 0 0 20px rgba(0,240,255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0,240,255, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(0, 240, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
+  }
 }
 
 .timeline-delete {
@@ -1114,7 +1198,7 @@ body.shake {
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   text-shadow: none;
 }
 
@@ -1154,11 +1238,13 @@ body.shake {
   cursor: pointer;
   color: var(--accent-color);
   position: relative;
+  transition: 0.3s;
   z-index: 2;
 }
 
 .notif-btn:hover {
-  background: #2d2d4f;
+  opacity: 0.9;
+  rotate: 20deg;
 }
 
 .notif-dot {
@@ -1266,7 +1352,6 @@ body.shake {
   justify-content: flex-end;
   gap: 16px;
   padding: 10px 20px;
-  position: relative;
   z-index: 10;
 }
 
@@ -1276,9 +1361,18 @@ body.shake {
 
 /* --- ANIMATION --- */
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.6; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .notif-close-btn {
@@ -1301,7 +1395,7 @@ body.shake {
 .admin-body {
   background: linear-gradient(to bottom, #0f0f1f, #1a1a2e);
   color: #fff;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .admin-header {

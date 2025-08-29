@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background: radial-gradient(ellipse at center, #0d0d2b, #000);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #e3e3f3;
   overflow-x: hidden;
 }
@@ -27,8 +27,44 @@ header p {
   font-size: 1em;
 }
 
+textarea {
+  resize: none;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px 20px;
+  z-index: 10;
+}
+
+.dropdown-menu {
+  background: #1a1a2f;
+  border: 2px solid #4e00c2;
+  box-shadow: 0 0 10px 4px #4e00c2;
+  border-radius: 10px;
+  padding: 0.5rem;
+  display: none;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+  z-index: 99;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@media (max-width: 750px) {
+  .dropdown-menu {
+    flex-direction: column;
+  }
+}
+
 .dropdown-container {
-  margin-top: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .dropdown-wrapper {
@@ -37,6 +73,9 @@ header p {
 }
 
 .dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: #4e00c2;
   border: none;
   color: white;
@@ -45,27 +84,25 @@ header p {
   cursor: pointer;
   font-weight: bold;
   box-shadow: 0 0 10px #8239ff;
-  transition: 0.2s;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.dropdown-trigger.active {
+  padding: 0.7rem 0.7rem;
+}
+
+.dropdown-trigger.active .fa-xmark {
+  rotate: 90deg;
+}
+
+.dropdown-trigger .icon {
+  font-size: 1.1em;
+  line-height: 1;
 }
 
 .dropdown-trigger:hover {
   background: #6d00ff;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #1a1a2f;
-  border: 1px solid #4e00c2;
-  border-radius: 8px;
-  display: none;
-  z-index: 10;
-  min-width: 180px;
-}
-
-.dropdown-wrapper:hover .dropdown-menu {
-  display: block;
+  transform: scale(1.05) rotate(2deg);
 }
 
 .dropdown-item {
@@ -73,11 +110,11 @@ header p {
   padding: 10px 15px;
   display: block;
   text-decoration: none;
-  border-bottom: 1px solid #4e00c255;
 }
 
 .dropdown-item:hover {
-  background-color: #330066;
+  color: #6d00ff;
+  filter: drop-shadow(0 0 6px #6d00ff);
 }
 
 /* Statistiques */
@@ -241,6 +278,12 @@ form#addCardForm button:hover {
   border: 1px solid #4e00c288;
   border-radius: 6px;
   font-size: 1em;
+  box-sizing: border-box;
+}
+
+#notifForm textarea {
+  height: 20vh;
+  text-align: justify;
 }
 
 #notifForm button {
@@ -279,6 +322,7 @@ form#addCardForm button:hover {
   background: #2d2d4f;
   color: #eee;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .admin-form button {

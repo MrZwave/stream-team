@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact - Stream Team</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
   <style>
     .contact-wrapper {
       max-width: 700px;
@@ -86,19 +89,21 @@
     }
   </style>
 </head>
+
 <body>
 
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/contact.html" class="dropdown-item">📩 Contact</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
-      </div>
+  <div class="top-actions">
+    <button id="auth-button" class="dropdown-trigger"><i class="fa-solid fa-gear"></i> Options</button>
+    <div class="dropdown-menu" id="auth-dropdown">
+      <a href="/home.html" class="dropdown-item"><span><i class="fa-regular fa-house"></i></span> Accueil</a>
+      <a href="#" id="profileButton" class="dropdown-item"><span><i class="fa-regular fa-circle-user"></i></span>
+        Profil</a>
+      <a href="/watch.html" class="dropdown-item"><span><i class="fa-solid fa-video"></i></span> Regarder des
+        Lives</a>
+      <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
+      <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
+      <a href="/logout" class="dropdown-item"><span><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+        Déconnexion</a>
     </div>
   </div>
 
@@ -107,12 +112,12 @@
     <form action="mailto:contact@stream-team.site" method="POST" enctype="text/plain">
       <div class="form-group">
         <label for="name">👤 Nom / Pseudo</label>
-        <input type="text" id="name" name="name" required/>
+        <input type="text" id="name" name="name" required />
       </div>
 
       <div class="form-group">
         <label for="email">📧 Adresse e-mail</label>
-        <input type="email" id="email" name="email" required/>
+        <input type="email" id="email" name="email" required />
       </div>
 
       <div class="form-group">
@@ -147,4 +152,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
