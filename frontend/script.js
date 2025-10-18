@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const profileBtn = document.getElementById("profileButton");
   const dashboardBtn = document.getElementById("dashboardButton");
   const container = document.querySelector(".streamers");
+  const moon = document.getElementById("darkLight");
   let sessionUser = null;
 
   function fetchWithSession(url, options = {}) {
@@ -15,41 +16,76 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function handleResize() {
+    const widthScreen = window.innerWidth;
+
+    if (widthScreen < 800) {
+      authButton.style.display = "block";
+      dropdownMenu.style.display = "none";
+
+      authButton.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = dropdownMenu.style.display === "flex";
+        dropdownMenu.style.display = isOpen ? "none" : "flex";
+        authButton.classList.toggle("active", !isOpen);
+        authButton.innerHTML = !isOpen
+          ? '<span class="icon"><i class="fa-solid fa-xmark"></i></span>'
+          : '<i class="fa-solid fa-bars"></i>';
+      };
+
+      document.addEventListener("click", (e) => {
+        if (!dropdownWrapper.contains(e.target)) {
+          dropdownMenu.style.display = "none";
+        }
+      });
+    } else {
+      // cacher le bouton et afficher le menu
+      authButton.style.display = "none";
+      dropdownMenu.style.display = "flex";
+    }
+  }
+
+  // lancer au chargement
+  handleResize();
+
+  // relancer à chaque redimensionnement
+  window.addEventListener("resize", handleResize);
+
   async function checkAuth() {
+    const connect = document.getElementById("connect");
+
+    try {
+      const res = await fetch("/api/auth/check"); // ✅ Ajout du fetch
+
+      if (res.ok) {
+        connect.innerHTML = `<span><i
+              class="fa-solid fa-arrow-right-from-bracket"></i></span> Déconnexion </a>`;
+      } else {
+        connect.innerHTML = `<span><i
+              class="fa-solid fa-arrow-right-from-bracket"></i></span> Connexion </a>`;
+      }
+    } catch (error) {
+      console.error("Erreur lors de la vérification auth:", error);
+      connect.innerHTML = `<span><i
+              class="fa-solid fa-arrow-right-from-bracket"></i></span> Connexion </a>`;
+    }
     // try {
     //   const res = await fetchWithSession("/api/me");
     //   if (!res.ok) throw new Error("Non connecté");
     //   const user = await res.json();
     //   sessionUser = user;
-
     //   authButton.innerHTML = "⚙️ Options";
     //   if (profileBtn) profileBtn.href = `/profile.html?user=${user.login}`;
     //   if (dashboardBtn)
     //     dashboardBtn.href = `/dashboard.html?user=${user.login}`;
-
-    authButton.onclick = (e) => {
-      e.stopPropagation();
-      const isOpen = dropdownMenu.style.display === "flex";
-      dropdownMenu.style.display = isOpen ? "none" : "flex";
-      authButton.classList.toggle("active", !isOpen);
-      authButton.innerHTML = !isOpen
-        ? '<span class="icon"><i class="fa-solid fa-xmark"></i></span>'
-        : '<i class="fa-solid fa-gear"></i> Options';
-    };
-
-    document.addEventListener("click", (e) => {
-      if (!dropdownWrapper.contains(e.target)) {
-        dropdownMenu.style.display = "none";
-      }
-    });
-    //   } catch {
-    //     authButton.innerHTML = "Connexion Twitch";
-    //     dropdownMenu.style.display = "none";
-    //     authButton.onclick = () => {
-    //       const popup = document.getElementById("loginPopup");
-    //       if (popup) popup.classList.remove("hidden");
-    //     };
-    //   }
+    // } catch {
+    //   authButton.innerHTML = "Connexion Twitch";
+    //   dropdownMenu.style.display = "none";
+    //   authButton.onclick = () => {
+    //     const popup = document.getElementById("loginPopup");
+    //     if (popup) popup.classList.remove("hidden");
+    //   };
+    // }
   }
 
   // STREAMERS
@@ -153,10 +189,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const closeNotif = document.getElementById("closeNotif");
   const notifDot = document.getElementById("notifDot");
 
+  function closeNotificationPanel() {
+    notifPanel.classList.remove("show");
+  }
+
   if (notifBtn && notifPanel) {
     notifBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
-      notifPanel.classList.toggle("show");
+      notifPanel.classList.add("show");
 
       if (notifPanel.classList.contains("show")) {
         // 1. Marquer comme lues
@@ -173,19 +213,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (notifDot) notifDot.style.display = "none";
       }
     });
+
+    // Fermer au clic en dehors
     document.addEventListener("click", (e) => {
       if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
-        notifPanel.classList.remove("show");
+        closeNotificationPanel();
       }
     });
 
+    // Fermer au clic sur la croix
     if (closeNotif) {
       closeNotif.addEventListener("click", (e) => {
-        notifPanel.classList.remove("show");
+        e.stopPropagation();
+        closeNotificationPanel();
       });
     }
   }
-
   async function checkNewNotifications() {
     try {
       const res = await fetch("/api/notifications");
@@ -263,3 +306,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     setInterval(loadStreamTeam, 30000);
   }
 });
+
+// Mode sombre ou clair
+function darkLight() {
+  document.body.classList.toggle("light");
+}
