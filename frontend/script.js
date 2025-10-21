@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const profileBtn = document.getElementById("profileButton");
   const dashboardBtn = document.getElementById("dashboardButton");
   const container = document.querySelector(".streamers");
-  const moon = document.getElementById("darkLight");
   let sessionUser = null;
 
   function fetchWithSession(url, options = {}) {
@@ -34,58 +33,37 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
 
       document.addEventListener("click", (e) => {
-        if (!dropdownWrapper.contains(e.target)) {
+        if (dropdownWrapper && !dropdownWrapper.contains(e.target)) {
           dropdownMenu.style.display = "none";
         }
       });
     } else {
-      // cacher le bouton et afficher le menu
       authButton.style.display = "none";
       dropdownMenu.style.display = "flex";
     }
   }
 
-  // lancer au chargement
-  handleResize();
-
-  // relancer à chaque redimensionnement
-  window.addEventListener("resize", handleResize);
+  if (authButton && dropdownMenu) {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+  }
 
   async function checkAuth() {
     const connect = document.getElementById("connect");
+    if (!connect) return;
 
     try {
-      const res = await fetch("/api/auth/check"); // ✅ Ajout du fetch
+      const res = await fetch("/api/auth/check", { credentials: "include" });
 
       if (res.ok) {
-        connect.innerHTML = `<span><i
-              class="fa-solid fa-arrow-right-from-bracket"></i></span> Déconnexion </a>`;
+        connect.innerHTML = `<span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Déconnexion`;
       } else {
-        connect.innerHTML = `<span><i
-              class="fa-solid fa-arrow-right-from-bracket"></i></span> Connexion </a>`;
+        connect.innerHTML = `<span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Connexion`;
       }
     } catch (error) {
       console.error("Erreur lors de la vérification auth:", error);
-      connect.innerHTML = `<span><i
-              class="fa-solid fa-arrow-right-from-bracket"></i></span> Connexion </a>`;
+      connect.innerHTML = `<span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Connexion`;
     }
-    // try {
-    //   const res = await fetchWithSession("/api/me");
-    //   if (!res.ok) throw new Error("Non connecté");
-    //   const user = await res.json();
-    //   sessionUser = user;
-    //   authButton.innerHTML = "⚙️ Options";
-    //   if (profileBtn) profileBtn.href = `/profile.html?user=${user.login}`;
-    //   if (dashboardBtn)
-    //     dashboardBtn.href = `/dashboard.html?user=${user.login}`;
-    // } catch {
-    //   authButton.innerHTML = "Connexion Twitch";
-    //   dropdownMenu.style.display = "none";
-    //   authButton.onclick = () => {
-    //     const popup = document.getElementById("loginPopup");
-    //     if (popup) popup.classList.remove("hidden");
-    //   };
-    // }
   }
 
   // STREAMERS
@@ -190,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const notifDot = document.getElementById("notifDot");
 
   function closeNotificationPanel() {
-    notifPanel.classList.remove("show");
+    if (notifPanel) notifPanel.classList.remove("show");
   }
 
   if (notifBtn && notifPanel) {
@@ -199,29 +177,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       notifPanel.classList.add("show");
 
       if (notifPanel.classList.contains("show")) {
-        // 1. Marquer comme lues
         try {
-          await fetch("/api/notifications/mark-read", { method: "POST" });
+          await fetch("/api/notifications/mark-read", {
+            method: "POST",
+            credentials: "include",
+          });
         } catch (err) {
           console.warn("Erreur mark-read", err);
         }
 
-        // 2. Recharger les notifications
         await loadNotifications();
 
-        // 3. Cacher le point rouge
         if (notifDot) notifDot.style.display = "none";
       }
     });
 
-    // Fermer au clic en dehors
     document.addEventListener("click", (e) => {
       if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
         closeNotificationPanel();
       }
     });
 
-    // Fermer au clic sur la croix
     if (closeNotif) {
       closeNotif.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -229,9 +205,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
   }
+
   async function checkNewNotifications() {
     try {
-      const res = await fetch("/api/notifications");
+      const res = await fetch("/api/notifications", { credentials: "include" });
       const notifs = await res.json();
 
       if (!Array.isArray(notifs)) {
@@ -240,7 +217,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const hasNew = notifs.some((n) => {
-        // Cast le n.id en string pour éviter erreur si c'est un nombre
         const idStr = String(n.id);
         const isRealNotif = !idStr.startsWith("quest-");
         return isRealNotif && n.read === false;
@@ -252,20 +228,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Vérifie à l'ouverture de la page
-  checkNewNotifications();
-
-  // Et toutes les 60s
-  setInterval(checkNewNotifications, 60000);
-
   async function loadNotifications() {
     try {
-      const res = await fetch("/api/notifications");
+      const res = await fetch("/api/notifications", { credentials: "include" });
       const notifs = await res.json();
       const list = document.querySelector(".notif-list");
+      if (!list) return;
+
       list.innerHTML = "";
 
-      // Trier les notifications les plus récentes en premier
       notifs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
       let hasNew = false;
@@ -290,7 +261,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         list.appendChild(item);
       });
 
-      // Affiche le point rouge s'il y a du neuf
       if (notifDot) {
         notifDot.style.display = hasNew ? "block" : "none";
       }
@@ -301,13 +271,157 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // LANCEMENT
   await checkAuth();
+
   if (container) {
     await loadStreamTeam();
     setInterval(loadStreamTeam, 30000);
   }
+
+  if (notifBtn) {
+    checkNewNotifications();
+    setInterval(checkNewNotifications, 60000);
+  }
 });
+
+// -------------------------------------------------------------------
+// Code LukDum
 
 // Mode sombre ou clair
 function darkLight() {
   document.body.classList.toggle("light");
 }
+
+// Inscription
+async function addUser(user) {
+  try {
+    const request = await fetch(`/api/user/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(user),
+    });
+
+    return await request.json();
+  } catch (error) {
+    console.error("Erreur lors de l'ajout:", error.message);
+    return { success: false, error: error.message };
+  }
+}
+
+if (document.getElementById("registerForm")) {
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const user = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      };
+
+      const result = await addUser(user);
+
+      if (result.success) {
+        alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+        window.location.href = "/login.html";
+      } else {
+        alert("Erreur : " + (result.error || "Impossible de créer le compte"));
+      }
+    });
+}
+
+// Connexion
+async function loginUser(credentials) {
+  try {
+    console.log("🔵 Envoi de la requête de connexion...");
+
+    const response = await fetch("/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(credentials),
+    });
+
+    console.log("📡 Status:", response.status);
+
+    const data = await response.json();
+    console.log("📦 Réponse:", data);
+
+    if (!response.ok) {
+      throw new Error(data.error || "Erreur de connexion");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("❌ Erreur:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+if (document.getElementById("loginForm")) {
+  const loginForm = document.getElementById("loginForm");
+
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log("✅ Formulaire intercepté par JavaScript");
+
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML =
+      '<i class="fa-solid fa-spinner fa-spin"></i> Connexion...';
+
+    const credentials = {
+      email: document.getElementById("email").value.trim(),
+      password: document.getElementById("password").value,
+    };
+
+    console.log("📧 Email:", credentials.email);
+
+    const result = await loginUser(credentials);
+
+    if (result.success) {
+      console.log("✅ Connexion réussie!");
+      submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Connecté!';
+
+      setTimeout(() => {
+        window.location.href = "/index.html";
+      }, 500);
+    } else {
+      console.error("❌ Échec:", result.error);
+      alert("❌ " + (result.error || "Impossible de se connecter"));
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }
+  });
+
+  console.log("✅ Gestionnaire de formulaire de connexion installé");
+}
+
+// Vérifier session
+async function checkSession() {
+  const response = await fetch("/api/user/check", {
+    method: "GET",
+    credentials: "include",
+  });
+  const data = await response.json();
+  console.log("🔎 Session check:", data);
+  return data.loggedIn;
+}
+
+checkSession().then((isLoggedIn) => {
+  if (isLoggedIn) {
+    console.log("✅ Utilisateur toujours connecté");
+  } else {
+    console.log("🔴 Utilisateur déconnecté");
+    window.location.href = "/login.html";
+  }
+});

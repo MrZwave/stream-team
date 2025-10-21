@@ -81,21 +81,46 @@
         <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
         <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
         <a href="#" onclick="darkLight()" class="dropdown-item"><span><i class="fa-regular fa-moon"></i></span>Mode</a>
-        <a href="/login.html" id="connect" class="dropdown-item"><span><i
+        <a href="/logout" id="connect" class="dropdown-item"><span><i
               class="fa-solid fa-arrow-right-from-bracket"></i></span></a>
       </div>
     </div>
-
-    <div class="hero-content">
-      <img src="assets/logo-stream-team-hq.webp" alt="Logo Stream Team" class="logo" loading="lazy" />
-      <h1>Stream Team HQ</h1>
-      <p>Le QG interdimensionnel des streamers d’élite.<br>Prépare-toi à entrer en opération.</p>
-    </div>
   </header>
 
-  <main>
-    <section class="streamers" id="streamer-cards">
-      <p>Chargement des unités...</p>
+  <main class="main-connect">
+    <section class="connect">
+      <form action="/register" method="POST" id="registerForm">
+        <h2>Inscription</h2>
+
+        <div class="form-group">
+          <label for="email">
+            <i class="fa-regular fa-envelope"></i> Email
+          </label>
+          <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">
+            <i class="fa-solid fa-lock"></i> Mot de passe
+          </label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required minlength="8" />
+        </div>
+
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="remember" name="remember" />
+          <label for="remember">Se souvenir de moi</label>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+        </button>
+
+        <div class="form-footer">
+          <a href="/forgot-password">Mot de passe oublié ?</a>
+          <span>|</span>
+          <a href="/register">Créer un compte</a>
+        </div>
+      </form>
     </section>
   </main>
 
