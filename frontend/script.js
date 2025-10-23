@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       sessionUser = user;
 
       authButton.innerHTML = '⚙️ Options';
-      if (profileBtn) profileBtn.href = `/profile.html?user=${user.login}`;
+      if (profileBtn) profileBtn.href = `/streamer/${user.login}`;
       if (dashboardBtn) dashboardBtn.href = `/dashboard.html?user=${user.login}`;
 
       authButton.onclick = (e) => {
@@ -47,28 +47,31 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // STREAMERS
-  async function loadStreamTeam() {
-    if (!container) return;
-    try {
-      const [streamerRes, liveRes] = await Promise.all([
-        fetchWithSession('/api/streamers'),
-        fetchWithSession('/api/live')
-      ]);
+async function loadStreamTeam() {
+  if (!container) return;
+  try {
+    const [streamerRes, liveRes] = await Promise.all([
+      fetchWithSession('/api/streamers'),
+      fetchWithSession('/api/live')
+    ]);
 
-      const logins = await streamerRes.json();
-      const liveData = await liveRes.json();
-      const queryString = logins.map(login => `login=${encodeURIComponent(login)}`).join('&');
+    const data = await streamerRes.json();
+    const logins = data.streamers || [];
+    const queryString = logins.map(s => `login=${encodeURIComponent(s.login)}`).join('&');
 
-      const usersRes = await fetchWithSession('/api/users?' + queryString);
-      const userData = await usersRes.json();
-      const users = userData.data || [];
+    const usersRes = await fetchWithSession('/api/users?' + queryString);
+    const userData = await usersRes.json();
+    const users = userData.data || [];
 
-      renderCards(liveData.liveData || [], users);
-    } catch (err) {
-      container.innerHTML = '<p style="color: #f55">Erreur de chargement des streamers.</p>';
-      console.error('[Erreur]', err);
-    }
+    const liveResponse = await liveRes.json();
+    const liveData = liveResponse.liveData || [];
+
+    renderCards(liveData, users);
+  } catch (err) {
+    container.innerHTML = '<p style="color: #f55">Erreur de chargement des streamers.</p>';
+    console.error('[Erreur]', err);
   }
+}
 
   function renderCards(streams, users) {
     container.innerHTML = '';
@@ -99,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (err) {
           console.warn('Échec du comptage de clic', err);
         }
-        window.location.href = `profile.html?user=${user.login}`;
+        window.location.href = `/streamer/${user.login}`;
       });
       container.appendChild(card);
     });
