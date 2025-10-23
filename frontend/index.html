@@ -2,120 +2,51 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>🚀 Retour du QG - Stream Team</title>
+  <title>🚀 Stream Team HQ - La Communauté des Streamers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta name="description" content="Rejoins la plus grande communauté de streamers francophones. Découvre, soutiens et vis l'expérience streaming ultime.">
+  <link rel="icon" href="assets/logo-stream-team-hq.webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <!-- Twitch performance optimizations -->
   <link rel="preconnect" href="https://player.twitch.tv">
   <link rel="preconnect" href="https://www.twitch.tv">
   <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin>
-  <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin>
   <link rel="dns-prefetch" href="https://player.twitch.tv">
-  <link rel="dns-prefetch" href="https://www.twitch.tv">
-  <link rel="dns-prefetch" href="https://static-cdn.jtvnw.net">
-  <link rel="dns-prefetch" href="https://clips-media-assets2.twitch.tv">
   
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #00ff9f;
+      --secondary: #9d4edd;
+      --accent: #00d4ff;
+    }
+
+    html, body {
+      background: radial-gradient(ellipse at top, #1a0a2e 0%, #0a0a1a 100%);
+      font-family: 'Space Grotesk', sans-serif;
+      color: white;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
     .fade-out {
-      animation: fadeOut 2s ease-in forwards;
-}
+      animation: fadeOut 1.5s ease-in forwards;
+    }
 
     @keyframes fadeOut {
       to {
-      opacity: 0;
-      transform: scale(1.1);
-  }
-}
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle, #1e0057 0%, #000027 100%);
-      font-family: 'Share Tech Mono', monospace;
-      color: white;
-      scroll-behavior: smooth;
-    }
-
-    .intro-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    h1 {
-      font-size: 4rem;
-      background: linear-gradient(90deg, #f0f, #0ff, #f0f);
-      background-size: 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: wave 5s linear infinite;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
-    }
-
-    .tagline {
-      font-size: 1.6rem;
-      color: #99ffe0;
-      margin-bottom: 2rem;
-      animation: slideUp 2s ease-out forwards;
-      text-shadow: 0 0 10px rgba(0,255,255,0.3);
-    }
-
-    .scroll-arrow {
-      font-size: 2rem;
-      animation: bounce 2s infinite;
-      color: #00ffffaa;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(10px);
+        opacity: 0;
+        transform: scale(1.05);
       }
     }
 
-    .enter-button {
-      background: #00f0ff;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 30px;
-      cursor: pointer;
-      color: #000;
-      font-weight: bold;
-      box-shadow: 0 0 20px #00f0ff88;
-      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .enter-button:hover {
-      transform: scale(1.05);
-      background: #0ff;
-      box-shadow: 0 0 30px #00f0ff;
-    }
-
-    section.info-block {
-      padding: 10vh 5vw;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    section.info-block.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    /* Particles Background */
     .particles {
       position: fixed;
       top: 0;
@@ -123,120 +54,507 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1;
+      z-index: 0;
       overflow: hidden;
     }
 
     .particle {
       position: absolute;
-      width: 4px;
-      height: 4px;
-      background: gold;
+      width: 3px;
+      height: 3px;
+      background: var(--primary);
       border-radius: 50%;
-      animation: fall 4s linear infinite;
-      opacity: 0.7;
+      animation: float 8s ease-in-out infinite;
+      opacity: 0.4;
     }
 
-    @keyframes wave {
-      0% { background-position: 0% }
-      100% { background-position: 400% }
-    }
-
-    @keyframes slideUp {
-      0% { transform: translateY(50px); opacity: 0 }
-      100% { transform: translateY(0); opacity: 1 }
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10px) scale(1);
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.4;
+      }
+      50% {
+        transform: translate(var(--tx), var(--ty)) scale(1.5);
         opacity: 0.8;
       }
-      100% {
-        transform: translateY(100vh) scale(0);
+    }
+
+    /* Hero Section */
+    .hero-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 30px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(0, 255, 159, 0.5));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      animation: slideDown 1s ease-out;
+      line-height: 1.2;
+    }
+
+    @keyframes slideDown {
+      from {
         opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 50px;
+      max-width: 600px;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .btn {
+      padding: 18px 40px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #000;
+      box-shadow: 0 0 30px rgba(0, 255, 159, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 50px rgba(0, 255, 159, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 2px solid var(--primary);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 255, 159, 0.1);
+      border-color: var(--accent);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      color: var(--primary);
+      opacity: 0.6;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(15px); }
+    }
+
+    /* Features Section */
+    .features-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px;
+      z-index: 1;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      backdrop-filter: blur(15px);
+      background: rgba(20, 20, 40, 0.7);
+      border: 1px solid rgba(0, 255, 159, 0.2);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px rgba(0, 255, 159, 0.3);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    .feature-description {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .stat-card {
+      backdrop-filter: blur(15px);
+      background: rgba(20, 20, 40, 0.7);
+      border: 1px solid rgba(0, 255, 159, 0.2);
+      border-radius: 15px;
+      padding: 30px;
+      transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 255, 159, 0.3);
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-shadow: 0 0 20px rgba(0, 255, 159, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      position: relative;
+      max-width: 900px;
+      margin: 100px auto;
+      padding: 60px 40px;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      background: linear-gradient(135deg, rgba(0, 255, 159, 0.1), rgba(157, 78, 221, 0.1));
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    .final-cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .final-cta p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 40px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(0, 255, 159, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .tagline {
+        font-size: 1.1rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .final-cta {
+        padding: 40px 20px;
+      }
+
+      .final-cta h2 {
+        font-size: 1.8rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Particules -->
+  <!-- Particles Background -->
   <div class="particles" id="particles"></div>
 
-  <!-- Intro -->
-  <div class="intro-container">
-    <h1>🔥 LE QG EST DE RETOUR</h1>
-    <p class="tagline">Une nouvelle ère de streaming commence maintenant.</p>
-    <div class="scroll-arrow">⬇️</div>
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <img src="assets/logo-stream-team-hq.webp" alt="Stream Team Logo" class="logo" />
+    <h1>Stream Team HQ</h1>
+    <p class="tagline">
+      La plateforme qui connecte les streamers francophones et leur communauté. 
+      Découvre, soutiens et vis l'expérience streaming ultime.
+    </p>
+    
+    <div class="cta-buttons">
+      <button class="btn btn-primary" onclick="enterSite()">
+        🎮 Entrer dans le QG
+      </button>
+      <a href="#features" class="btn btn-secondary">
+        ✨ Découvrir les fonctionnalités
+      </a>
+    </div>
+
+    <div class="scroll-indicator">⬇️</div>
   </div>
 
-  <!-- Sections de présentation -->
-  <section class="info-block">
-    <h2>🎥 Une équipe, une passion</h2>
-    <p>Stream Team, c’est bien plus qu’un site : c’est un QG pour les créateurs, les passionnés, les viewers curieux et les joueurs acharnés.</p>
-  </section>
+  <!-- Stats Section -->
+  <div class="stats-container">
+    <h2 class="section-title">La Communauté en Chiffres</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">21+</div>
+        <div class="stat-label">Streamers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">2.3K+</div>
+        <div class="stat-label">Clips</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">5K+</div>
+        <div class="stat-label">Spectateurs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">Lives Actifs</div>
+      </div>
+    </div>
+  </div>
 
-  <section class="info-block">
-    <h2>🚀 Rejoignez l’élite</h2>
-    <p>Chaque membre est un pilier de la communauté. Stats, dashboards, cartes à collectionner et clips à revivre : tout est centralisé ici.</p>
-  </section>
+  <!-- Features Section -->
+  <div class="features-container" id="features">
+    <h2 class="section-title">Pourquoi Stream Team ?</h2>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Découvre des Talents</h3>
+        <p class="feature-description">
+          Explore une sélection des meilleurs streamers francophones et trouve ton nouveau favori.
+        </p>
+      </div>
 
-  <section class="info-block">
-    <h2>📡 En direct de l’action</h2>
-    <p>Suivez les streamers en live, découvrez les pépites montantes, envoyez des salves et faites partie de l'histoire.</p>
-  </section>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Stats Détaillées</h3>
+        <p class="feature-description">
+          Accède aux statistiques complètes, performances et évolutions de chaque streamer.
+        </p>
+      </div>
 
-  <section class="info-block">
-    <h2>💾 Un QG en évolution constante</h2>
-    <p>Nous ajoutons régulièrement des fonctionnalités : cartes uniques, classements, mini-jeux, et bien plus à venir !</p>
-  </section>
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3 class="feature-title">Album de Clips</h3>
+        <p class="feature-description">
+          Sauvegarde et revois tes meilleurs moments. Collection de clips épiques à portée de main.
+        </p>
+      </div>
 
-  <!-- Call to Action -->
-  <section class="info-block">
-    <h2>🧠 Tu as tout lu ?</h2>
-    <p>Alors soldat, il est temps d’entrer dans le QG et découvrir qui sont les vrais streamers du front.</p>
-    <button class="enter-button" onclick="enterSite()">🎮 Accéder au QG</button>
-  </section>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Système de Quêtes</h3>
+        <p class="feature-description">
+          Accomplis des défis, débloque des récompenses et grimpe dans le classement.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h3 class="feature-title">Notifications Live</h3>
+        <p class="feature-description">
+          Ne rate plus jamais un stream grâce aux notifications en temps réel.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3 class="feature-title">Communauté Active</h3>
+        <p class="feature-description">
+          Rejoins une communauté passionnée et engagée autour du streaming francophone.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <h2>🚀 Prêt à Rejoindre l'Aventure ?</h2>
+    <p>
+      Connecte-toi avec ton compte Twitch et accède immédiatement à toutes les fonctionnalités.
+      100% gratuit, 100% communauté.
+    </p>
+    <button class="btn btn-primary" onclick="enterSite()">
+      🎮 Accéder au QG Maintenant
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2025 Stream Team HQ. Fait avec ❤️ pour la communauté francophone.</p>
+  </div>
 
   <script>
-    // Génère les particules
+    // Génère les particules animées
     const particles = document.getElementById('particles');
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 40; i++) {
       const p = document.createElement('div');
       p.classList.add('particle');
       p.style.left = Math.random() * 100 + 'vw';
-      p.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+      p.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+      p.style.animationDuration = (Math.random() * 8 + 6) + 's';
       p.style.animationDelay = (Math.random() * 4) + 's';
-      p.style.opacity = Math.random();
       particles.appendChild(p);
     }
 
-    // Apparition progressive des sections
+    // Animation d'apparition des feature cards
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
         }
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.info-block').forEach(block => {
-      observer.observe(block);
+    document.querySelectorAll('.feature-card').forEach(card => {
+      observer.observe(card);
     });
 
+    // Entrée sur le site avec animation
     function enterSite() {
-  const body = document.body;
-  body.classList.add('fade-out');
-  setTimeout(() => {
-    window.location.href = 'home.html';
-  }, 2000);
-}
-    // Animation de la flèche de défilement
-    const scrollArrow = document.querySelector('.scroll-arrow');
-    setInterval(() => {
-      scrollArrow.classList.toggle('bounce');
-    }, 2000);
+      const body = document.body;
+      body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1500);
+    }
 
+    // Smooth scroll pour le bouton "Découvrir"
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
