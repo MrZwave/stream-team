@@ -75,6 +75,12 @@ app.use((req, res, next) => {
     return res.redirect(301, newPath);
   }
   
+  // Routes dynamiques à ignorer (laisse passer vers les routes Express)
+  const dynamicRoutes = ['/streamer/', '/api/', '/auth/', '/admin/'];
+  if (dynamicRoutes.some(route => req.path.startsWith(route))) {
+    return next();
+  }
+  
   // Si l'URL n'a pas d'extension et n'est pas la racine
   if (!req.path.includes('.') && req.path !== '/') {
     // Vérifie si un fichier .html existe dans frontend/
@@ -181,6 +187,62 @@ app.get("/api/auth/check", (req, res) => {
   } else {
     res.status(401).json({ authenticated: false });
   }
+});
+
+// Après la route /api/auth/check
+
+app.get("/api/me", (req, res) => {
+  if (!req.session?.user) {
+    return res.status(401).json({ error: "Non authentifié" });
+  }
+  res.json(req.session.user);
+});
+
+app.get("/api/live", async (req, res) => {
+  try {
+    // Retourne un tableau vide en attendant
+    res.json({ liveData: [] });
+  } catch (err) {
+    console.error("[API /live]", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+app.get("/api/users", async (req, res) => {
+  try {
+    const logins = req.query.login;
+    if (!logins) {
+      return res.json({ data: [] });
+    }
+
+    const loginArray = Array.isArray(logins) ? logins : [logins];
+    const token = await getAppAccessToken();
+    
+    const queryString = loginArray.map(l => `login=${encodeURIComponent(l)}`).join('&');
+    const twitchRes = await fetch(
+      `https://api.twitch.tv/helix/users?${queryString}`,
+      {
+        headers: {
+          "Client-ID": process.env.TWITCH_CLIENT_ID,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await twitchRes.json();
+    res.json(data);
+  } catch (err) {
+    console.error("[API /users]", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+app.get("/profile", (req, res) => {
+  const user = req.query.user;
+  if (!user) {
+    return res.redirect("/");
+  }
+  res.redirect(`/streamer/${user}`);
 });
 
 // ========================================
@@ -454,6 +516,132 @@ app.get("/api/saved", (req, res) => {
 });
 
 // ========================================
+// 📡 API STREAMER DATA
+// ========================================
+
+// Route pour récupérer les données d'un streamer
+app.get("/api/streamer/:login", async (req, res) => {
+  try {
+    const { login } = req.params;
+
+    // 1. Récupérer les données Twitch
+    const token = await getAppAccessToken();
+    
+    const userRes = await fetch(
+      `https://api.twitch.tv/helix/users?login=${encodeURIComponent(login)}`,
+      {
+        headers: {
+          "Client-ID": process.env.TWITCH_CLIENT_ID,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const userData = await userRes.json();
+    const user = userData.data && userData.data[0];
+
+    if (!user) {
+      return res.status(404).json({ error: "Streamer introuvable" });
+    }
+
+    // 2. Vérifier si le streamer est en live
+    const streamRes = await fetch(
+      `https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(login)}`,
+      {
+        headers: {
+          "Client-ID": process.env.TWITCH_CLIENT_ID,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const streamData = await streamRes.json();
+    user.is_live = streamData.data && streamData.data.length > 0;
+
+    // 3. Récupérer les clips
+    const clipsRes = await fetch(
+      `https://api.twitch.tv/helix/clips?broadcaster_id=${user.id}&first=12`,
+      {
+        headers: {
+          "Client-ID": process.env.TWITCH_CLIENT_ID,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const clipsData = await clipsRes.json();
+    const clips = clipsData.data || [];
+
+    // 4. Récupérer les stats depuis la BDD
+    const [[userStats]] = await db.query(
+      "SELECT clicks, salves FROM streamers WHERE login = ?",
+      [login]
+    );
+
+    // 5. Incrémenter le compteur de clics
+    if (!userStats) {
+      // Si le streamer n'existe pas en BDD, l'ajouter
+      await db.query(
+        `INSERT INTO streamers (login, display_name, profile_image_url, clicks) 
+         VALUES (?, ?, ?, 1)
+         ON DUPLICATE KEY UPDATE clicks = clicks + 1`,
+        [login, user.display_name, user.profile_image_url]
+      );
+    }
+
+    // 6. Retourner les données
+    res.json({
+      userData: user,
+      userStats: userStats || { clicks: 0, salves: 0 },
+      clips: clips
+    });
+
+  } catch (err) {
+    console.error("[API /api/streamer]", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// ========================================
+// 📊 API TRACKING - Comptage des clics
+// ========================================
+
+app.post("/api/profile-click", async (req, res) => {
+  try {
+    const { login } = req.body;
+
+    if (!login) {
+      return res.status(400).json({ error: "Login manquant" });
+    }
+
+    // Vérifier si le streamer existe
+    const [[streamer]] = await db.query(
+      "SELECT id, clicks FROM streamers WHERE login = ?",
+      [login]
+    );
+
+    if (streamer) {
+      // Incrémenter
+      await db.query(
+        "UPDATE streamers SET clicks = clicks + 1 WHERE login = ?",
+        [login]
+      );
+    } else {
+      // Créer
+      await db.query(
+        "INSERT INTO streamers (login, clicks) VALUES (?, 1)",
+        [login]
+      );
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("[API /profile-click]", err);
+    res.status(500).json({ error: "Erreur serveur", details: err.message });
+  }
+});
+
+// ========================================
 // 🔔 NOTIFICATIONS
 // ========================================
 
@@ -717,53 +905,11 @@ app.get("/test", (req, res) => {
   res.render("test", { username: "MrZwave" });
 });
 
-app.get("/streamer/:name", async (req, res) => {
-  const name = req.params.name;
-
-  try {
-    const token = await getAppAccessToken();
-
-    const userRes = await fetch(
-      `https://api.twitch.tv/helix/users?login=${encodeURIComponent(name)}`,
-      {
-        headers: {
-          "Client-ID": process.env.TWITCH_CLIENT_ID,
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const userData = (await userRes.json()).data[0];
-    if (!userData) throw new Error(`Utilisateur Twitch introuvable: ${name}`);
-
-    const clipsRes = await fetch(
-      `https://api.twitch.tv/helix/clips?broadcaster_id=${userData.id}&first=6`,
-      {
-        headers: {
-          "Client-ID": process.env.TWITCH_CLIENT_ID,
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const clipsData = await clipsRes.json();
-    const clips = clipsData.data || [];
-
-    const [rows] = await db.query(
-      "SELECT clicks, salves FROM streamers WHERE login = ?",
-      [name]
-    );
-    const userStats = rows[0] || { clicks: 0, salves: 0 };
-
-    res.render("streamer", {
-      userData,
-      clips,
-      userStats,
-    });
-  } catch (err) {
-    console.error("Erreur profil:", err);
-    res.status(500).send("Erreur lors du chargement du profil.");
-  }
+// ========================================
+// 📄 PAGE STREAMER (HTML pur)
+// ========================================
+app.get("/streamer/:name", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "streamer.html"));
 });
 
 // ========================================
