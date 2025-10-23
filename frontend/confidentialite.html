@@ -1,31 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Politique de Confidentialité</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
 </head>
+
 <body>
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
-      </div>
+  <div class="top-actions">
+    <button id="auth-button" class="dropdown-trigger"><i class="fa-solid fa-bars"></i></button>
+    <div class="dropdown-menu" id="auth-dropdown">
+      <a href="/index.html" class="dropdown-item"><span><i class="fa-regular fa-house"></i></span> Accueil</a>
+      <a href="#" id="profileButton" class="dropdown-item"><span><i class="fa-regular fa-circle-user"></i></span>
+        Profil</a>
+
+      <a href="#" class="dropdown-item" id="notifBtn">
+        <div class="notif-container">
+          <button class="notif-btn" title="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notifDot" class="notif-dot"></span>
+          </button>
+          <div id="notifPanel" class="notif-panel">
+            <div class="notif-header">
+              <h3><i class="fa-regular fa-bell"></i> Notifications</h3>
+              <button id="closeNotif" class="notif-close-btn" aria-label="Fermer les notifications">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div class="notif-categories">
+              <button class="notif-cat active">Système</button>
+              <button class="notif-cat">Communauté</button>
+              <button class="notif-cat">Missions</button>
+            </div>
+            <div class="notif-list">
+              <div class="notif-item">
+                <span class="notif-icon">🆕</span>
+                <div class="notif-content">
+                  <strong>Nouveau module débloqué !</strong><br>
+                  Consulte la roadmap pour voir les nouveautés.
+                  <small>il y a 3h • Système</small>
+                </div>
+              </div>
+              <div class="notif-item">
+                <span class="notif-icon">💬</span>
+                <div class="notif-content">
+                  <strong>Nouveau commentaire</strong><br>
+                  Un streamer a laissé un message sur ton profil.
+                  <small>hier • Communauté</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        Notifications
+      </a>
+
+      <a href="/watch.html" class="dropdown-item"><span><i class="fa-solid fa-video"></i></span> Regarder des
+        Lives</a>
+      <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
+      <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
+      <a href="#" onclick="darkLight()" class="dropdown-item"><span><i class="fa-regular fa-moon"></i></span>Mode</a>
+      <a href="/logout" id="connect" class="dropdown-item"><span><i
+            class="fa-solid fa-arrow-right-from-bracket"></i></span></a>
     </div>
   </div>
 
-  <main style="max-width: 800px; margin: 5rem auto; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
+  <main
+    style="max-width: 800px; margin: 5rem auto; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
     <h1 style="color: var(--primary); text-shadow: 0 0 5px var(--primary-glow);">🔒 Politique de Confidentialité</h1>
 
-    <p>Cette politique de confidentialité explique comment nous collectons, utilisons, stockons et protégeons vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679).</p>
+    <p>Cette politique de confidentialité explique comment nous collectons, utilisons, stockons et protégeons vos
+      données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679).</p>
 
     <h2>1. Données collectées</h2>
     <ul>
@@ -35,7 +84,9 @@
     </ul>
 
     <h2>2. Finalité et base légale du traitement</h2>
-    <p>Les données sont traitées pour vous permettre d’accéder à votre profil, suivre vos statistiques, participer à la communauté et maintenir la sécurité du site. La base légale est le <strong>consentement</strong> (article 6-1-a RGPD) et/ou <strong>l’exécution d’un contrat</strong> (accès au service) – article 6-1-b RGPD.</p>
+    <p>Les données sont traitées pour vous permettre d’accéder à votre profil, suivre vos statistiques, participer à la
+      communauté et maintenir la sécurité du site. La base légale est le <strong>consentement</strong> (article 6-1-a
+      RGPD) et/ou <strong>l’exécution d’un contrat</strong> (accès au service) – article 6-1-b RGPD.</p>
 
     <h2>3. Utilisation des données</h2>
     <ul>
@@ -51,16 +102,20 @@
       <li>Maintenir votre session ouverte</li>
       <li>Stocker votre choix sur la bannière cookies</li>
     </ul>
-    <p>Aucune publicité ni tracking tiers n’est utilisé. Votre consentement est demandé dès votre arrivée sur le site.</p>
+    <p>Aucune publicité ni tracking tiers n’est utilisé. Votre consentement est demandé dès votre arrivée sur le site.
+    </p>
 
     <h2>5. Durée de conservation</h2>
-    <p>Les données sont conservées tant que votre compte est actif. Vous pouvez demander leur suppression à tout moment par email.</p>
+    <p>Les données sont conservées tant que votre compte est actif. Vous pouvez demander leur suppression à tout moment
+      par email.</p>
 
     <h2>6. Sécurité des données</h2>
-    <p>Les données sont stockées sur un serveur sécurisé hébergé en France ou dans l’UE. Les échanges sont chiffrés via HTTPS.</p>
+    <p>Les données sont stockées sur un serveur sécurisé hébergé en France ou dans l’UE. Les échanges sont chiffrés via
+      HTTPS.</p>
 
     <h2>7. Transfert hors UE</h2>
-    <p>Nous utilisons l’API Twitch, dont les serveurs peuvent être situés hors de l’Union européenne. Ces transferts sont encadrés par les clauses contractuelles types de la Commission européenne.</p>
+    <p>Nous utilisons l’API Twitch, dont les serveurs peuvent être situés hors de l’Union européenne. Ces transferts
+      sont encadrés par les clauses contractuelles types de la Commission européenne.</p>
 
     <h2>8. Destinataires / Sous-traitants</h2>
     <ul>
@@ -77,27 +132,30 @@
       <li>Droit à la portabilité</li>
       <li>Droit d’opposition au traitement</li>
     </ul>
-    <p>Vous pouvez exercer vos droits à tout moment en nous contactant à : <a href="mailto:support@stream-team.site">support@stream-team.site</a></p>
+    <p>Vous pouvez exercer vos droits à tout moment en nous contactant à : <a
+        href="mailto:support@stream-team.site">support@stream-team.site</a></p>
 
     <h2>10. Mise à jour</h2>
-    <p>Cette politique de confidentialité peut être mise à jour à tout moment. Les utilisateurs seront informés des modifications importantes via le site.</p>
-        <h2>11. Dernière mise à jour</h2>
+    <p>Cette politique de confidentialité peut être mise à jour à tout moment. Les utilisateurs seront informés des
+      modifications importantes via le site.</p>
+    <h2>11. Dernière mise à jour</h2>
     <p>Cette politique de confidentialité a été mise à jour le <strong>5 juillet 2025</strong>.</p>
-    <p>En utilisant notre site, vous acceptez cette politique de confidentialité. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.</p>
+    <p>En utilisant notre site, vous acceptez cette politique de confidentialité. Si vous n'êtes pas d'accord, veuillez
+      ne pas utiliser nos services.</p>
   </main>
 
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
+        <img src="assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" loading="lazy" />
         <span class="footer-name">Stream Team</span>
       </div>
       <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Confidentialité</a>
-        <a href="/conditions.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
+        <a href="/mentions-legales.html"><i class="fa-solid fa-file"></i> Mentions Légales</a>
+        <a href="/confidentialite.html"><i class="fa-solid fa-lock"></i> Confidentialité</a>
+        <a href="/cgu.html"><i class="fa-solid fa-book"></i> Conditions</a>
+        <a href="/cookies.html"><i class="fa-solid fa-cookie"></i> Cookies</a>
+        <a href="/contact.html"><i class="fa-solid fa-message"></i> Contact</a>
       </div>
       <div class="footer-copy">
         © 2025 Stream Team. Tous droits réservés.
@@ -107,4 +165,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

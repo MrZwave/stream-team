@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <title>🚀 Stream Team HQ - La Communauté des Streamers</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rejoins la plus grande communauté de streamers francophones. Découvre, soutiens et vis l'expérience streaming ultime.">
+  <meta charset="UTF-8" />
+  <title>Stream Team HQ - Nous revenir bientôt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#00FF9F" />
   <link rel="icon" href="assets/logo-stream-team-hq.webp" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Twitch performance optimizations -->
-  <link rel="preconnect" href="https://player.twitch.tv">
-  <link rel="preconnect" href="https://www.twitch.tv">
-  <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin>
-  <link rel="dns-prefetch" href="https://player.twitch.tv">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+
   <style>
     * {
       margin: 0;
@@ -23,30 +18,30 @@
 
     :root {
       --primary: #00ff9f;
-      --secondary: #9d4edd;
-      --accent: #00d4ff;
+      --primary-glow: rgba(0, 255, 159, 0.3);
+      --accent: #00d4cc;
+      --background: radial-gradient(circle, #1a1a1a, #000000);
+      --surface: rgba(15, 25, 20, 0.9);
+      --text: #e8f5f0;
+      --text-secondary: #a0e6d5;
+      --button-bg: #00ff9f;
+      --button-text: #000000;
+      --button-hover: #00d98a;
+      --button-shadow: 0 0 15px rgba(0, 255, 159, 0.4);
     }
 
-    html, body {
-      background: radial-gradient(ellipse at top, #1a0a2e 0%, #0a0a1a 100%);
-      font-family: 'Space Grotesk', sans-serif;
-      color: white;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .fade-out {
-      animation: fadeOut 1.5s ease-in forwards;
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: scale(1.05);
-      }
-    }
-
-    /* Particles Background */
+    /* Animated background particles */
     .particles {
       position: fixed;
       top: 0;
@@ -55,506 +50,335 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
-      overflow: hidden;
     }
 
     .particle {
       position: absolute;
-      width: 3px;
-      height: 3px;
+      width: 2px;
+      height: 2px;
       background: var(--primary);
       border-radius: 50%;
-      animation: float 8s ease-in-out infinite;
-      opacity: 0.4;
+      opacity: 0.5;
+      animation: float linear infinite;
     }
 
     @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.4;
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) translateX(0);
       }
-      50% {
-        transform: translate(var(--tx), var(--ty)) scale(1.5);
-        opacity: 0.8;
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) translateX(100px);
       }
     }
 
-    /* Hero Section */
-    .hero-container {
+    i {
+      color: #00ff9f;
+    }
+
+    .content {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 20px;
       z-index: 1;
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 600px;
     }
 
     .logo {
       width: 120px;
       height: 120px;
-      margin-bottom: 30px;
-      animation: float 3s ease-in-out infinite;
-      filter: drop-shadow(0 0 30px rgba(0, 255, 159, 0.5));
+      margin: 0 auto 30px;
+      animation: pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px var(--primary-glow));
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+    @keyframes pulse {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 20px var(--primary-glow));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 40px var(--primary));
+      }
     }
 
     h1 {
-      font-size: 4.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-      animation: slideDown 1s ease-out;
-      line-height: 1.2;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 50px;
-      max-width: 600px;
-      animation: fadeIn 1.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeIn 2s ease-out;
-    }
-
-    .btn {
-      padding: 18px 40px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: none;
-      font-family: inherit;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: #000;
-      box-shadow: 0 0 30px rgba(0, 255, 159, 0.4);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 50px rgba(0, 255, 159, 0.6);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text);
-      border: 2px solid var(--primary);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(0, 255, 159, 0.1);
-      border-color: var(--accent);
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      font-size: 2rem;
-      animation: bounce 2s infinite;
-      color: var(--primary);
-      opacity: 0.6;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(15px); }
-    }
-
-    /* Features Section */
-    .features-container {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 20px;
-      z-index: 1;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 3rem;
-      margin-bottom: 60px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .feature-card {
-      backdrop-filter: blur(15px);
-      background: rgba(20, 20, 40, 0.7);
-      border: 1px solid rgba(0, 255, 159, 0.2);
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    .feature-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary);
-      box-shadow: 0 10px 40px rgba(0, 255, 159, 0.3);
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .feature-title {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 3.5rem;
       margin-bottom: 15px;
-      color: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px var(--primary-glow);
+      font-weight: 700;
     }
 
-    .feature-description {
-      color: rgba(255, 255, 255, 0.7);
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
       line-height: 1.6;
     }
 
-    /* Stats Section */
-    .stats-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
-    }
-
-    .stat-card {
-      backdrop-filter: blur(15px);
-      background: rgba(20, 20, 40, 0.7);
-      border: 1px solid rgba(0, 255, 159, 0.2);
-      border-radius: 15px;
-      padding: 30px;
-      transition: all 0.3s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: 0 10px 30px rgba(0, 255, 159, 0.3);
-    }
-
-    .stat-value {
-      font-size: 3rem;
-      font-weight: 800;
+    .status {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: 50px;
       color: var(--primary);
-      text-shadow: 0 0 20px rgba(0, 255, 159, 0.5);
-      margin-bottom: 10px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      box-shadow: 0 0 15px var(--primary-glow);
+      animation: glow 2s ease-in-out infinite;
     }
 
-    .stat-label {
-      color: rgba(255, 255, 255, 0.6);
+    @keyframes glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 15px var(--primary-glow);
+      }
+
+      50% {
+        box-shadow: 0 0 30px var(--primary);
+      }
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 15px;
+      margin: 40px 0;
+    }
+
+    .countdown-item {
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      border-radius: 10px;
+      padding: 20px 10px;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .countdown-value {
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: 700;
+      display: block;
+    }
+
+    .countdown-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 5px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-size: 0.9rem;
     }
 
-    /* Final CTA */
-    .final-cta {
-      position: relative;
-      max-width: 900px;
-      margin: 100px auto;
-      padding: 60px 40px;
-      text-align: center;
-      backdrop-filter: blur(15px);
-      background: linear-gradient(135deg, rgba(0, 255, 159, 0.1), rgba(157, 78, 221, 0.1));
-      border: 2px solid var(--primary);
-      border-radius: 20px;
-      z-index: 1;
+    .cta-section {
+      margin-top: 50px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(0, 255, 159, 0.2);
     }
 
-    .final-cta h2 {
-      font-size: 2.5rem;
+    .email-form {
+      display: flex;
+      gap: 10px;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .final-cta p {
+    input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    input[type="email"]::placeholder {
+      color: var(--text-secondary);
+    }
+
+    button {
+      padding: 12px 30px;
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--button-shadow);
+    }
+
+    button:hover {
+      background: var(--button-hover);
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 255, 159, 0.6);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
       font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 40px;
     }
 
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 40px 20px;
-      color: rgba(255, 255, 255, 0.4);
-      border-top: 1px solid rgba(0, 255, 159, 0.1);
+    .social-links a:hover {
+      background: var(--primary);
+      color: var(--button-text);
+      box-shadow: var(--button-shadow);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       h1 {
         font-size: 2.5rem;
       }
 
-      .tagline {
-        font-size: 1.1rem;
+      .logo {
+        width: 80px;
+        height: 80px;
       }
 
-      .cta-buttons {
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .email-form {
         flex-direction: column;
-        width: 100%;
       }
 
-      .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .final-cta {
-        padding: 40px 20px;
-      }
-
-      .final-cta h2 {
-        font-size: 1.8rem;
+      input[type="email"] {
+        min-width: 100%;
       }
     }
   </style>
 </head>
+
 <body>
-  <!-- Particles Background -->
   <div class="particles" id="particles"></div>
 
-  <!-- Hero Section -->
-  <div class="hero-container">
-    <img src="assets/logo-stream-team-hq.webp" alt="Stream Team Logo" class="logo" />
+  <div class="content">
+    <img src="assets/logo-stream-team-hq.webp" alt="Stream Team Logo" class="logo" loading="lazy" />
+
     <h1>Stream Team HQ</h1>
-    <p class="tagline">
-      La plateforme qui connecte les streamers francophones et leur communauté. 
-      Découvre, soutiens et vis l'expérience streaming ultime.
+
+    <div class="status"><i class="fa-solid fa-wrench"></i> En maintenance</div>
+
+    <p class="subtitle">
+      Notre serveur a connu une petite défaillance, mais nous allons revenir très bientôt avec une expérience encore
+      meilleure.
+      Merci pour votre patience !
     </p>
-    
-    <div class="cta-buttons">
-      <button class="btn btn-primary" onclick="enterSite()">
-        🎮 Entrer dans le QG
-      </button>
-      <a href="#features" class="btn btn-secondary">
-        ✨ Découvrir les fonctionnalités
-      </a>
-    </div>
 
-    <div class="scroll-indicator">⬇️</div>
-  </div>
-
-  <!-- Stats Section -->
-  <div class="stats-container">
-    <h2 class="section-title">La Communauté en Chiffres</h2>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value">21+</div>
-        <div class="stat-label">Streamers</div>
+    <div class="countdown">
+      <div class="countdown-item">
+        <span class="countdown-value" id="days">0</span>
+        <span class="countdown-label">Jours</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-value">2.3K+</div>
-        <div class="stat-label">Clips</div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="hours">0</span>
+        <span class="countdown-label">Heures</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-value">5K+</div>
-        <div class="stat-label">Spectateurs</div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="minutes">0</span>
+        <span class="countdown-label">Minutes</span>
       </div>
-      <div class="stat-card">
-        <div class="stat-value">24/7</div>
-        <div class="stat-label">Lives Actifs</div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="seconds">0</span>
+        <span class="countdown-label">Secondes</span>
       </div>
     </div>
-  </div>
-
-  <!-- Features Section -->
-  <div class="features-container" id="features">
-    <h2 class="section-title">Pourquoi Stream Team ?</h2>
-    
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title">Découvre des Talents</h3>
-        <p class="feature-description">
-          Explore une sélection des meilleurs streamers francophones et trouve ton nouveau favori.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3 class="feature-title">Stats Détaillées</h3>
-        <p class="feature-description">
-          Accède aux statistiques complètes, performances et évolutions de chaque streamer.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎬</div>
-        <h3 class="feature-title">Album de Clips</h3>
-        <p class="feature-description">
-          Sauvegarde et revois tes meilleurs moments. Collection de clips épiques à portée de main.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title">Système de Quêtes</h3>
-        <p class="feature-description">
-          Accomplis des défis, débloque des récompenses et grimpe dans le classement.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔔</div>
-        <h3 class="feature-title">Notifications Live</h3>
-        <p class="feature-description">
-          Ne rate plus jamais un stream grâce aux notifications en temps réel.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">👥</div>
-        <h3 class="feature-title">Communauté Active</h3>
-        <p class="feature-description">
-          Rejoins une communauté passionnée et engagée autour du streaming francophone.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Final CTA -->
-  <div class="final-cta">
-    <h2>🚀 Prêt à Rejoindre l'Aventure ?</h2>
-    <p>
-      Connecte-toi avec ton compte Twitch et accède immédiatement à toutes les fonctionnalités.
-      100% gratuit, 100% communauté.
-    </p>
-    <button class="btn btn-primary" onclick="enterSite()">
-      🎮 Accéder au QG Maintenant
-    </button>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <p>© 2025 Stream Team HQ. Fait avec ❤️ pour la communauté francophone.</p>
+    <p>Ce temps est facultatif</p>
   </div>
 
   <script>
-    // Génère les particules animées
-    const particles = document.getElementById('particles');
-    for (let i = 0; i < 40; i++) {
-      const p = document.createElement('div');
-      p.classList.add('particle');
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.top = Math.random() * 100 + 'vh';
-      p.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
-      p.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
-      p.style.animationDuration = (Math.random() * 8 + 6) + 's';
-      p.style.animationDelay = (Math.random() * 4) + 's';
-      particles.appendChild(p);
+    // Generate floating particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      particle.style.opacity = Math.random() * 0.5 + 0.3;
+      particlesContainer.appendChild(particle);
     }
 
-    // Animation d'apparition des feature cards
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 100);
+    function updateCountdown() {
+      const launchDate = new Date();
+      launchDate.setDate(launchDate.getDate() + 20);
+
+      function tick() {
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+        if (distance < 0) {
+          document.querySelector('.status').textContent = '✅ Nous sommes de retour !';
         }
-      });
-    }, { threshold: 0.1 });
+      }
 
-    document.querySelectorAll('.feature-card').forEach(card => {
-      observer.observe(card);
-    });
-
-    // Entrée sur le site avec animation
-    function enterSite() {
-      const body = document.body;
-      body.classList.add('fade-out');
-      setTimeout(() => {
-        window.location.href = 'home.html';
-      }, 1500);
+      tick();
+      setInterval(tick, 1000);
     }
 
-    // Smooth scroll pour le bouton "Découvrir"
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
+    updateCountdown();
+
+    // Email subscription
+    function handleSubmit(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      alert(`Merci ! Nous t'enverrons un email à ${email} dès notre retour.`);
+      e.target.reset();
+    }
   </script>
 </body>
+
 </html>

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roadmap - Stream Team</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+
   <style>
     .roadmap-wrapper {
       max-width: 900px;
@@ -35,7 +39,7 @@
     .timeline-item {
       position: relative;
       margin-bottom: 50px;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0, 0, 0, 0.3);
       padding: 15px 20px;
       border-radius: 8px;
       box-shadow: 0 0 8px #00fff744;
@@ -89,18 +93,63 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-        <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
-      </div>
+  <div class="top-actions">
+    <button id="auth-button" class="dropdown-trigger"><i class="fa-solid fa-bars"></i></button>
+    <div class="dropdown-menu" id="auth-dropdown">
+      <a href="/index.html" class="dropdown-item"><span><i class="fa-regular fa-house"></i></span> Accueil</a>
+      <a href="#" id="profileButton" class="dropdown-item"><span><i class="fa-regular fa-circle-user"></i></span>
+        Profil</a>
+
+      <a href="#" class="dropdown-item" id="notifBtn">
+        <div class="notif-container">
+          <button class="notif-btn" title="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notifDot" class="notif-dot"></span>
+          </button>
+          <div id="notifPanel" class="notif-panel">
+            <div class="notif-header">
+              <h3><i class="fa-regular fa-bell"></i> Notifications</h3>
+              <button id="closeNotif" class="notif-close-btn" aria-label="Fermer les notifications">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div class="notif-categories">
+              <button class="notif-cat active">Système</button>
+              <button class="notif-cat">Communauté</button>
+              <button class="notif-cat">Missions</button>
+            </div>
+            <div class="notif-list">
+              <div class="notif-item">
+                <span class="notif-icon">🆕</span>
+                <div class="notif-content">
+                  <strong>Nouveau module débloqué !</strong><br>
+                  Consulte la roadmap pour voir les nouveautés.
+                  <small>il y a 3h • Système</small>
+                </div>
+              </div>
+              <div class="notif-item">
+                <span class="notif-icon">💬</span>
+                <div class="notif-content">
+                  <strong>Nouveau commentaire</strong><br>
+                  Un streamer a laissé un message sur ton profil.
+                  <small>hier • Communauté</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        Notifications
+      </a>
+
+      <a href="/watch.html" class="dropdown-item"><span><i class="fa-solid fa-video"></i></span> Regarder des
+        Lives</a>
+      <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
+      <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
+      <a href="#" onclick="darkLight()" class="dropdown-item"><span><i class="fa-regular fa-moon"></i></span>Mode</a>
+      <a href="/logout" id="connect" class="dropdown-item"><span><i
+            class="fa-solid fa-arrow-right-from-bracket"></i></span></a>
     </div>
   </div>
 
@@ -138,6 +187,11 @@
       <div class="timeline-item">
         <h3>🔔 Système de notifications</h3>
         <p>Ajout d'un onglet de notifications pour suivre les activités importantes.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>⚙️ Amélioration du menu de navigation</h3>
+        <p>Modification des icones et de la largeur du menu avec bouton de fermeture.</p>
       </div>
 
       <div class="timeline-category">🔮 Fonctionnalités à venir</div>
@@ -181,22 +235,23 @@
 
   <script src="script.js"></script>
 </body>
- <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-        <span class="footer-name">Stream Team</span>
-      </div>
-      <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Politique de Confidentialité</a>
-        <a href="/cgu.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
-      </div>
-      <div class="footer-copy">
-        © 2025 Stream Team. Tous droits réservés.
-      </div>
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" loading="lazy" />
+      <span class="footer-name">Stream Team</span>
     </div>
-  </footer>
+    <div class="footer-nav">
+      <a href="/mentions-legales.html"><i class="fa-solid fa-file"></i> Mentions Légales</a>
+      <a href="/confidentialite.html"><i class="fa-solid fa-lock"></i> Confidentialité</a>
+      <a href="/cgu.html"><i class="fa-solid fa-book"></i> Conditions</a>
+      <a href="/cookies.html"><i class="fa-solid fa-cookie"></i> Cookies</a>
+      <a href="/contact.html"><i class="fa-solid fa-message"></i> Contact</a>
+    </div>
+    <div class="footer-copy">
+      © 2025 Stream Team. Tous droits réservés.
+    </div>
+  </div>
+</footer>
+
 </html>

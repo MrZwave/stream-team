@@ -1,125 +1,192 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mon Album - Stream Team</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
 </head>
+
 <body>
 
-<header>
-  <h1 class="profile-title">🎴 Ton Album</h1>
-  <p class="profile-subtitle">Collectionne toutes les cartes et montre ta puissance sur Stream Team !</p>
-
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
+  <header>
+    <div class="top-actions">
+      <button id="auth-button" class="dropdown-trigger"><i class="fa-solid fa-bars"></i></button>
       <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-        <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+        <a href="/index.html" class="dropdown-item"><span><i class="fa-regular fa-house"></i></span> Accueil</a>
+        <a href="#" id="profileButton" class="dropdown-item"><span><i class="fa-regular fa-circle-user"></i></span>
+          Profil</a>
+
+        <a href="#" class="dropdown-item" id="notifBtn">
+          <div class="notif-container">
+            <button class="notif-btn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span id="notifDot" class="notif-dot"></span>
+            </button>
+            <div id="notifPanel" class="notif-panel">
+              <div class="notif-header">
+                <h3><i class="fa-regular fa-bell"></i> Notifications</h3>
+                <button id="closeNotif" class="notif-close-btn" aria-label="Fermer les notifications">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="notif-categories">
+                <button class="notif-cat active">Système</button>
+                <button class="notif-cat">Communauté</button>
+                <button class="notif-cat">Missions</button>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <span class="notif-icon">🆕</span>
+                  <div class="notif-content">
+                    <strong>Nouveau module débloqué !</strong><br>
+                    Consulte la roadmap pour voir les nouveautés.
+                    <small>il y a 3h • Système</small>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <span class="notif-icon">💬</span>
+                  <div class="notif-content">
+                    <strong>Nouveau commentaire</strong><br>
+                    Un streamer a laissé un message sur ton profil.
+                    <small>hier • Communauté</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          Notifications
+        </a>
+
+        <a href="/watch.html" class="dropdown-item"><span><i class="fa-solid fa-video"></i></span> Regarder des
+          Lives</a>
+        <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
+        <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
+        <a href="#" onclick="darkLight()" class="dropdown-item"><span><i class="fa-regular fa-moon"></i></span>Mode</a>
+        <a href="/logout" id="connect" class="dropdown-item"><span><i
+              class="fa-solid fa-arrow-right-from-bracket"></i></span></a>
       </div>
     </div>
-  </div>
-</header>
+    <h1 class="profile-title">🎴 Ton Album</h1>
+    <p class="profile-subtitle">Collectionne toutes les cartes et montre ta puissance sur Stream Team !</p>
+  </header>
 
-<main class="album-container">
-  <div class="coming-soon-box">
-    <h2>🚧 En construction !</h2>
-    <p>Ton album est encore en train d’être assemblé par notre QG. Reviens bientôt pour débloquer et afficher tes cartes collectées 🃏</p>
-    <p class="small-note">💡 L’album sera débloqué après l’obtention de tes premières cartes ou lors d’une future mise à jour majeure.</p>
-    <img src="/assets/ratonsb.webp" alt="Stream Team - Mascotte militaire" class="album-mascot">
-    <p class="mascotte-quote">🪖 Je surveille ton deck, soldat… Prépare-toi à collectionner !</p>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-brand">
-      <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-      <span class="footer-name">Stream Team</span>
+  <main class="album-container">
+    <div class="coming-soon-box">
+      <h2>🚧 En construction !</h2>
+      <p>Ton album est encore en train d’être assemblé par notre QG. Reviens bientôt pour débloquer et afficher tes
+        cartes collectées 🃏</p>
+      <p class="small-note">💡 L’album sera débloqué après l’obtention de tes premières cartes ou lors d’une future mise
+        à jour majeure.</p>
+      <img src="/assets/ratonsb.webp" alt="Stream Team - Mascotte militaire" class="album-mascot">
+      <p class="mascotte-quote">🪖 Je surveille ton deck, soldat… Prépare-toi à collectionner !</p>
     </div>
-    <div class="footer-nav">
-      <a href="/mentions-legales.html">📜 Mentions Légales</a>
-      <a href="/confidentialite.html">🔒 Confidentialité</a>
-      <a href="/cgu.html">📘 Conditions</a>
-      <a href="/cookies.html">🍪 Cookies</a>
-      <a href="/contact.html">📩 Contact</a>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" loading="lazy" />
+        <span class="footer-name">Stream Team</span>
+      </div>
+      <div class="footer-nav">
+        <a href="/mentions-legales.html"><i class="fa-solid fa-file"></i> Mentions Légales</a>
+        <a href="/confidentialite.html"><i class="fa-solid fa-lock"></i> Confidentialité</a>
+        <a href="/cgu.html"><i class="fa-solid fa-book"></i> Conditions</a>
+        <a href="/cookies.html"><i class="fa-solid fa-cookie"></i> Cookies</a>
+        <a href="/contact.html"><i class="fa-solid fa-message"></i> Contact</a>
+      </div>
+      <div class="footer-copy">
+        © 2025 Stream Team. Tous droits réservés.
+      </div>
     </div>
-    <div class="footer-copy">© 2025 Stream Team. Tous droits réservés.</div>
-  </div>
-</footer>
+  </footer>
 
-<style>
-  .coming-soon-box {
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px dashed #00fff7;
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 700px;
-    margin: 60px auto;
-    text-align: center;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    box-shadow: 0 0 20px rgba(0,255,247,0.2);
-  }
+  <style>
+    .coming-soon-box {
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px dashed #00fff7;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 60px auto;
+      text-align: center;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 20px rgba(0, 255, 247, 0.2);
+    }
 
-  .coming-soon-box h2 {
-    color: #00fff7;
-    text-shadow: 0 0 10px #00fff7;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
+    .coming-soon-box h2 {
+      color: #00fff7;
+      text-shadow: 0 0 10px #00fff7;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
 
-  .coming-soon-box p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
+    .coming-soon-box p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
-  .small-note {
-    margin-top: 1rem;
-    color: #aaa;
-    font-size: 0.85rem;
-  }
+    .small-note {
+      margin-top: 1rem;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
 
-.album-mascot {
-  max-width: 250px;
-  margin-top: 1rem;
-  filter: drop-shadow(0 0 6px #00fff7);
-  transition: transform 0.4s ease, filter 0.4s ease;
-}
+    .album-mascot {
+      max-width: 250px;
+      margin-top: 1rem;
+      filter: drop-shadow(0 0 6px #00fff7);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
 
-.album-mascot:hover {
-  transform: scale(1.05) rotate(-2deg);
-  filter: drop-shadow(0 0 10px #00fff7) brightness(1.2);
-}
+    .album-mascot:hover {
+      transform: scale(1.05) rotate(-2deg);
+      filter: drop-shadow(0 0 10px #00fff7) brightness(1.2);
+    }
 
-.mascotte-quote {
-  margin-top: 1rem;
-  font-family: 'Share Tech Mono', monospace;
-  color: #00fff7;
-  text-align: center;
-  font-size: 1rem;
-  animation: flicker 2s infinite alternate;
-  text-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
-}
+    .mascotte-quote {
+      margin-top: 1rem;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00fff7;
+      text-align: center;
+      font-size: 1rem;
+      animation: flicker 2s infinite alternate;
+      text-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+    }
 
-@keyframes flicker {
-  0% { opacity: 1; }
-  45% { opacity: 0.8; }
-  70% { opacity: 1; transform: scale(1); }
-  85% { opacity: 0.6; transform: scale(1.02); }
-  100% { opacity: 1; transform: scale(1.01); }
-}
+    @keyframes flicker {
+      0% {
+        opacity: 1;
+      }
 
-</style>
+      45% {
+        opacity: 0.8;
+      }
 
-<script src="album.js"></script>
-<script src="/script.js"></script>
+      70% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      85% {
+        opacity: 0.6;
+        transform: scale(1.02);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.01);
+      }
+    }
+  </style>
+
+  <script src="album.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

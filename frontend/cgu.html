@@ -1,33 +1,83 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Conditions Générales d'Utilisation</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
 </head>
+
 <body>
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
-      </div>
+  <div class="top-actions">
+    <button id="auth-button" class="dropdown-trigger"><i class="fa-solid fa-bars"></i></button>
+    <div class="dropdown-menu" id="auth-dropdown">
+      <a href="/index.html" class="dropdown-item"><span><i class="fa-regular fa-house"></i></span> Accueil</a>
+      <a href="#" id="profileButton" class="dropdown-item"><span><i class="fa-regular fa-circle-user"></i></span>
+        Profil</a>
+
+      <a href="#" class="dropdown-item" id="notifBtn">
+        <div class="notif-container">
+          <button class="notif-btn" title="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notifDot" class="notif-dot"></span>
+          </button>
+          <div id="notifPanel" class="notif-panel">
+            <div class="notif-header">
+              <h3><i class="fa-regular fa-bell"></i> Notifications</h3>
+              <button id="closeNotif" class="notif-close-btn" aria-label="Fermer les notifications">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div class="notif-categories">
+              <button class="notif-cat active">Système</button>
+              <button class="notif-cat">Communauté</button>
+              <button class="notif-cat">Missions</button>
+            </div>
+            <div class="notif-list">
+              <div class="notif-item">
+                <span class="notif-icon">🆕</span>
+                <div class="notif-content">
+                  <strong>Nouveau module débloqué !</strong><br>
+                  Consulte la roadmap pour voir les nouveautés.
+                  <small>il y a 3h • Système</small>
+                </div>
+              </div>
+              <div class="notif-item">
+                <span class="notif-icon">💬</span>
+                <div class="notif-content">
+                  <strong>Nouveau commentaire</strong><br>
+                  Un streamer a laissé un message sur ton profil.
+                  <small>hier • Communauté</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        Notifications
+      </a>
+
+      <a href="/watch.html" class="dropdown-item"><span><i class="fa-solid fa-video"></i></span> Regarder des
+        Lives</a>
+      <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
+      <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
+      <a href="#" onclick="darkLight()" class="dropdown-item"><span><i class="fa-regular fa-moon"></i></span>Mode</a>
+      <a href="/logout" id="connect" class="dropdown-item"><span><i
+            class="fa-solid fa-arrow-right-from-bracket"></i></span></a>
     </div>
   </div>
-  <main style="max-width: 800px; margin: 5rem auto; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
+  <main
+    style="max-width: 800px; margin: 5rem auto; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
     <h1>📘 Conditions Générales d'Utilisation (CGU)</h1>
 
-    <p>Les présentes Conditions Générales d’Utilisation (CGU) régissent l’accès et l’utilisation du site <strong>Stream Team</strong> accessible à l’adresse : <a href="https://stream-team.site">https://stream-team.site</a></p>
+    <p>Les présentes Conditions Générales d’Utilisation (CGU) régissent l’accès et l’utilisation du site <strong>Stream
+        Team</strong> accessible à l’adresse : <a href="https://stream-team.site">https://stream-team.site</a></p>
 
     <h2>1. Acceptation des conditions</h2>
-    <p>En accédant et en naviguant sur le site, l’utilisateur accepte sans réserve les présentes CGU. Si vous êtes en désaccord avec tout ou partie des CGU, vous devez quitter le site immédiatement.</p>
+    <p>En accédant et en naviguant sur le site, l’utilisateur accepte sans réserve les présentes CGU. Si vous êtes en
+      désaccord avec tout ou partie des CGU, vous devez quitter le site immédiatement.</p>
 
     <h2>2. Services proposés</h2>
     <p>Le site Stream Team permet aux streamers Twitch de :</p>
@@ -39,7 +89,9 @@
     </ul>
 
     <h2>3. Compte utilisateur</h2>
-    <p>L’authentification s’effectue via le service OAuth de Twitch. En vous connectant, vous autorisez Stream Team à accéder à certaines données de votre profil Twitch (identifiant, login, image de profil, etc.). Ces données sont nécessaires au fonctionnement du site.</p>
+    <p>L’authentification s’effectue via le service OAuth de Twitch. En vous connectant, vous autorisez Stream Team à
+      accéder à certaines données de votre profil Twitch (identifiant, login, image de profil, etc.). Ces données sont
+      nécessaires au fonctionnement du site.</p>
 
     <h2>4. Obligations des utilisateurs</h2>
     <p>L’utilisateur s’engage à :</p>
@@ -50,46 +102,60 @@
     </ul>
 
     <h2>5. Données personnelles (RGPD)</h2>
-    <p>Stream Team collecte et traite certaines données personnelles pour le bon fonctionnement du site. Ces données sont traitées conformément au Règlement Général sur la Protection des Données (RGPD).</p>
-    <p>Voir la <a href="/confidentialite.html">Politique de Confidentialité</a> pour connaître les finalités, la durée de conservation, les droits d’accès, de rectification, de suppression, et de portabilité des données.</p>
+    <p>Stream Team collecte et traite certaines données personnelles pour le bon fonctionnement du site. Ces données
+      sont traitées conformément au Règlement Général sur la Protection des Données (RGPD).</p>
+    <p>Voir la <a href="/confidentialite.html">Politique de Confidentialité</a> pour connaître les finalités, la durée
+      de conservation, les droits d’accès, de rectification, de suppression, et de portabilité des données.</p>
 
     <h2>6. Cookies et traceurs</h2>
-    <p>Des cookies peuvent être utilisés à des fins techniques, de mesure d’audience ou pour améliorer l’expérience utilisateur. Vous pouvez accepter ou refuser ces cookies via la bannière affichée lors de votre première visite.</p>
+    <p>Des cookies peuvent être utilisés à des fins techniques, de mesure d’audience ou pour améliorer l’expérience
+      utilisateur. Vous pouvez accepter ou refuser ces cookies via la bannière affichée lors de votre première visite.
+    </p>
 
     <h2>7. Propriété intellectuelle</h2>
-    <p>Les éléments visuels, textuels et techniques du site Stream Team (logo, design, code, textes) sont protégés par les lois en vigueur sur la propriété intellectuelle. Toute reproduction, diffusion ou utilisation sans autorisation est interdite.</p>
+    <p>Les éléments visuels, textuels et techniques du site Stream Team (logo, design, code, textes) sont protégés par
+      les lois en vigueur sur la propriété intellectuelle. Toute reproduction, diffusion ou utilisation sans
+      autorisation est interdite.</p>
 
     <h2>8. Transfert de données hors UE</h2>
-    <p>Le site utilise l’API Twitch, dont les serveurs sont situés en dehors de l’Union européenne. Vos données peuvent donc être transférées hors UE. Ces transferts sont encadrés par des garanties contractuelles appropriées fournies par Twitch.</p>
+    <p>Le site utilise l’API Twitch, dont les serveurs sont situés en dehors de l’Union européenne. Vos données peuvent
+      donc être transférées hors UE. Ces transferts sont encadrés par des garanties contractuelles appropriées fournies
+      par Twitch.</p>
 
     <h2>9. Disponibilité et responsabilité</h2>
-    <p>Le site est fourni "en l’état", sans garantie quant à sa disponibilité, son accessibilité ou son fonctionnement ininterrompu. Stream Team décline toute responsabilité en cas de perte de données, de bug ou d’indisponibilité temporaire.</p>
+    <p>Le site est fourni "en l’état", sans garantie quant à sa disponibilité, son accessibilité ou son fonctionnement
+      ininterrompu. Stream Team décline toute responsabilité en cas de perte de données, de bug ou d’indisponibilité
+      temporaire.</p>
 
     <h2>10. Suspension de compte</h2>
-    <p>Stream Team se réserve le droit de suspendre ou supprimer tout compte ne respectant pas ces conditions, sans préavis.</p>
+    <p>Stream Team se réserve le droit de suspendre ou supprimer tout compte ne respectant pas ces conditions, sans
+      préavis.</p>
 
     <h2>11. Modifications</h2>
-    <p>Les présentes CGU peuvent être modifiées à tout moment. Les utilisateurs seront informés des modifications via une notification sur le site ou par email si applicable.</p>
+    <p>Les présentes CGU peuvent être modifiées à tout moment. Les utilisateurs seront informés des modifications via
+      une notification sur le site ou par email si applicable.</p>
 
     <h2>12. Contact</h2>
-    <p>Pour toute question, vous pouvez nous contacter à : <a href="mailto:support@stream-team.site">support@stream-team.site</a></p>
-        <h2>11. Dernière mise à jour</h2>
+    <p>Pour toute question, vous pouvez nous contacter à : <a
+        href="mailto:support@stream-team.site">support@stream-team.site</a></p>
+    <h2>11. Dernière mise à jour</h2>
     <p>Ces CGU ont été mises à jour le <strong>5 juillet 2025</strong>.</p>
-    <p>En utilisant le site, vous acceptez ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.</p>
+    <p>En utilisant le site, vous acceptez ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos
+      services.</p>
   </main>
 
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
+        <img src="assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" loading="lazy" />
         <span class="footer-name">Stream Team</span>
       </div>
       <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Confidentialité</a>
-        <a href="/conditions.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
+        <a href="/mentions-legales.html"><i class="fa-solid fa-file"></i> Mentions Légales</a>
+        <a href="/confidentialite.html"><i class="fa-solid fa-lock"></i> Confidentialité</a>
+        <a href="/cgu.html"><i class="fa-solid fa-book"></i> Conditions</a>
+        <a href="/cookies.html"><i class="fa-solid fa-cookie"></i> Cookies</a>
+        <a href="/contact.html"><i class="fa-solid fa-message"></i> Contact</a>
       </div>
       <div class="footer-copy">
         © 2025 Stream Team. Tous droits réservés.
@@ -98,4 +164,5 @@
   </footer>
   <script src="script.js"></script>
 </body>
+
 </html>

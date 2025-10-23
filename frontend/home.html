@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <!-- Meta essentiels -->
   <meta charset="UTF-8" />
@@ -38,230 +39,131 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <meta name="theme-color" content="#00FF9F" />
-  <meta name="msapplication-TileColor" content="#00FF9F" />
-  
-  <!-- Manifest PWA -->
-  <link rel="manifest" href="/manifest.json" />
-  
-  <!-- Performance - Preconnect -->
-  <link rel="preconnect" href="https://player.twitch.tv" />
-  <link rel="preconnect" href="https://www.twitch.tv" />
-  <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin />
-  <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  
-  <!-- DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://player.twitch.tv" />
-  <link rel="dns-prefetch" href="https://www.twitch.tv" />
-  <link rel="dns-prefetch" href="https://static-cdn.jtvnw.net" />
-  <link rel="dns-prefetch" href="https://clips-media-assets2.twitch.tv" />
-  
-  <!-- Critical CSS -->
-  <link rel="stylesheet" href="style.css" />
-  
-  <!-- FontAwesome with defer -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
-  
-  <!-- Structured Data - JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Stream Team HQ",
-    "url": "https://stream-team.site",
-    "description": "Communauté des streamers francophones sur Twitch",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Stream Team HQ",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://stream-team.site/assets/logo-stream-team-hq.webp"
-      }
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://stream-team.site/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
+  <link rel="icon" href="assets/logo-stream-team-hq.webp" />
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="style.css">
+  </noscript>
+  <link rel="preload" href="script.js" as="script">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+
+
+  <!-- Twitch performance -->
+  <link rel="preconnect" href="https://player.twitch.tv">
+  <link rel="preconnect" href="https://www.twitch.tv">
+  <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin>
+  <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin>
+  <link rel="dns-prefetch" href="https://player.twitch.tv">
+  <link rel="dns-prefetch" href="https://www.twitch.tv">
+  <link rel="dns-prefetch" href="https://static-cdn.jtvnw.net">
+  <link rel="dns-prefetch" href="https://clips-media-assets2.twitch.tv">
 </head>
 
 <body>
-  <!-- Header -->
   <header class="site-header">
     <div class="top-actions">
-      <!-- Notifications -->
-      <div class="notif-container">
-        <button id="notifBtn" class="notif-btn" title="Notifications" aria-label="Notifications">
-          <i class="fas fa-bell"></i>
-          <span id="notifDot" class="notif-dot" style="display: none;"></span>
-        </button>
-        <div id="notifPanel" class="notif-panel">
-          <div class="notif-header">
-            <h3>🔔 Notifications</h3>
-            <button id="closeNotif" class="notif-close-btn" aria-label="Fermer les notifications">
-              <i class="fas fa-times"></i>
+      <button id="auth-button" class="dropdown-trigger"><i class="fa-solid fa-bars"></i></button>
+      <div class="dropdown-menu" id="auth-dropdown">
+        <a href="/index.html" class="dropdown-item"><span><i class="fa-regular fa-house"></i></span> Accueil</a>
+        <a href="#" id="profileButton" class="dropdown-item"><span><i class="fa-regular fa-circle-user"></i></span>
+          Profil</a>
+
+        <a href="#" class="dropdown-item" id="notifBtn">
+          <div class="notif-container">
+            <button class="notif-btn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span id="notifDot" class="notif-dot"></span>
             </button>
+            <div id="notifPanel" class="notif-panel">
+              <div class="notif-header">
+                <h3><i class="fa-regular fa-bell"></i> Notifications</h3>
+                <button id="closeNotif" class="notif-close-btn" aria-label="Fermer les notifications">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="notif-categories">
+                <button class="notif-cat active">Système</button>
+                <button class="notif-cat">Communauté</button>
+                <button class="notif-cat">Missions</button>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <span class="notif-icon">🆕</span>
+                  <div class="notif-content">
+                    <strong>Nouveau module débloqué !</strong><br>
+                    Consulte la roadmap pour voir les nouveautés.
+                    <small>il y a 3h • Système</small>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <span class="notif-icon">💬</span>
+                  <div class="notif-content">
+                    <strong>Nouveau commentaire</strong><br>
+                    Un streamer a laissé un message sur ton profil.
+                    <small>hier • Communauté</small>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="notif-list">
-            <p style="color: #94a3b8; padding: 20px;">Chargement des notifications...</p>
-          </div>
-        </div>
-      </div>
+          Notifications
+        </a>
 
-      <!-- Menu utilisateur -->
-      <div class="dropdown-wrapper" id="auth-wrapper">
-        <button id="auth-button" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          ⚙️ Options
-        </button>
-        <div class="dropdown-menu" id="auth-dropdown" role="menu">
-          <a href="/home" class="dropdown-item" role="menuitem">🏠 Accueil</a>
-          <a href="#" id="profileButton" class="dropdown-item" role="menuitem">👤 Profil</a>
-          <a href="#" id="dashboardButton" class="dropdown-item" role="menuitem">📊 Dashboard</a>
-          <a href="/watch" class="dropdown-item" role="menuitem">🎥 Lives</a>
-          <a href="/album" class="dropdown-item" role="menuitem">🎴 Album</a>
-          <a href="/roadmap" class="dropdown-item" role="menuitem">🗺️ Roadmap</a>
-          <a href="/logout" class="dropdown-item" role="menuitem">🚪 Déconnexion</a>
-        </div>
+        <a href="/watch.html" class="dropdown-item"><span><i class="fa-solid fa-video"></i></span> Regarder des
+          Lives</a>
+        <a href="/album.html" class="dropdown-item"><span><i class="fa-regular fa-images"></i></span> Mon Album</a>
+        <a href="/roadmap.html" class="dropdown-item"><span><i class="fa-regular fa-map"></i></span> Roadmap</a>
+        <a href="#" onclick="darkLight()" class="dropdown-item"><span><i class="fa-regular fa-moon"></i></span>Mode</a>
+        <a href="/login.html" id="connect" class="dropdown-item"><span><i
+              class="fa-solid fa-arrow-right-from-bracket"></i></span></a>
       </div>
     </div>
 
-    <!-- Hero -->
     <div class="hero-content">
-      <img 
-        src="/assets/logo-stream-team-hq.webp" 
-        alt="Logo Stream Team HQ - Communauté des streamers francophones" 
-        class="logo" 
-        width="120" 
-        height="120"
-        loading="eager"
-      />
+      <img src="assets/logo-stream-team-hq.webp" alt="Logo Stream Team" class="logo" loading="lazy" />
       <h1>Stream Team HQ</h1>
-      <p>Le QG interdimensionnel des streamers d'élite.<br>Prépare-toi à entrer en opération.</p>
-    </div>
-
-    <!-- Banner Roadmap -->
-    <div id="roadmap-alert" class="roadmap-banner" role="banner">
-      🆕 Une nouvelle mise à jour est dispo dans la <a href="/roadmap">roadmap</a> ! Va voir ce qui change 🚀
+      <p>Le QG interdimensionnel des streamers d’élite.<br>Prépare-toi à entrer en opération.</p>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main id="main-content">
-    <!-- Stats Section -->
-    <section class="stats-section" aria-label="Statistiques de la communauté">
-      <h2 class="section-title">⚡ La Communauté en Direct</h2>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="stat-value" id="statStreamers">127</div>
-          <div class="stat-label">Streamers</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-video"></i>
-          </div>
-          <div class="stat-value" id="statLive">12</div>
-          <div class="stat-label">En Live</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-eye"></i>
-          </div>
-          <div class="stat-value" id="statViews">8.5K</div>
-          <div class="stat-label">Spectateurs</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-fire"></i>
-          </div>
-          <div class="stat-value" id="statClips">2.3K</div>
-          <div class="stat-label">Clips</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Streamers Section -->
-    <section class="streamers-section" aria-label="Liste des streamers">
-      <h2 class="section-title">🎮 Streamers Actifs</h2>
-      <div class="streamers" id="streamer-cards">
-        <div class="loading-container">
-          <div class="spinner"></div>
-          <p>Chargement des unités...</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" aria-label="Appel à l'action">
-      <div class="cta-banner">
-        <h2>🚀 Rejoins la Communauté</h2>
-        <p>Connecte-toi avec Twitch pour accéder à toutes les fonctionnalités : stats, clips, quêtes et bien plus !</p>
-        <a href="/auth/twitch" class="btn-cta">
-          <i class="fab fa-twitch"></i> Se connecter avec Twitch
-        </a>
-      </div>
+  <main>
+    <section class="streamers" id="streamer-cards">
+      <p>Chargement des unités...</p>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img 
-          src="/assets/logo-stream-team-hq.webp" 
-          alt="Logo Stream Team" 
-          class="footer-logo" 
-          width="40" 
-          height="40"
-          loading="lazy" 
-        />
+        <img src="assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" loading="lazy" />
         <span class="footer-name">Stream Team</span>
       </div>
-      <nav class="footer-nav" aria-label="Navigation footer">
-        <a href="/mentions-legales">📜 Mentions Légales</a>
-        <a href="/confidentialite">🔒 Confidentialité</a>
-        <a href="/cgu">📘 Conditions</a>
-        <a href="/cookies">🍪 Cookies</a>
-        <a href="/contact">📩 Contact</a>
-      </nav>
+      <div class="footer-nav">
+        <a href="/mentions-legales.html"><i class="fa-solid fa-file"></i> Mentions Légales</a>
+        <a href="/confidentialite.html"><i class="fa-solid fa-lock"></i> Confidentialité</a>
+        <a href="/cgu.html"><i class="fa-solid fa-book"></i> Conditions</a>
+        <a href="/cookies.html"><i class="fa-solid fa-cookie"></i> Cookies</a>
+        <a href="/contact.html"><i class="fa-solid fa-message"></i> Contact</a>
+      </div>
       <div class="footer-copy">
         © 2025 Stream Team. Tous droits réservés.
       </div>
     </div>
   </footer>
 
-  <!-- Login Popup -->
-  <div id="loginPopup" class="login-popup hidden" role="dialog" aria-labelledby="loginTitle" aria-modal="true">
+  <script src="script.js"></script>
+
+  <div id="loginPopup" class="login-popup hidden">
     <div class="login-popup-content">
-      <img 
-        src="/assets/logo.png" 
-        alt="Logo Stream Team" 
-        class="login-popup-logo" 
-        width="80" 
-        height="80"
-        loading="lazy" 
-      />
-      <h2 id="loginTitle">Bienvenue à toi ! 🫡</h2>
+      <img src="/assets/logo.png" alt="Logo" class="login-popup-logo" loading="lazy" />
+      <h2>Bienvenue à toi ! 🫡</h2>
       <p>Connecte-toi avec Twitch pour rejoindre la mission.</p>
       <a href="/auth/twitch" class="login-popup-button">
         <i class="fab fa-twitch"></i> Se connecter avec Twitch
       </a>
-      <p class="login-help">Un souci ? <a href="/contact">Contacter le support</a></p>
+      <p class="login-help">Un souci ? <a href="/support">Contacter le support</a></p>
     </div>
   </div>
-
-  <!-- Scripts -->
-  <script src="script.js" defer></script>
-  
-  <!-- Analytics (à ajouter si nécessaire) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 </body>
+
 </html>
