@@ -1,58 +1,329 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Meta essentiels -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎥 Regarder des Streams | Stream Team</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <!-- SEO Primary -->
+  <title>🔴 Lives en Direct - Stream Team HQ | Regarder des Streamers Francophones</title>
+  <meta name="description" content="Regarde les meilleurs streamers francophones en direct sur Stream Team HQ. Player Twitch intégré, chat en direct et communauté active. 100% gratuit." />
+  <meta name="keywords" content="twitch live, streamers en direct, regarder stream, twitch français, live gaming, stream team" />
+  <meta name="author" content="Stream Team HQ" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://stream-team.site/watch" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://stream-team.site/watch" />
+  <meta property="og:title" content="🔴 Lives en Direct - Stream Team HQ" />
+  <meta property="og:description" content="Regarde les meilleurs streamers francophones en direct. Player intégré et chat communautaire." />
+  <meta property="og:image" content="https://stream-team.site/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Stream Team HQ" />
+  <meta property="og:locale" content="fr_FR" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🔴 Lives en Direct - Stream Team HQ" />
+  <meta name="twitter:description" content="Regarde les meilleurs streamers francophones en direct" />
+  <meta name="twitter:image" content="https://stream-team.site/assets/og-image.jpg" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#00FF9F" />
+  
+  <!-- Performance - Preconnect -->
+  <link rel="preconnect" href="https://player.twitch.tv" />
+  <link rel="preconnect" href="https://www.twitch.tv" />
+  <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin />
+  <link rel="dns-prefetch" href="https://player.twitch.tv" />
+  <link rel="dns-prefetch" href="https://www.twitch.tv" />
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="/style.css" />
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'" />
+  
+  <!-- Structured Data - JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Lives en Direct - Stream Team HQ",
+    "description": "Regardez les streamers francophones en direct",
+    "url": "https://stream-team.site/watch",
+    "mainEntity": {
+      "@type": "VideoGallery",
+      "name": "Streamers en Direct",
+      "description": "Collection de lives Twitch francophones"
+    }
+  }
+  </script>
 </head>
+
 <body>
+  <!-- Header Universel -->
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Bouton Retour -->
+      <a href="/home" class="nav-back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span class="nav-back-text">Retour au QG</span>
+      </a>
+      
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle">🔴 Lives en Direct</h1>
+      </div>
+      
+      <!-- Actions Droite -->
+      <div class="nav-actions">
+        <button id="notifBtn" class="icon-btn" title="Notifications" aria-label="Notifications">
+          <i class="fas fa-bell"></i>
+          <span id="notifDot" class="notif-dot" style="display: none;"></span>
+        </button>
+        <button id="menuBtn" class="icon-btn" title="Menu" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
 
-<div class="dropdown-container">
-  <div class="dropdown-wrapper" id="auth-wrapper">
-    <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-    <div class="dropdown-menu" id="auth-dropdown">
-      <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-      <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-      <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-      <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-      <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-      <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
+      </div>
     </div>
-  </div>
-</div>
 
-<main class="watch-wrapper">
-  <h1 class="page-title">🎥 Regarde les Lives en direct</h1>
-  <p class="page-subtitle">Choisis ton streamer préféré et entre dans son monde. ✨</p>
-
-  <div id="liveStreamers" class="streamer-buttons"></div>
-
-  <div id="playerContainer" class="player-chat-wrapper" style="display: none;">
-    <div id="twitchPlayer" class="player-container"></div>
-    <div id="twitchChat" class="chat-container"></div>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-brand">
-      <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-      <span class="footer-name">Stream Team</span>
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item active">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
     </div>
-    <div class="footer-nav">
-      <a href="/mentions-legales.html">📜 Mentions Légales</a>
-      <a href="/confidentialite.html">🔒 Confidentialité</a>
-      <a href="/cgu.html">📘 Conditions</a>
-      <a href="/cookies.html">🍪 Cookies</a>
-      <a href="/contact.html">📩 Contact</a>
-    </div>
-    <div class="footer-copy">© 2025 Stream Team. Tous droits réservés.</div>
-  </div>
-</footer>
+  </header>
 
-<script src="/watch.js"></script>
-<script src="/script.js"></script>
+  <!-- Main Content -->
+  <main class="watch-container">
+    <!-- Hero Section -->
+    <section class="watch-hero">
+      <div class="hero-content">
+        <h2>🎮 Regarde les Lives en Direct</h2>
+        <p>Soutiens tes streamers préférés et rejoins la communauté</p>
+      </div>
+      
+      <!-- Stats Bar -->
+      <div class="live-stats">
+        <div class="stat-badge">
+          <i class="fas fa-circle" style="color: #ff0000; animation: pulse 2s infinite;"></i>
+          <span id="liveCount">0</span> en live
+        </div>
+        <div class="stat-badge">
+          <i class="fas fa-users"></i>
+          <span id="totalViewers">0</span> spectateurs
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters-section">
+      <div class="filters-container">
+        <button class="filter-btn active" data-filter="all">
+          <i class="fas fa-th"></i> Tous
+        </button>
+        <button class="filter-btn" data-filter="game">
+          <i class="fas fa-gamepad"></i> Par Jeu
+        </button>
+        <button class="filter-btn" data-filter="viewers">
+          <i class="fas fa-fire"></i> Plus Populaires
+        </button>
+      </div>
+      
+      <div class="sort-container">
+        <select id="sortSelect" class="sort-select">
+          <option value="viewers">💥 Plus de viewers</option>
+          <option value="recent">🕐 Récemment en ligne</option>
+          <option value="title">🔤 Par titre</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state">
+      <div class="spinner"></div>
+      <p>Chargement des streams en direct...</p>
+    </div>
+
+    <!-- No Live State -->
+    <div id="noLiveState" class="no-live-state" style="display: none;">
+      <i class="fas fa-moon"></i>
+      <h3>Aucun stream en direct</h3>
+      <p>Personne n'est en live pour le moment. Reviens plus tard !</p>
+      <a href="/home" class="btn-primary">
+        <i class="fas fa-home"></i> Retour à l'accueil
+      </a>
+    </div>
+
+    <!-- Streamers Grid -->
+    <section id="streamersGrid" class="streamers-grid" style="display: none;">
+      <!-- Les cards seront injectées ici par JS -->
+    </section>
+
+    <!-- Player Container -->
+    <section id="playerSection" class="player-section" style="display: none;">
+      <div class="player-header">
+        <button id="backToList" class="btn-back">
+          <i class="fas fa-arrow-left"></i> Retour à la liste
+        </button>
+        
+        <div class="player-info">
+          <img id="playerAvatar" src="" alt="" class="player-avatar" />
+          <div>
+            <h3 id="playerName">...</h3>
+            <p id="playerGame">...</p>
+          </div>
+        </div>
+        
+        <div class="player-actions">
+          <button id="fullscreenBtn" class="icon-btn" title="Plein écran">
+            <i class="fas fa-expand"></i>
+          </button>
+          <button id="popoutBtn" class="icon-btn" title="Ouvrir sur Twitch">
+            <i class="fas fa-external-link-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="player-wrapper">
+        <div id="twitchPlayer" class="twitch-player">
+          <!-- Twitch Player iframe -->
+        </div>
+        <div id="twitchChat" class="twitch-chat">
+          <!-- Twitch Chat iframe -->
+        </div>
+      </div>
+
+      <div class="stream-details">
+        <div class="stream-meta">
+          <div class="meta-item">
+            <i class="fas fa-eye"></i>
+            <span id="viewerCount">0</span> spectateurs
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-clock"></i>
+            En live depuis <span id="uptime">...</span>
+          </div>
+        </div>
+        
+        <div class="stream-actions">
+          <button id="shareBtn" class="btn-action">
+            <i class="fas fa-share"></i> Partager
+          </button>
+          <button id="clipBtn" class="btn-action">
+            <i class="fas fa-scissors"></i> Créer un clip
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Universel -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img 
+          src="/assets/logo-stream-team-hq.webp" 
+          alt="Logo Stream Team HQ" 
+          class="footer-logo"
+          width="50"
+          height="50"
+          loading="lazy"
+        />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/script.js" defer></script>
+  <script src="/watch.js" defer></script>
 </body>
 </html>
