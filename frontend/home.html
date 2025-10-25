@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <!-- Meta essentiels -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  
+
   <!-- SEO Primary -->
   <title>Stream Team HQ - Communauté des Streamers Francophones | Twitch</title>
-  <meta name="description" content="Rejoins la plus grande communauté de streamers francophones. Découvre des talents, soutiens les petits streamers, suis les lives, collectionne des clips et participe aux quêtes. 100% gratuit." />
-  <meta name="keywords" content="stream team, streamers français, twitch france, communauté streaming, clips twitch, lives twitch, streamers francophones, soutiens petit streamer" />
+  <meta name="description"
+    content="Rejoins la plus grande communauté de streamers francophones. Découvre des talents, soutiens les petits streamers, suis les lives, collectionne des clips et participe aux quêtes. 100% gratuit." />
+  <meta name="keywords"
+    content="stream team, streamers français, twitch france, communauté streaming, clips twitch, lives twitch, streamers francophones, soutiens petit streamer" />
   <meta name="author" content="Stream Team HQ" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://stream-team.site/home" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stream-team.site/home" />
   <meta property="og:title" content="Stream Team HQ - Communauté des Streamers Francophones" />
-  <meta property="og:description" content="Découvre les meilleurs streamers francophones, suis les lives en direct et rejoins une communauté passionnée. Gratuit et sans pub." />
+  <meta property="og:description"
+    content="Découvre les meilleurs streamers francophones, suis les lives en direct et rejoins une communauté passionnée. Gratuit et sans pub." />
   <meta property="og:image" content="https://stream-team.site/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Stream Team HQ" />
   <meta property="og:locale" content="fr_FR" />
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://stream-team.site/home" />
   <meta name="twitter:title" content="Stream Team HQ - Communauté des Streamers Francophones" />
-  <meta name="twitter:description" content="Découvre les meilleurs streamers francophones, suis les lives en direct et rejoins une communauté passionnée." />
+  <meta name="twitter:description"
+    content="Découvre les meilleurs streamers francophones, suis les lives en direct et rejoins une communauté passionnée." />
   <meta name="twitter:image" content="https://stream-team.site/assets/og-image.jpg" />
-  
+
   <!-- Favicon et App Icons -->
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
@@ -39,30 +44,33 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <meta name="theme-color" content="#00FF9F" />
   <meta name="msapplication-TileColor" content="#00FF9F" />
-  
+
   <!-- Manifest PWA -->
   <link rel="manifest" href="/manifest.json" />
-  
+
   <!-- Performance - Preconnect -->
   <link rel="preconnect" href="https://player.twitch.tv" />
   <link rel="preconnect" href="https://www.twitch.tv" />
   <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin />
   <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  
+
   <!-- DNS Prefetch -->
   <link rel="dns-prefetch" href="https://player.twitch.tv" />
   <link rel="dns-prefetch" href="https://www.twitch.tv" />
   <link rel="dns-prefetch" href="https://static-cdn.jtvnw.net" />
   <link rel="dns-prefetch" href="https://clips-media-assets2.twitch.tv" />
-  
+
   <!-- Critical CSS -->
   <link rel="stylesheet" href="style.css" />
-  
+
   <!-- FontAwesome with defer -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </noscript>
+
   <!-- Structured Data - JSON-LD -->
   <script type="application/ld+json">
   {
@@ -96,12 +104,12 @@
       <div class="nav-logo">
         <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
       </div>
-      
+
       <!-- Titre Central -->
       <div class="nav-center">
-        <h1 class="nav-title" id="pageTitle">🏠 Accueil</h1>
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
       </div>
-      
+
       <!-- Actions Droite -->
       <div class="nav-actions">
         <button id="notifBtn" class="icon-btn" title="Notifications" aria-label="Notifications">
@@ -160,14 +168,8 @@
   <main id="main-content">
     <!-- Hero Content -->
     <div class="hero-content" style="margin-top: 40px;">
-      <img 
-        src="/assets/logo-stream-team-hq.webp" 
-        alt="Logo Stream Team HQ - Communauté des streamers francophones" 
-        class="logo" 
-        width="120" 
-        height="120"
-        loading="eager"
-      />
+      <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ - Communauté des streamers francophones"
+        class="logo" width="120" height="120" loading="eager" />
       <h1>Stream Team HQ</h1>
       <p>Le QG interdimensionnel des streamers d'élite.<br>Prépare-toi à entrer en opération.</p>
     </div>
@@ -237,22 +239,16 @@
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img 
-          src="/assets/logo-stream-team-hq.webp" 
-          alt="Logo Stream Team" 
-          class="footer-logo" 
-          width="40" 
-          height="40"
-          loading="lazy" 
-        />
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team" class="footer-logo" width="40" height="40"
+          loading="lazy" />
         <span class="footer-name">Stream Team</span>
       </div>
       <nav class="footer-nav" aria-label="Navigation footer">
-        <a href="/mentions-legales">📜 Mentions Légales</a>
-        <a href="/confidentialite">🔒 Confidentialité</a>
-        <a href="/cgu">📘 Conditions</a>
-        <a href="/cookies">🍪 Cookies</a>
-        <a href="/contact">📩 Contact</a>
+        <a href="/mentions-legales"><i class="fa-solid fa-file"></i> Mentions Légales</a>
+        <a href="/confidentialite"><i class="fa-solid fa-lock"></i> Confidentialité</a>
+        <a href="/cgu"><i class="fa-solid fa-book"></i> Conditions</a>
+        <a href="/cookies"><i class="fa-solid fa-cookie"></i> Cookies</a>
+        <a href="/contact"><i class="fa-solid fa-message"></i> Contact</a>
       </nav>
       <div class="footer-copy">
         © 2025 Stream Team. Tous droits réservés.
@@ -263,14 +259,8 @@
   <!-- Login Popup -->
   <div id="loginPopup" class="login-popup hidden" role="dialog" aria-labelledby="loginTitle" aria-modal="true">
     <div class="login-popup-content">
-      <img 
-        src="/assets/logo.png" 
-        alt="Logo Stream Team" 
-        class="login-popup-logo" 
-        width="80" 
-        height="80"
-        loading="lazy" 
-      />
+      <img src="/assets/logo.png" alt="Logo Stream Team" class="login-popup-logo" width="80" height="80"
+        loading="lazy" />
       <h2 id="loginTitle">Bienvenue à toi ! 🫡</h2>
       <p>Connecte-toi avec Twitch pour rejoindre la mission.</p>
       <a href="/auth/twitch" class="login-popup-button">
@@ -283,4 +273,5 @@
   <!-- Scripts -->
   <script src="script.js" defer></script>
 </body>
+
 </html>
