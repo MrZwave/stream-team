@@ -7,17 +7,17 @@
    VARIABLES CSS
    ======================================== */
 :root {
-  --primary: #00FF9F;
+  --primary: #00ff9f;
   --primary-glow: rgba(0, 255, 159, 0.3);
-  --accent: #7F00FF;
+  --accent: #7f00ff;
   --background: radial-gradient(circle at center, #1e0057, #000027 90%);
   --surface: rgba(10, 10, 30, 0.9);
   --surface-hover: rgba(30, 0, 60, 0.95);
-  --text: #E6E6FA;
-  --text-secondary: #D8B4FE;
+  --text: #e6e6fa;
+  --text-secondary: #d8b4fe;
   --border: rgba(0, 255, 159, 0.2);
   --shadow: 0 0 20px rgba(0, 255, 159, 0.2);
-  --button-bg: #00FF9F;
+  --button-bg: #00ff9f;
   --button-text: #000000;
   --button-hover: #00c280;
 }
@@ -32,7 +32,7 @@
 }
 
 body {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   background: var(--background);
   color: var(--text);
   overflow-x: hidden;
@@ -55,29 +55,54 @@ body::before {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, rgba(255, 0, 255, 0.05), transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 255, 0.05),
+    transparent 70%
+  );
   animation: pulseBackground 6s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
 }
 
 @keyframes pulseBackground {
-  0%, 100% { transform: scale(1); opacity: 0.4; }
-  50% { transform: scale(1.05); opacity: 0.6; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.6;
+  }
 }
 
 /* ========================================
    TYPOGRAPHY
    ======================================== */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Orbitron", sans-serif;
   color: var(--primary);
   text-shadow: 0 0 10px var(--primary-glow);
 }
 
-h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-h2 { font-size: 2rem; margin-bottom: 0.8rem; }
-h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
 
 a {
   color: var(--primary);
@@ -135,7 +160,9 @@ a:hover {
 }
 
 .nav-center {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
 }
 
@@ -185,8 +212,13 @@ a:hover {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 /* ========================================
@@ -363,7 +395,11 @@ a:hover {
 .site-header {
   padding: 2rem 1rem;
   text-align: center;
-  background: linear-gradient(135deg, rgba(0, 255, 159, 0.1), rgba(127, 0, 255, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 159, 0.1),
+    rgba(127, 0, 255, 0.1)
+  );
   border-bottom: 1px solid var(--border);
   position: relative;
 }
@@ -414,8 +450,13 @@ a:hover {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* ========================================
@@ -521,7 +562,7 @@ a:hover {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary);
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   text-shadow: 0 0 10px var(--primary-glow);
   margin-bottom: 8px;
 }
@@ -666,7 +707,7 @@ a:hover {
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.3s;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -691,7 +732,7 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: 10px;
   color: var(--text);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -716,10 +757,13 @@ a:hover {
   margin: 0 auto 20px;
 }
 
-
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .no-live-state {
@@ -970,7 +1014,7 @@ a:hover {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--primary);
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .footer-tagline {
@@ -1095,7 +1139,11 @@ a:hover {
 
 /* Fix pour la roadmap banner */
 .roadmap-banner {
-  background: linear-gradient(90deg, rgba(0, 255, 159, 0.1), rgba(127, 0, 255, 0.1));
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 159, 0.1),
+    rgba(127, 0, 255, 0.1)
+  );
   border-top: 1px solid var(--border);
   padding: 12px 20px;
   text-align: center;
@@ -1138,33 +1186,49 @@ a:hover {
   .universal-nav {
     padding: 12px 15px;
   }
-  
+
   .nav-back-text {
     display: none;
   }
-  
+
   .nav-title {
     font-size: 1.2rem;
   }
 
-  .hero-content h1 {
-   font-size: 2rem;
+  .nav-center {
+    position: static;
+    transform: none;
+    flex: 1;
+    text-align: center;
   }
-  
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
   .notif-panel,
   .menu-dropdown {
     right: 10px;
   }
-  
+
+  .live-stats {
+    gap: 15px;
+  }
+
+  .no-live-state {
+    padding: 40px 10px;
+    gap: 10px;
+  }
+
   .streamers-grid,
   .streamers {
     grid-template-columns: 1fr;
   }
-  
+
   .player-wrapper {
     grid-template-columns: 1fr;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
@@ -1179,27 +1243,34 @@ a:hover {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .footer-nav {
     grid-template-columns: 1fr;
   }
-  
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.5rem; }
 
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
 
-@media (max-width: 480px) {
-  .nav-title {
-    font-size: 1rem;
+  @media (max-width: 480px) {
+    .nav-title {
+      font-size: 1rem;
+    }
+
+    .notif-panel {
+      width: calc(100vw - 20px);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
   }
-  
-  .notif-panel {
-    width: calc(100vw - 20px);
-  }
-  
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.2rem; }
-}
 
   .filters-container {
     justify-content: center;
