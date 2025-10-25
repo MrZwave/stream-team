@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <title>🚀 Stream Team HQ - La Communauté des Streamers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rejoins la plus grande communauté de streamers francophones. Découvre, soutiens et vis l'expérience streaming ultime.">
+  <meta name="description"
+    content="Rejoins la plus grande communauté de streamers francophones. Découvre, soutiens et vis l'expérience streaming ultime.">
   <link rel="icon" href="assets/logo-stream-team-hq.webp" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Twitch performance optimizations -->
   <link rel="preconnect" href="https://player.twitch.tv">
   <link rel="preconnect" href="https://www.twitch.tv">
   <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin>
   <link rel="dns-prefetch" href="https://player.twitch.tv">
-  
+
   <style>
     * {
       margin: 0;
@@ -27,7 +29,8 @@
       --accent: #00d4ff;
     }
 
-    html, body {
+    html,
+    body {
       background: radial-gradient(ellipse at top, #1a0a2e 0%, #0a0a1a 100%);
       font-family: 'Space Grotesk', sans-serif;
       color: white;
@@ -69,10 +72,13 @@
     }
 
     @keyframes float {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate(0, 0) scale(1);
         opacity: 0.4;
       }
+
       50% {
         transform: translate(var(--tx), var(--ty)) scale(1.5);
         opacity: 0.8;
@@ -101,8 +107,15 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
     }
 
     h1 {
@@ -121,6 +134,7 @@
         opacity: 0;
         transform: translateY(-50px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -136,8 +150,13 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .cta-buttons {
@@ -196,8 +215,15 @@
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(15px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(15px);
+      }
     }
 
     /* Features Section */
@@ -360,7 +386,7 @@
 
       .cta-buttons {
         flex-direction: column;
-        width: 100%;
+        width: 80%;
       }
 
       .btn {
@@ -386,6 +412,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Particles Background -->
   <div class="particles" id="particles"></div>
@@ -395,10 +422,10 @@
     <img src="assets/logo-stream-team-hq.webp" alt="Stream Team Logo" class="logo" />
     <h1>Stream Team HQ</h1>
     <p class="tagline">
-      La plateforme qui connecte les streamers francophones et leur communauté. 
+      La plateforme qui connecte les streamers francophones et leur communauté.
       Découvre, soutiens et vis l'expérience streaming ultime.
     </p>
-    
+
     <div class="cta-buttons">
       <button class="btn btn-primary" onclick="enterSite()">
         🎮 Entrer dans le QG
@@ -437,7 +464,7 @@
   <!-- Features Section -->
   <div class="features-container" id="features">
     <h2 class="section-title">Pourquoi Stream Team ?</h2>
-    
+
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
@@ -557,4 +584,5 @@
     });
   </script>
 </body>
+
 </html>
