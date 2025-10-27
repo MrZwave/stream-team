@@ -1704,7 +1704,13 @@ a:hover {
   }
 
   .live-stats {
+    flex-direction: column;
+    text-align: center;
     gap: 15px;
+  }
+
+  .stat-badge {
+    justify-content: center;
   }
 
   .no-live-state {
