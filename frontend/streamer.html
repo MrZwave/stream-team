@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <!-- Meta essentiels -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
+
   <!-- SEO dynamique (sera modifié par JS) -->
   <title>Profil Streamer | Stream Team HQ</title>
-  <meta name="description" content="Découvre ce streamer sur Stream Team HQ. Suis ses lives, regarde ses clips et rejoins sa communauté." id="meta-description" />
+  <meta name="description"
+    content="Découvre ce streamer sur Stream Team HQ. Suis ses lives, regarde ses clips et rejoins sa communauté."
+    id="meta-description" />
   <meta name="keywords" content="streamer twitch, clips twitch, stream team" id="meta-keywords" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://stream-team.site/streamer" id="canonical-url" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://stream-team.site/streamer" id="og-url" />
@@ -21,23 +24,23 @@
   <meta property="og:image" content="https://stream-team.site/assets/logo-stream-team-hq.webp" id="og-image" />
   <meta property="og:site_name" content="Stream Team HQ" />
   <meta property="og:locale" content="fr_FR" />
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Profil Streamer - Stream Team HQ" id="twitter-title" />
   <meta name="twitter:description" content="Découvre ce streamer sur Stream Team HQ" id="twitter-description" />
   <meta name="twitter:image" content="https://stream-team.site/assets/logo-stream-team-hq.webp" id="twitter-image" />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <meta name="theme-color" content="#00FF9F" />
-  
+
   <!-- Performance - Preconnect -->
   <link rel="preconnect" href="https://static-cdn.jtvnw.net" />
   <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin />
   <link rel="dns-prefetch" href="https://www.twitch.tv" />
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/streamer-fixes.css" />
@@ -45,9 +48,10 @@
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#00ff9f">
-  
+
   <!-- FontAwesome - CSP compliant -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" media="print" id="fontawesome-css" />
   <meta name="csrf-token" content="">
 </head>
 
@@ -55,12 +59,12 @@
   <!-- Header Navigation -->
   <header class="streamer-header">
     <nav class="streamer-nav" aria-label="Navigation principale">
-      <a href="/home" class="nav-back">
+      <a href="/home" class="nav-back-btn">
         <i class="fas fa-arrow-left"></i> Retour au QG
       </a>
       <div class="nav-actions">
-        <a href="/home" class="nav-link">🏠 Accueil</a>
-        <a href="/watch" class="nav-link">🎥 Lives</a>
+        <a href="/home" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="/watch" class="nav-link"><i class="fas fa-video"></i> Lives</a>
       </div>
     </nav>
   </header>
@@ -77,15 +81,8 @@
     <article class="profile-card neon-border">
       <!-- Avatar -->
       <div class="profile-header">
-        <img 
-          id="profile-avatar"
-          src="/assets/logo-stream-team-hq.webp" 
-          alt="Avatar du streamer" 
-          class="profile-avatar"
-          width="150"
-          height="150"
-          loading="eager"
-        />
+        <img id="profile-avatar" src="/assets/logo-stream-team-hq.webp" alt="Avatar du streamer" class="profile-avatar"
+          width="150" height="150" loading="eager" />
         <span id="live-badge" class="live-badge-top" style="display: none;">🔴 EN DIRECT</span>
       </div>
 
@@ -115,27 +112,15 @@
 
       <!-- Actions -->
       <div class="profile-buttons">
-        <a 
-          id="btn-twitch"
-          href="#" 
-          class="btn btn-primary btn-twitch" 
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a id="btn-twitch" href="#" class="btn btn-primary btn-twitch" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-twitch"></i> Suivre sur Twitch
         </a>
-        
-        <button 
-          id="btn-salve"
-          class="btn btn-secondary btn-salve"
-        >
+
+        <button id="btn-salve" class="btn btn-secondary btn-salve">
           <i class="fas fa-star"></i> Envoyer une Salve
         </button>
 
-        <button 
-          id="btn-share"
-          class="btn btn-outline btn-share"
-        >
+        <button id="btn-share" class="btn btn-outline btn-share">
           <i class="fas fa-share-alt"></i> Partager
         </button>
       </div>
@@ -145,13 +130,7 @@
     <section class="clips-section" aria-label="Clips du streamer">
       <div class="clips-header">
         <h2>🎬 Derniers Clips</h2>
-        <a 
-          id="link-all-clips"
-          href="#" 
-          target="_blank"
-          rel="noopener noreferrer"
-          class="view-all-link"
-        >
+        <a id="link-all-clips" href="#" target="_blank" rel="noopener noreferrer" class="view-all-link">
           Voir tous les clips <i class="fas fa-external-link-alt"></i>
         </a>
       </div>
@@ -184,7 +163,7 @@
     // Chargement lazy de FontAwesome (CSP-compliant)
     const fa = document.getElementById('fontawesome-css');
     if (fa) fa.media = 'all';
-    
+
     // Récupérer le login depuis l'URL
     const pathParts = window.location.pathname.split('/');
     const streamerLogin = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
@@ -194,22 +173,22 @@
       try {
         const response = await fetch(`/api/streamer/${streamerLogin}`);
         if (!response.ok) throw new Error('Streamer introuvable');
-        
+
         const data = await response.json();
-        
+
         // Mettre à jour les meta tags
         updateMetaTags(data.userData);
-        
+
         // Afficher les données
         displayStreamerData(data);
-        
+
         // Masquer le loading, afficher le contenu
         document.getElementById('loading-state').style.display = 'none';
         document.getElementById('profile-content').style.display = 'block';
-        
+
         // Tracking des vues
         trackProfileView(streamerLogin);
-        
+
       } catch (error) {
         console.error('Erreur:', error);
         document.getElementById('loading-state').innerHTML = `
@@ -224,17 +203,17 @@
     function updateMetaTags(userData) {
       const title = `${userData.display_name} - Profil Streamer | Stream Team HQ`;
       const description = userData.description || `Découvre ${userData.display_name} sur Stream Team HQ. Streamer francophone sur Twitch.`;
-      
+
       document.title = title;
       document.getElementById('meta-description').content = description;
       document.getElementById('meta-keywords').content = `${userData.display_name}, ${userData.login}, streamer twitch, stream team`;
       document.getElementById('canonical-url').href = `https://stream-team.site/streamer/${userData.login}`;
-      
+
       document.getElementById('og-url').content = `https://stream-team.site/streamer/${userData.login}`;
       document.getElementById('og-title').content = title;
       document.getElementById('og-description').content = description;
       document.getElementById('og-image').content = userData.profile_image_url;
-      
+
       document.getElementById('twitter-title').content = title;
       document.getElementById('twitter-description').content = description;
       document.getElementById('twitter-image').content = userData.profile_image_url;
@@ -243,37 +222,37 @@
     // Afficher les données du streamer
     function displayStreamerData(data) {
       const { userData, userStats, clips } = data;
-      
+
       // Profile info
       document.getElementById('profile-avatar').src = userData.profile_image_url;
       document.getElementById('profile-avatar').alt = `Avatar de ${userData.display_name}`;
       document.getElementById('profile-name').textContent = userData.display_name;
       document.getElementById('profile-username').textContent = `@${userData.login}`;
-      
+
       if (userData.description) {
         document.getElementById('profile-bio').textContent = userData.description;
       }
-      
+
       // Live badge
       if (userData.is_live) {
         document.getElementById('live-badge').style.display = 'block';
       }
-      
+
       // Stats
       document.getElementById('stat-clicks').textContent = userStats.clicks || 0;
       document.getElementById('stat-salves').textContent = userStats.salves || 0;
-      
+
       if (userData.view_count) {
         document.getElementById('stat-views-container').style.display = 'block';
         document.getElementById('stat-views').textContent = Math.floor(userData.view_count / 1000) + 'K';
       }
-      
+
       // Boutons
       document.getElementById('btn-twitch').href = `https://twitch.tv/${userData.login}`;
       document.getElementById('btn-salve').dataset.login = userData.login;
       document.getElementById('btn-share').dataset.url = `https://stream-team.site/streamer/${userData.login}`;
       document.getElementById('link-all-clips').href = `https://twitch.tv/${userData.login}/clips`;
-      
+
       // Clips
       displayClips(clips, userData.login);
     }
@@ -281,7 +260,7 @@
     // Afficher les clips
     function displayClips(clips, login) {
       const container = document.getElementById('clips-container');
-      
+
       if (!clips || clips.length === 0) {
         container.innerHTML = `
           <div class="no-clips">
@@ -294,7 +273,7 @@
         `;
         return;
       }
-      
+
       const clipsHTML = clips.map((clip, index) => `
         <article class="clip-card">
           <a href="${clip.url}" target="_blank" rel="noopener noreferrer" class="clip-link">
@@ -327,7 +306,7 @@
           </a>
         </article>
       `).join('');
-      
+
       container.innerHTML = `<div class="clips-grid">${clipsHTML}</div>`;
     }
 
@@ -349,7 +328,7 @@
       if (e.target.closest('.btn-salve')) {
         const btn = e.target.closest('.btn-salve');
         const login = btn.dataset.login;
-        
+
         try {
           const res = await fetch('/api/salve', {
             method: 'POST',
@@ -357,7 +336,7 @@
             body: JSON.stringify({ login }),
             credentials: 'include'
           });
-          
+
           if (res.ok) {
             btn.innerHTML = '<i class="fas fa-check"></i> Salve envoyée !';
             btn.disabled = true;
@@ -370,18 +349,18 @@
           alert('Erreur réseau');
         }
       }
-      
+
       // Bouton Partage
       if (e.target.closest('.btn-share')) {
         const btn = e.target.closest('.btn-share');
         const url = btn.dataset.url;
-        
+
         if (navigator.share) {
           navigator.share({
             title: document.title,
             text: 'Découvre ce streamer sur Stream Team HQ !',
             url: url
-          }).catch(() => {});
+          }).catch(() => { });
         } else {
           navigator.clipboard.writeText(url).then(() => {
             btn.innerHTML = '<i class="fas fa-check"></i> Lien copié !';
@@ -397,4 +376,5 @@
     loadStreamerData();
   </script>
 </body>
+
 </html>

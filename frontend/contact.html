@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact - Stream Team</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet" />
+
+  <!-- FontAwesome with defer -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </noscript>
   <style>
     .contact-wrapper {
       max-width: 700px;
@@ -86,6 +95,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="dropdown-container">
@@ -107,12 +117,12 @@
     <form action="mailto:contact@stream-team.site" method="POST" enctype="text/plain">
       <div class="form-group">
         <label for="name">👤 Nom / Pseudo</label>
-        <input type="text" id="name" name="name" required/>
+        <input type="text" id="name" name="name" required />
       </div>
 
       <div class="form-group">
         <label for="email">📧 Adresse e-mail</label>
-        <input type="email" id="email" name="email" required/>
+        <input type="email" id="email" name="email" required />
       </div>
 
       <div class="form-group">
@@ -126,25 +136,69 @@
     <p class="contact-note">Nous répondons généralement sous 48h. Pour les urgences, passe par Discord.</p>
   </main>
 
+  <!-- Footer Universel -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-        <span class="footer-name">Stream Team</span>
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
       </div>
-      <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Confidentialité</a>
-        <a href="/cgu.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
-      </div>
-      <div class="footer-copy">
-        © 2025 Stream Team. Tous droits réservés.
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>

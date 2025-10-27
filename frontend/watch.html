@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <!-- Meta essentiels -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  
+
   <!-- SEO Primary -->
   <title>🔴 Lives en Direct - Stream Team HQ | Regarder des Streamers Francophones</title>
-  <meta name="description" content="Regarde les meilleurs streamers francophones en direct sur Stream Team HQ. Player Twitch intégré, chat en direct et communauté active. 100% gratuit." />
-  <meta name="keywords" content="twitch live, streamers en direct, regarder stream, twitch français, live gaming, stream team" />
+  <meta name="description"
+    content="Regarde les meilleurs streamers francophones en direct sur Stream Team HQ. Player Twitch intégré, chat en direct et communauté active. 100% gratuit." />
+  <meta name="keywords"
+    content="twitch live, streamers en direct, regarder stream, twitch français, live gaming, stream team" />
   <meta name="author" content="Stream Team HQ" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://stream-team.site/watch" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stream-team.site/watch" />
   <meta property="og:title" content="🔴 Lives en Direct - Stream Team HQ" />
-  <meta property="og:description" content="Regarde les meilleurs streamers francophones en direct. Player intégré et chat communautaire." />
+  <meta property="og:description"
+    content="Regarde les meilleurs streamers francophones en direct. Player intégré et chat communautaire." />
   <meta property="og:image" content="https://stream-team.site/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Stream Team HQ" />
   <meta property="og:locale" content="fr_FR" />
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="🔴 Lives en Direct - Stream Team HQ" />
   <meta name="twitter:description" content="Regarde les meilleurs streamers francophones en direct" />
   <meta name="twitter:image" content="https://stream-team.site/assets/og-image.jpg" />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
@@ -38,24 +42,28 @@
 
   <!-- Meta CSRF (sera rempli par le serveur) -->
   <meta name="csrf-token" content="">
-  
+
   <!-- Performance - Preconnect -->
   <link rel="preconnect" href="https://player.twitch.tv" />
   <link rel="preconnect" href="https://www.twitch.tv" />
   <link rel="preconnect" href="https://static-cdn.jtvnw.net" crossorigin />
   <link rel="dns-prefetch" href="https://player.twitch.tv" />
   <link rel="dns-prefetch" href="https://www.twitch.tv" />
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="/style.css" />
-  
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'" />
+
+  <!-- FontAwesome with defer -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </noscript>
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#00ff9f">
-  
+
   <!-- Structured Data - JSON-LD -->
   <script type="application/ld+json">
   {
@@ -82,12 +90,12 @@
         <i class="fas fa-arrow-left"></i>
         <span class="nav-back-text">Retour au QG</span>
       </a>
-      
+
       <!-- Titre Central -->
       <div class="nav-center">
         <h1 class="nav-title" id="pageTitle">🔴 Lives en Direct</h1>
       </div>
-      
+
       <!-- Actions Droite -->
       <div class="nav-actions">
         <button id="notifBtn" class="icon-btn" title="Notifications" aria-label="Notifications">
@@ -145,7 +153,7 @@
         <h2>🎮 Regarde les Lives en Direct</h2>
         <p>Soutiens tes streamers préférés et rejoins la communauté</p>
       </div>
-      
+
       <!-- Stats Bar -->
       <div class="live-stats">
         <div class="stat-badge">
@@ -172,7 +180,7 @@
           <i class="fas fa-fire"></i> Plus Populaires
         </button>
       </div>
-      
+
       <div class="sort-container">
         <select id="sortSelect" class="sort-select">
           <option value="viewers">💥 Plus de viewers</option>
@@ -209,7 +217,7 @@
         <button id="backToList" class="btn-back">
           <i class="fas fa-arrow-left"></i> Retour à la liste
         </button>
-        
+
         <div class="player-info">
           <img id="playerAvatar" src="" alt="" class="player-avatar" />
           <div>
@@ -217,7 +225,7 @@
             <p id="playerGame">...</p>
           </div>
         </div>
-        
+
         <div class="player-actions">
           <button id="fullscreenBtn" class="icon-btn" title="Plein écran">
             <i class="fas fa-expand"></i>
@@ -248,7 +256,7 @@
             En live depuis <span id="uptime">...</span>
           </div>
         </div>
-        
+
         <div class="stream-actions">
           <button id="shareBtn" class="btn-action">
             <i class="fas fa-share"></i> Partager
@@ -266,155 +274,149 @@
      À ajouter avant </body> dans TOUTES les pages
      ======================================== -->
 
-<!-- Bannière Cookies RGPD -->
-<div id="cookieBanner" class="cookie-banner" style="display: none;">
-  <div class="cookie-content">
-    <div class="cookie-icon">🍪</div>
-    <div class="cookie-text">
-      <h3>Utilisation des cookies</h3>
-      <p>
-        Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
-        En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
-        <a href="/confidentialite">politique de confidentialité</a>.
-      </p>
-    </div>
-    <div class="cookie-actions">
-      <button id="cookieAccept" class="btn-cookie-accept">
-        <i class="fas fa-check"></i> Accepter
-      </button>
-      <button id="cookieDecline" class="btn-cookie-decline">
-        <i class="fas fa-times"></i> Refuser
-      </button>
-      <button id="cookieCustomize" class="btn-cookie-customize">
-        <i class="fas fa-cog"></i> Personnaliser
-      </button>
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal de personnalisation des cookies -->
-<div id="cookieModal" class="cookie-modal" style="display: none;">
-  <div class="cookie-modal-content">
-    <div class="cookie-modal-header">
-      <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
-      <button id="closeCookieModal" class="cookie-modal-close">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div class="cookie-modal-body">
-      <!-- Cookies essentiels (obligatoires) -->
-      <div class="cookie-category">
-        <div class="cookie-category-header">
-          <div class="cookie-category-title">
-            <input type="checkbox" id="cookieEssential" checked disabled>
-            <label for="cookieEssential">
-              <strong>Cookies essentiels</strong>
-              <span class="cookie-required">(Obligatoires)</span>
-            </label>
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
           </div>
-          <button class="cookie-toggle" data-target="essentialDetails">
-            <i class="fas fa-chevron-down"></i>
-          </button>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
         </div>
-        <div id="essentialDetails" class="cookie-details" style="display: none;">
-          <p>
-            Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
-          </p>
-          <ul>
-            <li>Authentification via Twitch OAuth</li>
-            <li>Maintien de la session utilisateur</li>
-            <li>Sécurité CSRF</li>
-            <li>Mémorisation des préférences de cookies</li>
-          </ul>
-          <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
         </div>
       </div>
-      
-      <!-- Cookies de performance (optionnels) -->
-      <div class="cookie-category">
-        <div class="cookie-category-header">
-          <div class="cookie-category-title">
-            <input type="checkbox" id="cookiePerformance">
-            <label for="cookiePerformance">
-              <strong>Cookies de performance</strong>
-              <span class="cookie-optional">(Optionnels)</span>
-            </label>
-          </div>
-          <button class="cookie-toggle" data-target="performanceDetails">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-        <div id="performanceDetails" class="cookie-details" style="display: none;">
-          <p>
-            Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
-          </p>
-          <ul>
-            <li>Pages visitées</li>
-            <li>Temps passé sur le site</li>
-            <li>Erreurs rencontrées</li>
-          </ul>
-          <p><strong>Durée :</strong> 1 an</p>
-        </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
       </div>
-      
-      <!-- Cookies de fonctionnalité (optionnels) -->
-      <div class="cookie-category">
-        <div class="cookie-category-header">
-          <div class="cookie-category-title">
-            <input type="checkbox" id="cookieFunctional">
-            <label for="cookieFunctional">
-              <strong>Cookies de fonctionnalité</strong>
-              <span class="cookie-optional">(Optionnels)</span>
-            </label>
-          </div>
-          <button class="cookie-toggle" data-target="functionalDetails">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-        <div id="functionalDetails" class="cookie-details" style="display: none;">
-          <p>
-            Ces cookies permettent d'améliorer votre expérience :
-          </p>
-          <ul>
-            <li>Mémorisation du thème (clair/sombre)</li>
-            <li>Préférences de langue</li>
-            <li>État des panneaux (ouvert/fermé)</li>
-          </ul>
-          <p><strong>Durée :</strong> 1 an</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="cookie-modal-footer">
-      <button id="cookieSavePreferences" class="btn-cookie-save">
-        <i class="fas fa-save"></i> Enregistrer mes préférences
-      </button>
-      <button id="cookieAcceptAll" class="btn-cookie-accept-all">
-        <i class="fas fa-check-double"></i> Tout accepter
-      </button>
     </div>
   </div>
-</div>
 
-<!-- Bouton flottant pour rouvrir les paramètres cookies -->
-<button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
-  <i class="fas fa-cookie-bite"></i>
-</button>
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
   <!-- Fin cookies -->
 
   <!-- Footer Universel -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img 
-          src="/assets/logo-stream-team-hq.webp" 
-          alt="Logo Stream Team HQ" 
-          class="footer-logo"
-          width="50"
-          height="50"
-          loading="lazy"
-        />
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
         <div class="footer-brand-text">
           <span class="footer-name">Stream Team HQ</span>
           <span class="footer-tagline">Le QG des streamers d'élite</span>
@@ -474,44 +476,44 @@
   <!-- Scripts -->
   <script src="/cookie-consent.js"></script>
   <script src="/script.js" defer></script>
-  
+
   <!-- Fix Event Listeners pour Menu et Notifs -->
   <script>
     // Attendre que le DOM soit chargé
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Éléments
       const notifBtn = document.getElementById('notifBtn');
       const notifPanel = document.getElementById('notifPanel');
       const closeNotif = document.getElementById('closeNotif');
       const menuBtn = document.getElementById('menuBtn');
       const menuDropdown = document.getElementById('menuDropdown');
-      
+
       // Notifications
       if (notifBtn && notifPanel) {
-        notifBtn.addEventListener('click', function(e) {
+        notifBtn.addEventListener('click', function (e) {
           e.stopPropagation();
           notifPanel.classList.toggle('show');
           if (menuDropdown) menuDropdown.classList.remove('show');
         });
-        
+
         if (closeNotif) {
-          closeNotif.addEventListener('click', function() {
+          closeNotif.addEventListener('click', function () {
             notifPanel.classList.remove('show');
           });
         }
       }
-      
+
       // Menu
       if (menuBtn && menuDropdown) {
-        menuBtn.addEventListener('click', function(e) {
+        menuBtn.addEventListener('click', function (e) {
           e.stopPropagation();
           menuDropdown.classList.toggle('show');
           if (notifPanel) notifPanel.classList.remove('show');
         });
       }
-      
+
       // Fermer au clic extérieur
-      document.addEventListener('click', function(e) {
+      document.addEventListener('click', function (e) {
         if (notifPanel && !notifPanel.contains(e.target) && !notifBtn?.contains(e.target)) {
           notifPanel.classList.remove('show');
         }
@@ -519,11 +521,12 @@
           menuDropdown.classList.remove('show');
         }
       });
-      
+
       console.log('✅ Event listeners menu/notif chargés pour watch.html');
     });
   </script>
-  
+
   <script src="/watch.js" defer></script>
 </body>
+
 </html>

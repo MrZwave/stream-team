@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <title>Mentions Légales - Stream Team</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="stylesheet" href="style.css">
+
+  <!-- FontAwesome with defer -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </noscript>
 </head>
+
 <body>
   <header>
     <h1>Mentions Légales</h1>
     <p>Tu viens d’entrer dans la zone réglementaire. RGPD activé, confidentialité respectée, sécurité garantie.</p>
 
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+    <div class="dropdown-container">
+      <div class="dropdown-wrapper" id="auth-wrapper">
+        <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
+        <div class="dropdown-menu" id="auth-dropdown">
+          <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
+          <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
+          <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
+          <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
+          <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
+          <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+        </div>
       </div>
     </div>
-  </div>
   </header>
 
   <main class="profile-card" style="max-width: 800px; margin: auto; padding: 2rem;">
@@ -46,19 +55,24 @@
 
     <section>
       <h2>Propriété intellectuelle</h2>
-      <p>Tous les contenus présents sur ce site (logos, images, textes, scripts, etc.) sont la propriété exclusive de Stream Team, sauf indication contraire. Toute reproduction ou extraction est interdite sans autorisation écrite préalable.</p>
+      <p>Tous les contenus présents sur ce site (logos, images, textes, scripts, etc.) sont la propriété exclusive de
+        Stream Team, sauf indication contraire. Toute reproduction ou extraction est interdite sans autorisation écrite
+        préalable.</p>
     </section>
 
     <section>
       <h2>Protection des données personnelles</h2>
-      <p>Stream Team collecte des données uniquement via l'authentification Twitch (login, ID Twitch, image de profil). Ces données sont utilisées uniquement pour les besoins du site.</p>
+      <p>Stream Team collecte des données uniquement via l'authentification Twitch (login, ID Twitch, image de profil).
+        Ces données sont utilisées uniquement pour les besoins du site.</p>
       <p>Aucune donnée personnelle n'est vendue, transférée ou cédée à des tiers.</p>
-      <p>Tu peux demander à tout moment l'accès, la rectification ou la suppression de tes données en écrivant à <a href="mailto:contact@stream-team.site">contact@stream-team.site</a>.</p>
+      <p>Tu peux demander à tout moment l'accès, la rectification ou la suppression de tes données en écrivant à <a
+          href="mailto:contact@stream-team.site">contact@stream-team.site</a>.</p>
     </section>
 
     <section>
       <h2>Cookies</h2>
-      <p>Ce site n'utilise que des cookies techniques nécessaires au bon fonctionnement des sessions (connexion via Twitch).</p>
+      <p>Ce site n'utilise que des cookies techniques nécessaires au bon fonctionnement des sessions (connexion via
+        Twitch).</p>
       <p>Il n'y a pas de cookie tiers ni de publicité.</p>
     </section>
 
@@ -83,33 +97,79 @@
 
     <section>
       <h2>Modification des mentions</h2>
-      <p>Stream Team se réserve le droit de modifier les présentes mentions légales à tout moment. L’utilisateur est invité à les consulter régulièrement.</p>
+      <p>Stream Team se réserve le droit de modifier les présentes mentions légales à tout moment. L’utilisateur est
+        invité à les consulter régulièrement.</p>
     </section>
     <section>
       <h2>Contact</h2>
-      <p>Pour toute question ou réclamation concernant ces mentions légales, tu peux nous contacter à l'adresse suivante : <a href="mailto:contact@stream-team.site">contact@stream-team.site</a></p>
+      <p>Pour toute question ou réclamation concernant ces mentions légales, tu peux nous contacter à l'adresse suivante
+        : <a href="mailto:contact@stream-team.site">contact@stream-team.site</a></p>
     </section>
   </main>
 
+  <!-- Footer Universel -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-        <span class="footer-name">Stream Team</span>
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
       </div>
-      <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Politique de Confidentialité</a>
-        <a href="/cgu.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
-      </div>
-      <div class="footer-copy">
-        © 2025 Stream Team. Tous droits réservés.
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>

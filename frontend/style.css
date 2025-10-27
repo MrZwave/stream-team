@@ -175,7 +175,9 @@ a:hover {
 
 .nav-actions {
   display: flex;
+  justify-content: center;
   gap: 12px;
+  margin: 10px 0;
 }
 
 .icon-btn {
@@ -471,6 +473,7 @@ a:hover {
   border: 1px solid var(--border);
   color: var(--primary);
   padding: 10px 20px;
+  margin: 10px 0;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s;
@@ -1002,6 +1005,13 @@ a:hover {
   justify-content: center;
 }
 
+.footer-brand-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .footer-logo {
   width: 50px;
   height: 50px;
@@ -1025,6 +1035,7 @@ a:hover {
 .footer-nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: center;
   gap: 30px;
   margin-bottom: 40px;
 }
@@ -1224,8 +1235,13 @@ a:hover {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .cookie-text {
@@ -1266,7 +1282,7 @@ a:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1325,8 +1341,12 @@ a:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .cookie-modal-content {
@@ -1503,7 +1523,7 @@ a:hover {
 }
 
 .cookie-details li::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   left: 0;
   color: var(--primary);
@@ -1525,7 +1545,7 @@ a:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1582,8 +1602,12 @@ a:hover {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive */
@@ -1592,29 +1616,29 @@ a:hover {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .cookie-icon {
     font-size: 2rem;
   }
-  
+
   .cookie-actions {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .cookie-actions button {
     width: 100%;
     justify-content: center;
   }
-  
+
   .cookie-modal-content {
     max-height: 95vh;
   }
-  
+
   .cookie-modal-footer {
     flex-direction: column;
   }
-  
+
   .cookie-modal-footer button {
     width: 100%;
     justify-content: center;
@@ -1625,15 +1649,15 @@ a:hover {
   .cookie-banner {
     padding: 15px;
   }
-  
+
   .cookie-text h3 {
     font-size: 1.1rem;
   }
-  
+
   .cookie-text p {
     font-size: 0.9rem;
   }
-  
+
   .cookie-settings-btn {
     width: 50px;
     height: 50px;
