@@ -374,6 +374,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Helper CSRF
+function getCSRFToken() {
+  const meta = document.querySelector('meta[name="csrf-token"]');
+  return meta ? meta.getAttribute('content') : null;
+}
+
+async function secureFetch(url, options = {}) {
+  const token = getCSRFToken();
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(options.headers || {})
+  };
+  
+  if (token) {
+    headers['CSRF-Token'] = token;
+  }
+  
+  const response = await fetch(url, {
+    ...options,
+    headers,
+    credentials: 'include'
+  });
+  
+  if (response.status === 403) {
+    const data = await response.json();
+    if (data.error && data.error.includes('CSRF')) {
+      window.location.reload();
+      return;
+    }
+  }
+  
+  return response;
+}
+
   // ========================================
   // 🚀 INITIALISATION
   // ========================================
