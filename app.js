@@ -6,10 +6,13 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 const path = require("path");
 const mysql = require("mysql2/promise");
+const csrf = require('csurf');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 // Indique à Express qu'il est derrière un proxy comme NGINX
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
@@ -93,6 +96,188 @@ app.use((req, res, next) => {
   
   next();
 });
+
+// ========================================
+// HELMET - CSP (Content Security Policy)
+// ========================================
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'", // Nécessaire pour les scripts inline
+        "'unsafe-hashes'",
+        "https://cdnjs.cloudflare.com",
+        "https://cdn.jsdelivr.net",
+        "https://player.twitch.tv",
+        "https://embed.twitch.tv"
+      ],
+      scriptSrcAttr: ["'unsafe-hashes'"], // Pour les événements inline (ex: onload)
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://cdnjs.cloudflare.com",
+        "https://fonts.googleapis.com"
+      ],
+      fontSrc: [
+        "'self'",
+        "https://cdnjs.cloudflare.com",
+        "https://fonts.gstatic.com",
+        "data:"
+      ],
+      imgSrc: [
+        "'self'",
+        "data:",
+        "https:",
+        "https://static-cdn.jtvnw.net",
+        "https://static.twitchcdn.net",
+        "blob:"
+      ],
+      frameSrc: [
+        "'self'",
+        "https://player.twitch.tv",
+        "https://embed.twitch.tv",
+        "https://www.twitch.tv"
+      ],
+      connectSrc: [
+        "'self'",
+        "https://api.twitch.tv",
+        "https://id.twitch.tv",
+        "wss://irc-ws.chat.twitch.tv"
+      ],
+      mediaSrc: [
+        "'self'",
+        "https:",
+        "blob:"
+      ],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  },
+  frameguard: {
+    action: 'deny'
+  },
+  noSniff: true,
+  referrerPolicy: {
+    policy: 'strict-origin-when-cross-origin'
+  },
+  crossOriginEmbedderPolicy: false // Important pour Twitch embeds
+}));
+
+// ========================================
+//  RATE LIMITING - FIX trust proxy
+// ========================================
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Max 100 requêtes par IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  // FIX CRITIQUE: Désactiver la validation stricte du trust proxy
+  validate: {
+    trustProxy: false
+  },
+  // Récupérer la vraie IP depuis X-Forwarded-For (NGINX)
+  keyGenerator: (req) => {
+    const forwarded = req.headers['x-forwarded-for'];
+    return forwarded ? forwarded.split(',')[0].trim() : req.ip;
+  },
+  message: 'Trop de requêtes depuis cette IP, réessayez dans 15 minutes.',
+  // Skip function pour exclure certaines routes du rate limiting
+  skip: (req) => {
+    // Pas de rate limit sur les pages statiques
+    return req.method === 'GET' && !req.path.startsWith('/api/');
+  }
+});
+
+// Appliquer uniquement sur les routes API
+app.use('/api/', limiter);
+
+// ========================================
+// 4. CSRF PROTECTION - AVEC EXEMPTIONS
+// ========================================
+
+// Créer le middleware CSRF
+const csrfProtection = csrf({
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 3600000 // 1 heure
+  }
+});
+
+// Routes exemptées du CSRF
+const csrfExemptions = [
+  // OAuth
+  '/auth/twitch/callback',
+  
+  // Webhooks externes
+  '/webhooks/',
+  
+  // Endpoints de lecture (GET safe)
+  '/api/auth/status',
+  '/api/auth/check',
+  '/api/live',
+  '/api/streamer/',
+  
+  // ⚠️ CRITIQUE: Tracking non sensible (pas besoin de CSRF)
+  '/api/profile-click',
+  
+  // Autres endpoints publics non sensibles
+  '/api/clips',
+  '/api/debug'
+];
+
+// Middleware CSRF conditionnel
+app.use((req, res, next) => {
+  // Skip CSRF pour les GET (safe methods)
+  if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') {
+    return next();
+  }
+  
+  // Skip CSRF pour les routes exemptées
+  const isExempted = csrfExemptions.some(path => req.path.startsWith(path));
+  if (isExempted) {
+    return next();
+  }
+  
+  // Appliquer CSRF pour POST/PUT/DELETE sensibles
+  csrfProtection(req, res, next);
+});
+
+// Middleware pour passer le token CSRF aux vues
+app.use((req, res, next) => {
+  // Générer le token seulement si CSRF est actif pour cette route
+  try {
+    res.locals.csrfToken = req.csrfToken ? req.csrfToken() : null;
+  } catch (err) {
+    res.locals.csrfToken = null;
+  }
+  next();
+});
+
+// Logging des tentatives POST sans CSRF (debug)
+app.use((req, res, next) => {
+  if (req.method === 'POST' && !req.csrfToken) {
+    const isExempted = csrfExemptions.some(path => req.path.startsWith(path));
+    if (!isExempted) {
+      console.log('[Security] POST sans token CSRF:', {
+        ip: req.ip || req.headers['x-forwarded-for'],
+        path: req.path,
+        userAgent: req.headers['user-agent']
+      });
+    }
+  }
+  next();
+});
+
+  console.log('🔒 Sécurité initialisée : CSRF + CSP + Rate Limiting');
 
 // ========================================
 // 🔐 AUTHENTIFICATION TWITCH OAUTH
@@ -189,8 +374,35 @@ app.get("/api/auth/check", (req, res) => {
   }
 });
 
-// Après la route /api/auth/check
+// Vérifier l'authentification (utilisé par script.js)
+app.get("/api/auth/check", (req, res) => {
+  if (req.session && req.session.user) {
+    res.json({ 
+      authenticated: true, 
+      user: req.session.user 
+    });
+  } else {
+    res.status(401).json({ authenticated: false });
+  }
+});
 
+// ⭐ NOUVEAU : Endpoint pour header-auth.js
+app.get("/api/auth/status", (req, res) => {
+  if (req.session && req.session.user) {
+    res.json({
+      authenticated: true,
+      user: {
+        login: req.session.user.login,
+        display_name: req.session.user.display_name,
+        profile_image_url: req.session.user.profile_image_url
+      }
+    });
+  } else {
+    res.json({ authenticated: false });
+  }
+});
+
+// Après la route /api/auth/check
 app.get("/api/me", (req, res) => {
   if (!req.session?.user) {
     return res.status(401).json({ error: "Non authentifié" });
@@ -200,10 +412,41 @@ app.get("/api/me", (req, res) => {
 
 app.get("/api/live", async (req, res) => {
   try {
-    // Retourne un tableau vide en attendant
-    res.json({ liveData: [] });
+    const [streamers] = await db.query("SELECT login FROM streamers");
+    
+    if (streamers.length === 0) {
+      return res.json({ liveData: [] });
+    }
+    
+    const token = await getAppAccessToken();
+    const logins = streamers.map(s => s.login);
+    const liveStreams = [];
+    
+    for (let i = 0; i < logins.length; i += 100) {
+      const batch = logins.slice(i, i + 100);
+      const queryString = batch.map(l => `user_login=${encodeURIComponent(l)}`).join('&');
+      
+      const streamsRes = await fetch(
+        `https://api.twitch.tv/helix/streams?${queryString}`,
+        {
+          headers: {
+            "Client-ID": process.env.TWITCH_CLIENT_ID,
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+      const streamsData = await streamsRes.json();
+      
+      if (streamsData.data && streamsData.data.length > 0) {
+        liveStreams.push(...streamsData.data);
+      }
+    }
+    
+    console.log(`[API /live] ${liveStreams.length} streamers en live`);
+    res.json({ liveData: liveStreams });
   } catch (err) {
-    console.error("[API /live]", err);
+    console.error("[API /live] Erreur:", err);
     res.status(500).json({ error: "Erreur serveur" });
   }
 });
@@ -604,40 +847,124 @@ app.get("/api/streamer/:login", async (req, res) => {
 
 // ========================================
 // 📊 API TRACKING - Comptage des clics
+//         SANS CSRF (tracking non sensible)
 // ========================================
+
+// ⚠️ IMPORTANT: /api/profile-click est déjà exempté du CSRF dans le middleware global
+// Il ne faut donc PAS ajouter csrfProtection dans la route
 
 app.post("/api/profile-click", async (req, res) => {
   try {
-    const { login } = req.body;
-
+    const { login } = req.body; // Utiliser 'login' au lieu de 'targetId'
+    
     if (!login) {
       return res.status(400).json({ error: "Login manquant" });
     }
-
-    // Vérifier si le streamer existe
-    const [[streamer]] = await db.query(
+    
+    // Vérifier si le streamer existe dans la DB
+    const [rows] = await db.query(
       "SELECT id, clicks FROM streamers WHERE login = ?",
       [login]
     );
-
-    if (streamer) {
-      // Incrémenter
+    
+    if (rows.length > 0) {
+      // Incrémenter le compteur
       await db.query(
         "UPDATE streamers SET clicks = clicks + 1 WHERE login = ?",
         [login]
       );
     } else {
-      // Créer
+      // Créer l'entrée avec 1 clic
       await db.query(
         "INSERT INTO streamers (login, clicks) VALUES (?, 1)",
         [login]
       );
     }
-
+    
+    console.log(`[Profile Click] Vue enregistrée pour ${login}`);
+    
     res.json({ success: true });
   } catch (err) {
-    console.error("[API /profile-click]", err);
+    console.error("[POST /api/profile-click]", err);
     res.status(500).json({ error: "Erreur serveur", details: err.message });
+  }
+});
+
+// ========================================
+// ⭐ API SALVE - Action sensible
+//         AVEC protection CSRF
+// ========================================
+
+app.post("/api/salve", csrfProtection, async (req, res) => {
+  try {
+    // Vérifier l'authentification
+    if (!req.session || !req.session.user) {
+      return res.status(401).json({ error: "Non authentifié" });
+    }
+    
+    const senderId = req.session.user.id;
+    const { login } = req.body; // Utiliser 'login' comme dans le frontend
+    
+    // Validation
+    if (!login) {
+      return res.status(400).json({ error: "Login manquant" });
+    }
+    
+    // Récupérer l'ID du destinataire depuis son login
+    const [targetRows] = await db.query(
+      "SELECT id FROM users WHERE login = ?",
+      [login]
+    );
+    
+    if (targetRows.length === 0) {
+      return res.status(404).json({ error: "Utilisateur introuvable" });
+    }
+    
+    const targetId = targetRows[0].id;
+    
+    // Vérifier que l'utilisateur ne s'envoie pas à lui-même
+    if (senderId === targetId) {
+      return res.status(400).json({ error: "Impossible de s'envoyer une salve" });
+    }
+    
+    // Vérifier si une salve existe déjà (éviter le spam)
+    const [existingSalve] = await db.query(
+      "SELECT id FROM salves WHERE sender_id = ? AND receiver_id = ? AND created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)",
+      [senderId, targetId]
+    );
+    
+    if (existingSalve.length > 0) {
+      return res.status(429).json({ error: "Tu as déjà envoyé une salve à cet utilisateur aujourd'hui" });
+    }
+    
+    // Insérer la salve
+    await db.query(
+      "INSERT INTO salves (sender_id, receiver_id) VALUES (?, ?)",
+      [senderId, targetId]
+    );
+    
+    // Incrémenter le compteur de salves du destinataire
+    await db.query(
+      "UPDATE streamers SET salves = salves + 1 WHERE login = ?",
+      [login]
+    );
+    
+    console.log(`[Salve] ${senderId} → ${targetId} (${login})`);
+    
+    res.json({
+      success: true,
+      message: "Salve envoyée !",
+      receiver: login
+    });
+  } catch (err) {
+    console.error("[POST /api/salve]", err);
+    
+    // Si c'est une erreur CSRF
+    if (err.code === 'EBADCSRFTOKEN') {
+      return res.status(403).json({ error: "Token CSRF invalide" });
+    }
+    
+    res.status(500).json({ error: "Erreur serveur" });
   }
 });
 
@@ -935,6 +1262,28 @@ app.use((err, req, res, next) => {
   if (req.path.startsWith("/api/"))
     return res.status(500).json({ error: "Internal Server Error" });
   next();
+});
+
+// ========================================
+// 5. GESTIONNAIRE D'ERREURS CSRF
+// ========================================
+
+// Gestionnaire d'erreur CSRF
+app.use((err, req, res, next) => {
+  if (err.code === 'EBADCSRFTOKEN') {
+    console.error('[CSRF] Token invalide:', {
+      ip: req.ip,
+      path: req.path,
+      method: req.method
+    });
+    
+    return res.status(403).json({
+      error: 'Token CSRF invalide ou expiré',
+      message: 'Veuillez rafraîchir la page et réessayer'
+    });
+  }
+  
+  next(err);
 });
 
 // ========================================
