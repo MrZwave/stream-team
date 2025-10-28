@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     "/home": '<i class="fas fa-home"></i> Accueil',
     "/contact": '<i class="fa-solid fa-envelope"></i> Contact',
     "/admin": '<i class="fa-solid fa-lock"></i> Admin',
+    "/cgu": '<i class="fas fa-book"></i> CGU',
+    "/mentions-legales": '<i class="fas fa-file-alt"></i> Mentions Légales',
+    "/confidentialite": '<i class="fas fa-shield-alt"></i> Confidentialité',
+    "/cookies": '<i class="fas fa-cookie-bite"></i> Cookies',
+    "/contact": '<i class="fas fa-envelope"></i> Contact',
     "/": '<i class="fas fa-home"></i> Stream Team HQ',
   };
 
@@ -375,39 +380,39 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Helper CSRF
-function getCSRFToken() {
-  const meta = document.querySelector('meta[name="csrf-token"]');
-  return meta ? meta.getAttribute('content') : null;
-}
+  function getCSRFToken() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.getAttribute("content") : null;
+  }
 
-async function secureFetch(url, options = {}) {
-  const token = getCSRFToken();
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(options.headers || {})
-  };
-  
-  if (token) {
-    headers['CSRF-Token'] = token;
-  }
-  
-  const response = await fetch(url, {
-    ...options,
-    headers,
-    credentials: 'include'
-  });
-  
-  if (response.status === 403) {
-    const data = await response.json();
-    if (data.error && data.error.includes('CSRF')) {
-      window.location.reload();
-      return;
+  async function secureFetch(url, options = {}) {
+    const token = getCSRFToken();
+
+    const headers = {
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    };
+
+    if (token) {
+      headers["CSRF-Token"] = token;
     }
+
+    const response = await fetch(url, {
+      ...options,
+      headers,
+      credentials: "include",
+    });
+
+    if (response.status === 403) {
+      const data = await response.json();
+      if (data.error && data.error.includes("CSRF")) {
+        window.location.reload();
+        return;
+      }
+    }
+
+    return response;
   }
-  
-  return response;
-}
 
   // ========================================
   // 🚀 INITIALISATION
