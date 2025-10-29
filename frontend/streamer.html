@@ -56,17 +56,64 @@
 </head>
 
 <body class="glow-bg">
-  <!-- Header Navigation -->
-  <header class="streamer-header">
-    <nav class="streamer-nav" aria-label="Navigation principale">
-      <a href="/home" class="nav-back-btn">
-        <i class="fas fa-arrow-left"></i> Retour au QG
-      </a>
-      <div class="nav-actions">
-        <a href="/home" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
-        <a href="/watch" class="nav-link"><i class="fas fa-video"></i> Lives</a>
+  <!-- Header Universel -->
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+
+      <!-- Actions Droite -->
+      <div class="nav-actions loading">
       </div>
     </nav>
+
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
+      </div>
+    </div>
+
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item active">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+
+    <!-- Banner Roadmap -->
+    <div id="roadmap-alert" class="roadmap-banner" role="banner">
+      🆕 Une nouvelle mise à jour est dispo dans la <a href="/roadmap">roadmap</a> ! Va voir ce qui change 🚀
+    </div>
   </header>
 
   <!-- Loading State -->
