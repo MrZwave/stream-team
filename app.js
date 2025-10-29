@@ -6,9 +6,9 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 const path = require("path");
 const mysql = require("mysql2/promise");
-const csrf = require('csurf');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const csrf = require("csurf");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 // Indique à Express qu'il est derrière un proxy comme NGINX
@@ -73,102 +73,100 @@ app.use(
 // ========================================
 app.use((req, res, next) => {
   // Si l'URL se termine par .html, rediriger vers l'URL sans extension
-  if (req.path.endsWith('.html')) {
+  if (req.path.endsWith(".html")) {
     const newPath = req.path.slice(0, -5);
     return res.redirect(301, newPath);
   }
-  
+
   // Routes dynamiques à ignorer (laisse passer vers les routes Express)
-  const dynamicRoutes = ['/streamer/', '/api/', '/auth/', '/admin/'];
-  if (dynamicRoutes.some(route => req.path.startsWith(route))) {
+  const dynamicRoutes = ["/streamer/", "/api/", "/auth/", "/admin/"];
+  if (dynamicRoutes.some((route) => req.path.startsWith(route))) {
     return next();
   }
-  
+
   // Si l'URL n'a pas d'extension et n'est pas la racine
-  if (!req.path.includes('.') && req.path !== '/') {
+  if (!req.path.includes(".") && req.path !== "/") {
     // Vérifie si un fichier .html existe dans frontend/
-    const htmlPath = path.join(__dirname, 'frontend', req.path + '.html');
-    
+    const htmlPath = path.join(__dirname, "frontend", req.path + ".html");
+
     if (fs.existsSync(htmlPath)) {
       return res.sendFile(htmlPath);
     }
   }
-  
+
   next();
 });
 
 // ========================================
 // HELMET - CSP (Content Security Policy)
 // ========================================
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'", // Nécessaire pour les scripts inline
-        "'unsafe-hashes'",
-        "https://cdnjs.cloudflare.com",
-        "https://cdn.jsdelivr.net",
-        "https://player.twitch.tv",
-        "https://embed.twitch.tv"
-      ],
-      scriptSrcAttr: ["'unsafe-hashes'"], // Pour les événements inline (ex: onload)
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "https://cdnjs.cloudflare.com",
-        "https://fonts.googleapis.com"
-      ],
-      fontSrc: [
-        "'self'",
-        "https://cdnjs.cloudflare.com",
-        "https://fonts.gstatic.com",
-        "data:"
-      ],
-      imgSrc: [
-        "'self'",
-        "data:",
-        "https:",
-        "https://static-cdn.jtvnw.net",
-        "https://static.twitchcdn.net",
-        "blob:"
-      ],
-      frameSrc: [
-        "'self'",
-        "https://player.twitch.tv",
-        "https://embed.twitch.tv",
-        "https://www.twitch.tv"
-      ],
-      connectSrc: [
-        "'self'",
-        "https://api.twitch.tv",
-        "https://id.twitch.tv",
-        "wss://irc-ws.chat.twitch.tv"
-      ],
-      mediaSrc: [
-        "'self'",
-        "https:",
-        "blob:"
-      ],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'", // Nécessaire pour les scripts inline
+          "'unsafe-hashes'",
+          "https://cdnjs.cloudflare.com",
+          "https://cdn.jsdelivr.net",
+          "https://player.twitch.tv",
+          "https://embed.twitch.tv",
+        ],
+        scriptSrcAttr: ["'unsafe-hashes'"], // Pour les événements inline (ex: onload)
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "https://cdnjs.cloudflare.com",
+          "https://fonts.googleapis.com",
+        ],
+        fontSrc: [
+          "'self'",
+          "https://cdnjs.cloudflare.com",
+          "https://fonts.gstatic.com",
+          "data:",
+        ],
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https:",
+          "https://static-cdn.jtvnw.net",
+          "https://static.twitchcdn.net",
+          "blob:",
+        ],
+        frameSrc: [
+          "'self'",
+          "https://player.twitch.tv",
+          "https://embed.twitch.tv",
+          "https://www.twitch.tv",
+        ],
+        connectSrc: [
+          "'self'",
+          "https://api.twitch.tv",
+          "https://id.twitch.tv",
+          "wss://irc-ws.chat.twitch.tv",
+        ],
+        mediaSrc: ["'self'", "https:", "blob:"],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
     },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  },
-  frameguard: {
-    action: 'deny'
-  },
-  noSniff: true,
-  referrerPolicy: {
-    policy: 'strict-origin-when-cross-origin'
-  },
-  crossOriginEmbedderPolicy: false // Important pour Twitch embeds
-}));
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+    frameguard: {
+      action: "deny",
+    },
+    noSniff: true,
+    referrerPolicy: {
+      policy: "strict-origin-when-cross-origin",
+    },
+    crossOriginEmbedderPolicy: false, // Important pour Twitch embeds
+  })
+);
 
 // ========================================
 //  RATE LIMITING - FIX trust proxy
@@ -180,23 +178,23 @@ const limiter = rateLimit({
   legacyHeaders: false,
   // FIX CRITIQUE: Désactiver la validation stricte du trust proxy
   validate: {
-    trustProxy: false
+    trustProxy: false,
   },
   // Récupérer la vraie IP depuis X-Forwarded-For (NGINX)
   keyGenerator: (req) => {
-    const forwarded = req.headers['x-forwarded-for'];
-    return forwarded ? forwarded.split(',')[0].trim() : req.ip;
+    const forwarded = req.headers["x-forwarded-for"];
+    return forwarded ? forwarded.split(",")[0].trim() : req.ip;
   },
-  message: 'Trop de requêtes depuis cette IP, réessayez dans 15 minutes.',
+  message: "Trop de requêtes depuis cette IP, réessayez dans 15 minutes.",
   // Skip function pour exclure certaines routes du rate limiting
   skip: (req) => {
     // Pas de rate limit sur les pages statiques
-    return req.method === 'GET' && !req.path.startsWith('/api/');
-  }
+    return req.method === "GET" && !req.path.startsWith("/api/");
+  },
 });
 
 // Appliquer uniquement sur les routes API
-app.use('/api/', limiter);
+app.use("/api/", limiter);
 
 // ========================================
 // 4. CSRF PROTECTION - AVEC EXEMPTIONS
@@ -206,47 +204,51 @@ app.use('/api/', limiter);
 const csrfProtection = csrf({
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 3600000 // 1 heure
-  }
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 3600000, // 1 heure
+  },
 });
 
 // Routes exemptées du CSRF
 const csrfExemptions = [
   // OAuth
-  '/auth/twitch/callback',
-  
+  "/auth/twitch/callback",
+
   // Webhooks externes
-  '/webhooks/',
-  
+  "/webhooks/",
+
   // Endpoints de lecture (GET safe)
-  '/api/auth/status',
-  '/api/auth/check',
-  '/api/live',
-  '/api/streamer/',
-  
+  "/api/auth/status",
+  "/api/auth/check",
+  "/api/live",
+  "/api/streamer/",
+
   // ⚠️ CRITIQUE: Tracking non sensible (pas besoin de CSRF)
-  '/api/profile-click',
-  
+  "/api/profile-click",
+
   // Autres endpoints publics non sensibles
-  '/api/clips',
-  '/api/debug'
+  "/api/clips",
+  "/api/debug",
 ];
 
 // Middleware CSRF conditionnel
 app.use((req, res, next) => {
   // Skip CSRF pour les GET (safe methods)
-  if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') {
+  if (
+    req.method === "GET" ||
+    req.method === "HEAD" ||
+    req.method === "OPTIONS"
+  ) {
     return next();
   }
-  
+
   // Skip CSRF pour les routes exemptées
-  const isExempted = csrfExemptions.some(path => req.path.startsWith(path));
+  const isExempted = csrfExemptions.some((path) => req.path.startsWith(path));
   if (isExempted) {
     return next();
   }
-  
+
   // Appliquer CSRF pour POST/PUT/DELETE sensibles
   csrfProtection(req, res, next);
 });
@@ -264,20 +266,20 @@ app.use((req, res, next) => {
 
 // Logging des tentatives POST sans CSRF (debug)
 app.use((req, res, next) => {
-  if (req.method === 'POST' && !req.csrfToken) {
-    const isExempted = csrfExemptions.some(path => req.path.startsWith(path));
+  if (req.method === "POST" && !req.csrfToken) {
+    const isExempted = csrfExemptions.some((path) => req.path.startsWith(path));
     if (!isExempted) {
-      console.log('[Security] POST sans token CSRF:', {
-        ip: req.ip || req.headers['x-forwarded-for'],
+      console.log("[Security] POST sans token CSRF:", {
+        ip: req.ip || req.headers["x-forwarded-for"],
         path: req.path,
-        userAgent: req.headers['user-agent']
+        userAgent: req.headers["user-agent"],
       });
     }
   }
   next();
 });
 
-  console.log('🔒 Sécurité initialisée : CSRF + CSP + Rate Limiting');
+console.log("🔒 Sécurité initialisée : CSRF + CSP + Rate Limiting");
 
 // ========================================
 // 🔐 AUTHENTIFICATION TWITCH OAUTH
@@ -365,9 +367,9 @@ app.get("/logout", (req, res) => {
 // Vérifier l'authentification (utilisé par script.js)
 app.get("/api/auth/check", (req, res) => {
   if (req.session && req.session.user) {
-    res.json({ 
-      authenticated: true, 
-      user: req.session.user 
+    res.json({
+      authenticated: true,
+      user: req.session.user,
     });
   } else {
     res.status(401).json({ authenticated: false });
@@ -377,9 +379,9 @@ app.get("/api/auth/check", (req, res) => {
 // Vérifier l'authentification (utilisé par script.js)
 app.get("/api/auth/check", (req, res) => {
   if (req.session && req.session.user) {
-    res.json({ 
-      authenticated: true, 
-      user: req.session.user 
+    res.json({
+      authenticated: true,
+      user: req.session.user,
     });
   } else {
     res.status(401).json({ authenticated: false });
@@ -394,8 +396,8 @@ app.get("/api/auth/status", (req, res) => {
       user: {
         login: req.session.user.login,
         display_name: req.session.user.display_name,
-        profile_image_url: req.session.user.profile_image_url
-      }
+        profile_image_url: req.session.user.profile_image_url,
+      },
     });
   } else {
     res.json({ authenticated: false });
@@ -413,19 +415,21 @@ app.get("/api/me", (req, res) => {
 app.get("/api/live", async (req, res) => {
   try {
     const [streamers] = await db.query("SELECT login FROM streamers");
-    
+
     if (streamers.length === 0) {
       return res.json({ liveData: [] });
     }
-    
+
     const token = await getAppAccessToken();
-    const logins = streamers.map(s => s.login);
+    const logins = streamers.map((s) => s.login);
     const liveStreams = [];
-    
+
     for (let i = 0; i < logins.length; i += 100) {
       const batch = logins.slice(i, i + 100);
-      const queryString = batch.map(l => `user_login=${encodeURIComponent(l)}`).join('&');
-      
+      const queryString = batch
+        .map((l) => `user_login=${encodeURIComponent(l)}`)
+        .join("&");
+
       const streamsRes = await fetch(
         `https://api.twitch.tv/helix/streams?${queryString}`,
         {
@@ -435,14 +439,14 @@ app.get("/api/live", async (req, res) => {
           },
         }
       );
-      
+
       const streamsData = await streamsRes.json();
-      
+
       if (streamsData.data && streamsData.data.length > 0) {
         liveStreams.push(...streamsData.data);
       }
     }
-    
+
     console.log(`[API /live] ${liveStreams.length} streamers en live`);
     res.json({ liveData: liveStreams });
   } catch (err) {
@@ -460,8 +464,10 @@ app.get("/api/users", async (req, res) => {
 
     const loginArray = Array.isArray(logins) ? logins : [logins];
     const token = await getAppAccessToken();
-    
-    const queryString = loginArray.map(l => `login=${encodeURIComponent(l)}`).join('&');
+
+    const queryString = loginArray
+      .map((l) => `login=${encodeURIComponent(l)}`)
+      .join("&");
     const twitchRes = await fetch(
       `https://api.twitch.tv/helix/users?${queryString}`,
       {
@@ -769,7 +775,7 @@ app.get("/api/streamer/:login", async (req, res) => {
 
     // 1. Récupérer les données Twitch
     const token = await getAppAccessToken();
-    
+
     const userRes = await fetch(
       `https://api.twitch.tv/helix/users?login=${encodeURIComponent(login)}`,
       {
@@ -789,7 +795,9 @@ app.get("/api/streamer/:login", async (req, res) => {
 
     // 2. Vérifier si le streamer est en live
     const streamRes = await fetch(
-      `https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(login)}`,
+      `https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(
+        login
+      )}`,
       {
         headers: {
           "Client-ID": process.env.TWITCH_CLIENT_ID,
@@ -836,9 +844,8 @@ app.get("/api/streamer/:login", async (req, res) => {
     res.json({
       userData: user,
       userStats: userStats || { clicks: 0, salves: 0 },
-      clips: clips
+      clips: clips,
     });
-
   } catch (err) {
     console.error("[API /api/streamer]", err);
     res.status(500).json({ error: "Erreur serveur" });
@@ -856,17 +863,17 @@ app.get("/api/streamer/:login", async (req, res) => {
 app.post("/api/profile-click", async (req, res) => {
   try {
     const { login } = req.body; // Utiliser 'login' au lieu de 'targetId'
-    
+
     if (!login) {
       return res.status(400).json({ error: "Login manquant" });
     }
-    
+
     // Vérifier si le streamer existe dans la DB
     const [rows] = await db.query(
       "SELECT id, clicks FROM streamers WHERE login = ?",
       [login]
     );
-    
+
     if (rows.length > 0) {
       // Incrémenter le compteur
       await db.query(
@@ -875,14 +882,13 @@ app.post("/api/profile-click", async (req, res) => {
       );
     } else {
       // Créer l'entrée avec 1 clic
-      await db.query(
-        "INSERT INTO streamers (login, clicks) VALUES (?, 1)",
-        [login]
-      );
+      await db.query("INSERT INTO streamers (login, clicks) VALUES (?, 1)", [
+        login,
+      ]);
     }
-    
+
     console.log(`[Profile Click] Vue enregistrée pour ${login}`);
-    
+
     res.json({ success: true });
   } catch (err) {
     console.error("[POST /api/profile-click]", err);
@@ -901,69 +907,74 @@ app.post("/api/salve", csrfProtection, async (req, res) => {
     if (!req.session || !req.session.user) {
       return res.status(401).json({ error: "Non authentifié" });
     }
-    
+
     const senderId = req.session.user.id;
     const { login } = req.body; // Utiliser 'login' comme dans le frontend
-    
+
     // Validation
     if (!login) {
       return res.status(400).json({ error: "Login manquant" });
     }
-    
+
     // Récupérer l'ID du destinataire depuis son login
     const [targetRows] = await db.query(
       "SELECT id FROM users WHERE login = ?",
       [login]
     );
-    
+
     if (targetRows.length === 0) {
       return res.status(404).json({ error: "Utilisateur introuvable" });
     }
-    
+
     const targetId = targetRows[0].id;
-    
+
     // Vérifier que l'utilisateur ne s'envoie pas à lui-même
     if (senderId === targetId) {
-      return res.status(400).json({ error: "Impossible de s'envoyer une salve" });
+      return res
+        .status(400)
+        .json({ error: "Impossible de s'envoyer une salve" });
     }
-    
+
     // Vérifier si une salve existe déjà (éviter le spam)
     const [existingSalve] = await db.query(
       "SELECT id FROM salves WHERE sender_id = ? AND receiver_id = ? AND created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)",
       [senderId, targetId]
     );
-    
+
     if (existingSalve.length > 0) {
-      return res.status(429).json({ error: "Tu as déjà envoyé une salve à cet utilisateur aujourd'hui" });
+      return res
+        .status(429)
+        .json({
+          error: "Tu as déjà envoyé une salve à cet utilisateur aujourd'hui",
+        });
     }
-    
+
     // Insérer la salve
     await db.query(
       "INSERT INTO salves (sender_id, receiver_id) VALUES (?, ?)",
       [senderId, targetId]
     );
-    
+
     // Incrémenter le compteur de salves du destinataire
-    await db.query(
-      "UPDATE streamers SET salves = salves + 1 WHERE login = ?",
-      [login]
-    );
-    
+    await db.query("UPDATE streamers SET salves = salves + 1 WHERE login = ?", [
+      login,
+    ]);
+
     console.log(`[Salve] ${senderId} → ${targetId} (${login})`);
-    
+
     res.json({
       success: true,
       message: "Salve envoyée !",
-      receiver: login
+      receiver: login,
     });
   } catch (err) {
     console.error("[POST /api/salve]", err);
-    
+
     // Si c'est une erreur CSRF
-    if (err.code === 'EBADCSRFTOKEN') {
+    if (err.code === "EBADCSRFTOKEN") {
       return res.status(403).json({ error: "Token CSRF invalide" });
     }
-    
+
     res.status(500).json({ error: "Erreur serveur" });
   }
 });
@@ -1041,18 +1052,25 @@ app.get("/api/admin/streamers", requireAdmin, async (req, res) => {
   }
 });
 
-app.post("/api/admin/streamers/:id/toggle-admin", requireAdmin, async (req, res) => {
-  const id = parseInt(req.params.id);
-  const { is_admin } = req.body;
+app.post(
+  "/api/admin/streamers/:id/toggle-admin",
+  requireAdmin,
+  async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { is_admin } = req.body;
 
-  try {
-    await db.query("UPDATE streamers SET is_admin = ? WHERE id = ?", [is_admin ? 1 : 0, id]);
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Erreur toggle admin:", err);
-    res.status(500).json({ error: "Erreur serveur" });
+    try {
+      await db.query("UPDATE streamers SET is_admin = ? WHERE id = ?", [
+        is_admin ? 1 : 0,
+        id,
+      ]);
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Erreur toggle admin:", err);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
   }
-});
+);
 
 app.post("/api/admin/notifications", requireAdmin, async (req, res) => {
   const { title, message, icon, category } = req.body;
@@ -1079,7 +1097,9 @@ app.get("/api/admin/cards", requireAdmin, async (req, res) => {
     res.json(cards);
   } catch (err) {
     console.error("[GET /api/admin/cards] Erreur SQL :", err);
-    res.status(500).json({ error: "Erreur lors de la récupération des cartes" });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération des cartes" });
   }
 });
 
@@ -1093,10 +1113,18 @@ app.post("/api/admin/cards", requireAdmin, async (req, res) => {
   try {
     const [result] = await db.query(
       `INSERT INTO cards (name, rarity, image_url, description, unlock_condition) VALUES (?, ?, ?, ?, ?)`,
-      [name, rarity, image_url || null, description || null, unlock_condition || null]
+      [
+        name,
+        rarity,
+        image_url || null,
+        description || null,
+        unlock_condition || null,
+      ]
     );
 
-    logCardEvent(`[CREATE] Carte ajoutée : ID=${result.insertId}, Nom=${name}, Rareté=${rarity}`);
+    logCardEvent(
+      `[CREATE] Carte ajoutée : ID=${result.insertId}, Nom=${name}, Rareté=${rarity}`
+    );
     res.json({ success: true, cardId: result.insertId });
   } catch (err) {
     console.error("[POST /api/admin/cards] Erreur SQL :", err);
@@ -1116,19 +1144,30 @@ app.put("/api/admin/cards/:id", requireAdmin, async (req, res) => {
   try {
     const [result] = await db.query(
       `UPDATE cards SET name = ?, rarity = ?, image_url = ?, description = ?, unlock_condition = ? WHERE id = ?`,
-      [name, rarity, image_url || null, description || null, unlock_condition || null, id]
+      [
+        name,
+        rarity,
+        image_url || null,
+        description || null,
+        unlock_condition || null,
+        id,
+      ]
     );
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Carte introuvable." });
     }
 
-    logCardEvent(`[UPDATE] Carte modifiée : ID=${id}, Nom=${name}, Rareté=${rarity}`);
+    logCardEvent(
+      `[UPDATE] Carte modifiée : ID=${id}, Nom=${name}, Rareté=${rarity}`
+    );
     res.json({ success: true });
   } catch (err) {
     console.error("[PUT /api/admin/cards/:id] Erreur SQL :", err);
     logCardEvent(`[ERROR UPDATE] ${err.message}`);
-    res.status(500).json({ error: "Erreur lors de la modification de la carte." });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la modification de la carte." });
   }
 });
 
@@ -1147,7 +1186,9 @@ app.delete("/api/admin/cards/:id", requireAdmin, async (req, res) => {
   } catch (err) {
     console.error("[DELETE /api/admin/cards/:id] Erreur SQL :", err);
     logCardEvent(`[ERROR DELETE] ${err.message}`);
-    res.status(500).json({ error: "Erreur lors de la suppression de la carte." });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la suppression de la carte." });
   }
 });
 
@@ -1158,7 +1199,9 @@ app.get("/api/admin/quests", requireAdmin, async (req, res) => {
     res.json(quests);
   } catch (err) {
     console.error("[GET /api/admin/quests] Erreur SQL :", err);
-    res.status(500).json({ error: "Erreur lors de la récupération des quêtes." });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération des quêtes." });
   }
 });
 
@@ -1166,7 +1209,9 @@ app.post("/api/admin/quests", requireAdmin, async (req, res) => {
   const { title, description, reward_points, is_active } = req.body;
 
   if (!title || reward_points === undefined) {
-    return res.status(400).json({ error: "Titre et points de récompense requis." });
+    return res
+      .status(400)
+      .json({ error: "Titre et points de récompense requis." });
   }
 
   try {
@@ -1187,7 +1232,9 @@ app.put("/api/admin/quests/:id", requireAdmin, async (req, res) => {
   const { title, description, reward_points, is_active } = req.body;
 
   if (!title || reward_points === undefined) {
-    return res.status(400).json({ error: "Titre et points de récompense requis." });
+    return res
+      .status(400)
+      .json({ error: "Titre et points de récompense requis." });
   }
 
   try {
@@ -1270,19 +1317,19 @@ app.use((err, req, res, next) => {
 
 // Gestionnaire d'erreur CSRF
 app.use((err, req, res, next) => {
-  if (err.code === 'EBADCSRFTOKEN') {
-    console.error('[CSRF] Token invalide:', {
+  if (err.code === "EBADCSRFTOKEN") {
+    console.error("[CSRF] Token invalide:", {
       ip: req.ip,
       path: req.path,
-      method: req.method
+      method: req.method,
     });
-    
+
     return res.status(403).json({
-      error: 'Token CSRF invalide ou expiré',
-      message: 'Veuillez rafraîchir la page et réessayer'
+      error: "Token CSRF invalide ou expiré",
+      message: "Veuillez rafraîchir la page et réessayer",
     });
   }
-  
+
   next(err);
 });
 
