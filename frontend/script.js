@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "/confidentialite": '<i class="fas fa-shield-alt"></i> Confidentialité',
     "/cookies": '<i class="fas fa-cookie-bite"></i> Cookies',
     "/contact": '<i class="fas fa-envelope"></i> Contact',
+    "/streamer": '<i class="fas fa-user"></i> Mon Profil',
     "/": '<i class="fas fa-home"></i> Stream Team HQ',
   };
 
