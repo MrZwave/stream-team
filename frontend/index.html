@@ -2,6 +2,15 @@
 <html lang="fr">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5N53QMW3B2');
+</script>
   <meta charset="UTF-8">
   <title>🚀 Stream Team HQ - La Communauté des Streamers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +25,13 @@
   <link rel="dns-prefetch" href="https://player.twitch.tv">
   <!-- CSS Cookies -->
   <link rel="stylesheet" href="/cookie-consent.css">
+
+  <!-- FontAwesome with defer -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </noscript>
   <style>
     * {
       margin: 0;
@@ -413,7 +429,7 @@
   </style>
   <meta name="csrf-token" content="">
 
-    <!-- PWA Manifest -->
+  <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#00ff9f">
 </head>
@@ -526,141 +542,141 @@
      À ajouter avant </body> dans TOUTES les pages
      ======================================== -->
 
-<!-- Bannière Cookies RGPD -->
-<div id="cookieBanner" class="cookie-banner" style="display: none;">
-  <div class="cookie-content">
-    <div class="cookie-icon">🍪</div>
-    <div class="cookie-text">
-      <h3>Utilisation des cookies</h3>
-      <p>
-        Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
-        En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
-        <a href="/confidentialite">politique de confidentialité</a>.
-      </p>
-    </div>
-    <div class="cookie-actions">
-      <button id="cookieAccept" class="btn-cookie-accept">
-        <i class="fas fa-check"></i> Accepter
-      </button>
-      <button id="cookieDecline" class="btn-cookie-decline">
-        <i class="fas fa-times"></i> Refuser
-      </button>
-      <button id="cookieCustomize" class="btn-cookie-customize">
-        <i class="fas fa-cog"></i> Personnaliser
-      </button>
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal de personnalisation des cookies -->
-<div id="cookieModal" class="cookie-modal" style="display: none;">
-  <div class="cookie-modal-content">
-    <div class="cookie-modal-header">
-      <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
-      <button id="closeCookieModal" class="cookie-modal-close">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div class="cookie-modal-body">
-      <!-- Cookies essentiels (obligatoires) -->
-      <div class="cookie-category">
-        <div class="cookie-category-header">
-          <div class="cookie-category-title">
-            <input type="checkbox" id="cookieEssential" checked disabled>
-            <label for="cookieEssential">
-              <strong>Cookies essentiels</strong>
-              <span class="cookie-required">(Obligatoires)</span>
-            </label>
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
           </div>
-          <button class="cookie-toggle" data-target="essentialDetails">
-            <i class="fas fa-chevron-down"></i>
-          </button>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
         </div>
-        <div id="essentialDetails" class="cookie-details" style="display: none;">
-          <p>
-            Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
-          </p>
-          <ul>
-            <li>Authentification via Twitch OAuth</li>
-            <li>Maintien de la session utilisateur</li>
-            <li>Sécurité CSRF</li>
-            <li>Mémorisation des préférences de cookies</li>
-          </ul>
-          <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
         </div>
       </div>
-      
-      <!-- Cookies de performance (optionnels) -->
-      <div class="cookie-category">
-        <div class="cookie-category-header">
-          <div class="cookie-category-title">
-            <input type="checkbox" id="cookiePerformance">
-            <label for="cookiePerformance">
-              <strong>Cookies de performance</strong>
-              <span class="cookie-optional">(Optionnels)</span>
-            </label>
-          </div>
-          <button class="cookie-toggle" data-target="performanceDetails">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-        <div id="performanceDetails" class="cookie-details" style="display: none;">
-          <p>
-            Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
-          </p>
-          <ul>
-            <li>Pages visitées</li>
-            <li>Temps passé sur le site</li>
-            <li>Erreurs rencontrées</li>
-          </ul>
-          <p><strong>Durée :</strong> 1 an</p>
-        </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
       </div>
-      
-      <!-- Cookies de fonctionnalité (optionnels) -->
-      <div class="cookie-category">
-        <div class="cookie-category-header">
-          <div class="cookie-category-title">
-            <input type="checkbox" id="cookieFunctional">
-            <label for="cookieFunctional">
-              <strong>Cookies de fonctionnalité</strong>
-              <span class="cookie-optional">(Optionnels)</span>
-            </label>
-          </div>
-          <button class="cookie-toggle" data-target="functionalDetails">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-        <div id="functionalDetails" class="cookie-details" style="display: none;">
-          <p>
-            Ces cookies permettent d'améliorer votre expérience :
-          </p>
-          <ul>
-            <li>Mémorisation du thème (clair/sombre)</li>
-            <li>Préférences de langue</li>
-            <li>État des panneaux (ouvert/fermé)</li>
-          </ul>
-          <p><strong>Durée :</strong> 1 an</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="cookie-modal-footer">
-      <button id="cookieSavePreferences" class="btn-cookie-save">
-        <i class="fas fa-save"></i> Enregistrer mes préférences
-      </button>
-      <button id="cookieAcceptAll" class="btn-cookie-accept-all">
-        <i class="fas fa-check-double"></i> Tout accepter
-      </button>
     </div>
   </div>
-</div>
 
-<!-- Bouton flottant pour rouvrir les paramètres cookies -->
-<button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
-  <i class="fas fa-cookie-bite"></i>
-</button>
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
 
   <!-- Final CTA -->
   <div class="final-cta">
@@ -719,18 +735,18 @@
     }
 
     // Attacher les event listeners aux boutons
-document.addEventListener('DOMContentLoaded', function() {
-  const btn1 = document.getElementById('btnEnterSite1');
-  const btn2 = document.getElementById('btnEnterSite2');
-  
-  if (btn1) {
-    btn1.addEventListener('click', enterSite);
-  }
-  
-  if (btn2) {
-    btn2.addEventListener('click', enterSite);
-  }
-});
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn1 = document.getElementById('btnEnterSite1');
+      const btn2 = document.getElementById('btnEnterSite2');
+
+      if (btn1) {
+        btn1.addEventListener('click', enterSite);
+      }
+
+      if (btn2) {
+        btn2.addEventListener('click', enterSite);
+      }
+    });
 
     // Smooth scroll pour le bouton "Découvrir"
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
