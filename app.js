@@ -68,6 +68,13 @@ app.use(
   })
 );
 
+const pageLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 120,            // 120 requêtes/minute/IP
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // ========================================
 // 🆕 MIDDLEWARE RÉÉCRITURE D'URL (sans .html)
 // ========================================
@@ -4059,5 +4066,6 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log("📍 OAuth Twitch configuré");
   console.log("🔗 URL: " + (process.env.BASE_URL || "http://localhost:3000"));
 });
+
 
 
