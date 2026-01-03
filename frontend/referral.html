@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5N53QMW3B2');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programme de Parrainage | Stream Team HQ</title>
+  <meta name="description" content="Page de parrainage de Stream Team HQ - Le programme de Parrainage qui vous récompense vous et vos amis.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style-fixes.css" />
+  <link rel="stylesheet" href="/header-auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css">
+</head>
+<body class="glow-bg">
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+      <!-- Actions Droite -->
+      <div class="nav-actions loading">
+      </div>
+    </nav>
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
+      </div>
+    </div>
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <a href="/dashboard" class="dropdown-item">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="/referral" class="dropdown-item">
+        <i class="fas fa-users"></i> Parrainage
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+  </header>
+
+      <!-- Loading state -->
+    <div id="loading" class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Chargement de tes données de parrainage...</p>
+    </div>
+
+  <!-- Contenu principal -->
+  <main class="referral-container">
+
+    <!-- Contenu (caché au départ) -->
+    <div id="content" style="display: none;">
+      
+      <!-- Section code de parrainage -->
+      <div class="referral-code-section">
+        <div class="referral-code-title">Ton code de parrainage</div>
+        <div class="referral-code-display">
+          <div class="referral-code-text" id="referralCode">XXXX-XXXX</div>
+          <button class="copy-btn" id="copyCodeBtn">
+            <i class="fas fa-copy"></i>
+            <span>Copier</span>
+          </button>
+        </div>
+        <div class="referral-link">
+          Lien de parrainage : <strong id="referralLink">https://stream-team.site?ref=XXXX-XXXX</strong>
+          <button class="copy-btn" id="copyLinkBtn" style="margin-left: 10px; padding: 8px 20px; font-size: 0.85rem;">
+            <i class="fas fa-link"></i>
+            <span>Copier le lien</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats rapides -->
+      <div class="referral-stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-value" id="totalReferrals">0</div>
+          <div class="stat-label">Filleuls total</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" id="activeReferrals">0</div>
+          <div class="stat-label">Filleuls actifs</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">💎</div>
+          <div class="stat-value" id="totalCoins">0</div>
+          <div class="stat-label">Team Coins gagnés</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-value" id="ranking">#-</div>
+          <div class="stat-label">Classement</div>
+        </div>
+      </div>
+
+      <!-- Paliers -->
+      <div class="milestones-section">
+        <h2 class="milestones-title">
+          <i class="fas fa-trophy"></i>
+          Paliers de récompenses
+        </h2>
+        <div id="milestonesContainer">
+          <!-- Généré dynamiquement -->
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div class="analytics-section">
+        <h2 class="analytics-title">
+          <i class="fas fa-chart-line"></i>
+          Analytics (7 derniers jours)
+        </h2>
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <div class="analytics-value" id="analyticsClicks">0</div>
+            <div class="analytics-label">Clics sur ton lien</div>
+          </div>
+          <div class="analytics-card">
+            <div class="analytics-value" id="analyticsSignups">0</div>
+            <div class="analytics-label">Inscriptions</div>
+          </div>
+          <div class="analytics-card">
+            <div class="analytics-value" id="analyticsConversion">0%</div>
+            <div class="analytics-label">Taux de conversion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Liste des filleuls -->
+      <div class="referrals-list-section">
+        <h2 class="referrals-list-title">
+          <i class="fas fa-users"></i>
+          Mes filleuls (<span id="referralsCount">0</span>)
+        </h2>
+        <div id="referralsContainer">
+          <!-- Généré dynamiquement -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+<!-- Footer Universel -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+          <a href="/dashboard">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+      <!-- ========================================
+     🍪 BANNIÈRE RGPD COOKIES
+     À ajouter avant </body> dans TOUTES les pages
+     ======================================== -->
+
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
+        </div>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
+
+    <!-- Scripts -->
+  <script src="/header-auth.js"></script>
+  <script src="/cookie-consent.js"></script>
+  <script src="script.js" defer></script>
+
+  <script>
+    // ========================================
+    // GESTION PAGE PARRAINAGE
+    // ========================================
+
+    let referralData = {
+      code: '',
+      link: '',
+      stats: {},
+      referrals: [],
+      analytics: {}
+    };
+
+    // Charger toutes les données
+    async function loadReferralData() {
+      try {
+        // 1. Code de parrainage
+        const codeRes = await fetch('/api/referral/my-code');
+        const codeData = await codeRes.json();
+        
+        if (codeData.success) {
+          referralData.code = codeData.data.code;
+          referralData.link = codeData.data.shortLink;
+          displayCode();
+        }
+
+        // 2. Statistiques
+        const statsRes = await fetch('/api/referral/stats');
+        const statsData = await statsRes.json();
+        
+        if (statsData.success) {
+          referralData.stats = statsData.data;
+          displayStats();
+          displayMilestones();
+        }
+
+        // 3. Analytics
+        const analyticsRes = await fetch('/api/referral/analytics?period=7d');
+        const analyticsData = await analyticsRes.json();
+        
+        if (analyticsData.success) {
+          referralData.analytics = analyticsData.data;
+          displayAnalytics();
+        }
+
+        // 4. Liste des filleuls
+        const referralsRes = await fetch('/api/referral/referrals?limit=20');
+        const referralsData = await referralsRes.json();
+        
+        if (referralsData.success) {
+          referralData.referrals = referralsData.data.referrals;
+          displayReferrals();
+        }
+
+        // Masquer le loading, afficher le contenu
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+
+      } catch (err) {
+        console.error('Erreur chargement données parrainage:', err);
+        document.getElementById('loading').innerHTML = `
+          <p style="color: #ff4444;">❌ Erreur de chargement. <a href="/referral" style="color: #667eea;">Réessayer</a></p>
+        `;
+      }
+    }
+
+    // Afficher le code
+    function displayCode() {
+      document.getElementById('referralCode').textContent = referralData.code;
+      document.getElementById('referralLink').textContent = referralData.link;
+    }
+
+    // Afficher les stats
+    function displayStats() {
+      const stats = referralData.stats;
+      document.getElementById('totalReferrals').textContent = stats.totalReferrals || 0;
+      document.getElementById('activeReferrals').textContent = stats.activeReferrals || 0;
+      document.getElementById('totalCoins').textContent = stats.totalCoinsEarned || 0;
+      document.getElementById('ranking').textContent = stats.ranking ? `#${stats.ranking}` : '-';
+    }
+
+    // Afficher les paliers
+    function displayMilestones() {
+      const milestones = [
+        { goal: 5, reward: 'Badge Recruteur Bronze + 250 TC', icon: '🥉' },
+        { goal: 10, reward: 'Badge Recruteur Argent + 500 TC', icon: '🥈' },
+        { goal: 25, reward: 'Badge Recruteur Or + 1500 TC', icon: '🥇' },
+        { goal: 50, reward: 'Badge Recruteur Platine + 3000 TC', icon: '💎' },
+        { goal: 100, reward: 'Badge Légende + 10000 TC', icon: '👑' }
+      ];
+
+      const total = referralData.stats.totalReferrals || 0;
+      const container = document.getElementById('milestonesContainer');
+      
+      container.innerHTML = milestones.map(m => {
+        const progress = Math.min((total / m.goal) * 100, 100);
+        const completed = total >= m.goal;
+        
+        return `
+          <div class="milestone-item ${completed ? 'completed' : ''}">
+            <div class="milestone-info">
+              <div class="milestone-title">
+                ${m.icon} ${m.goal} filleuls
+                ${completed ? '<i class="fas fa-check-circle" style="color: #00ff88; margin-left: 10px;"></i>' : ''}
+              </div>
+              <div class="milestone-reward">${m.reward}</div>
+            </div>
+            <div class="milestone-progress">
+              <div class="progress-text">${total}/${m.goal}</div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: ${progress}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Afficher les analytics
+    function displayAnalytics() {
+      const analytics = referralData.analytics;
+      document.getElementById('analyticsClicks').textContent = analytics.clicks || 0;
+      document.getElementById('analyticsSignups').textContent = analytics.signups || 0;
+      document.getElementById('analyticsConversion').textContent = `${analytics.conversionRate || 0}%`;
+    }
+
+    // Afficher les filleuls
+    function displayReferrals() {
+      const referrals = referralData.referrals;
+      const container = document.getElementById('referralsContainer');
+      document.getElementById('referralsCount').textContent = referrals.length;
+
+      if (referrals.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: rgba(255,255,255,0.5);">
+            <i class="fas fa-user-friends" style="font-size: 3rem; margin-bottom: 15px;"></i>
+            <p>Aucun filleul pour le moment</p>
+            <p style="font-size: 0.9rem;">Partage ton code pour commencer à gagner des récompenses !</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = referrals.map(r => {
+        const statusClass = r.isActive ? 'status-active' : 'status-inactive';
+        const statusText = r.isActive ? 'Actif' : 'Inactif';
+        const signupDate = new Date(r.signupDate).toLocaleDateString('fr-FR');
+
+        return `
+          <div class="referral-item">
+            <img src="${r.referee.avatar || '/assets/logo-stream-team-hq.webp'}" 
+                 alt="${r.referee.displayName}" 
+                 class="referral-avatar">
+            <div class="referral-info">
+              <div class="referral-name">${r.referee.displayName}</div>
+              <div class="referral-meta">
+                Inscrit le ${signupDate} • Niveau ${r.referee.level || 1}
+              </div>
+            </div>
+            <div class="referral-status ${statusClass}">
+              ${statusText}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Copier le code
+    document.getElementById('copyCodeBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('copyCodeBtn');
+      const code = referralData.code;
+      
+      try {
+        await navigator.clipboard.writeText(code);
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="fas fa-check"></i><span>Copié !</span>';
+        
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="fas fa-copy"></i><span>Copier</span>';
+        }, 2000);
+      } catch (err) {
+        alert('Code copié : ' + code);
+      }
+    });
+
+    // Copier le lien
+    document.getElementById('copyLinkBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('copyLinkBtn');
+      const link = referralData.link;
+      
+      try {
+        await navigator.clipboard.writeText(link);
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="fas fa-check"></i><span>Copié !</span>';
+        
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="fas fa-link"></i><span>Copier le lien</span>';
+        }, 2000);
+      } catch (err) {
+        alert('Lien copié : ' + link);
+      }
+    });
+
+    // Charger au démarrage
+    document.addEventListener('DOMContentLoaded', () => {
+      loadReferralData();
+    });
+  </script>
+
+    <script>
+    // Chargement lazy FontAwesome
+    const fa = document.getElementById('fontawesome-css');
+    if (fa) fa.media = 'all';
+  </script>
+</body>
+</html>
