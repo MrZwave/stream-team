@@ -2291,7 +2291,7 @@ app.get("/test", (req, res) => {
 // ========================================
 // 📄 PAGE STREAMER (HTML pur)
 // ========================================
-app.get("/streamer/:name", (req, res) => {
+app.get("/streamer/:name", pageLimiter, (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "streamer.html"));
 });
 
@@ -4066,6 +4066,7 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log("📍 OAuth Twitch configuré");
   console.log("🔗 URL: " + (process.env.BASE_URL || "http://localhost:3000"));
 });
+
 
 
 
