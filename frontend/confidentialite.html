@@ -1,110 +1,514 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Politique de Confidentialité</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5N53QMW3B2');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de Confidentialité | Stream Team HQ</title>
+  <meta name="description" content="Politique de confidentialité RGPD de Stream Team HQ. Protection et gestion de vos données personnelles.">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-fixes.css" />
+  <link rel="stylesheet" href="/header-auth.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css">
 </head>
-<body>
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+<body class="glow-bg">
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+      <div class="nav-actions loading">
+      </div>
+    </nav>
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
       </div>
     </div>
-  </div>
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <a href="/dashboard" class="dropdown-item">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="/referral" class="dropdown-item">
+        <i class="fas fa-users"></i> Parrainage
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+  </header>
 
-  <main style="max-width: 800px; margin: 5rem auto; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
-    <h1 style="color: var(--primary); text-shadow: 0 0 5px var(--primary-glow);">🔒 Politique de Confidentialité</h1>
+  <main class="legal-container">
+    <section class="legal-hero">
+      <div class="legal-hero-content">
+        <h1><i class="fas fa-shield-alt"></i> Politique de Confidentialité</h1>
+        <p class="legal-subtitle">Protection de vos données personnelles selon le RGPD</p>
+        <div class="legal-badge"><i class="fas fa-calendar"></i><span>Mise à jour : 29 octobre 2025</span></div>
+      </div>
+    </section>
 
-    <p>Cette politique de confidentialité explique comment nous collectons, utilisons, stockons et protégeons vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679).</p>
+    <article class="legal-card neon-border">
+      
+      <section class="legal-section">
+        <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+        <div class="legal-content">
+          <p>Stream Team HQ s'engage à protéger votre vie privée et vos données personnelles. Cette politique explique comment nous collectons, utilisons et protégeons vos informations conformément au <strong>RGPD (Règlement UE 2016/679)</strong> et à la loi "Informatique et Libertés".</p>
+        </div>
+      </section>
 
-    <h2>1. Données collectées</h2>
-    <ul>
-      <li>Identifiants Twitch (ID, login, image de profil)</li>
-      <li>Données de navigation (pages visitées, activité sur le site)</li>
-      <li>Adresse IP (sécurité, statistiques)</li>
-    </ul>
+      <section class="legal-section">
+        <h2><i class="fas fa-database"></i> Données collectées</h2>
+        <div class="legal-content">
+          <div class="legal-data-box">
+            <div class="data-category">
+              <h4><i class="fas fa-id-card"></i> Données d'identité</h4>
+              <ul>
+                <li>Identifiant Twitch (login)</li>
+                <li>Nom d'affichage</li>
+                <li>Photo de profil</li>
+                <li>ID utilisateur Twitch</li>
+                <li>Email (si autorisé)</li>
+              </ul>
+            </div>
+            <div class="data-category">
+              <h4><i class="fas fa-chart-line"></i> Données d'utilisation</h4>
+              <ul>
+                <li>Clips sauvegardés</li>
+                <li>Salves envoyées/reçues</li>
+                <li>Progression quêtes</li>
+                <li>Historique de connexion</li>
+              </ul>
+            </div>
+            <div class="data-category">
+              <h4><i class="fas fa-network-wired"></i> Données techniques</h4>
+              <ul>
+                <li>Adresse IP (anonymisée)</li>
+                <li>Type de navigateur</li>
+                <li>Pages visitées</li>
+                <li>Horodatage</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>2. Finalité et base légale du traitement</h2>
-    <p>Les données sont traitées pour vous permettre d’accéder à votre profil, suivre vos statistiques, participer à la communauté et maintenir la sécurité du site. La base légale est le <strong>consentement</strong> (article 6-1-a RGPD) et/ou <strong>l’exécution d’un contrat</strong> (accès au service) – article 6-1-b RGPD.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-bullseye"></i> Finalités du traitement</h2>
+        <div class="legal-content">
+          <ul class="legal-list">
+            <li><strong>Authentification :</strong> Connexion via Twitch OAuth</li>
+            <li><strong>Gestion du compte :</strong> Accès à votre profil et fonctionnalités</li>
+            <li><strong>Personnalisation :</strong> Expérience utilisateur adaptée</li>
+            <li><strong>Statistiques :</strong> Amélioration du service (données anonymisées)</li>
+            <li><strong>Sécurité :</strong> Prévention des abus et fraudes</li>
+            <li><strong>Communication :</strong> Mises à jour importantes du service</li>
+          </ul>
+          <p><strong>Base légale :</strong> Exécution du contrat (art. 6-1-b RGPD) et consentement (art. 6-1-a RGPD)</p>
+        </div>
+      </section>
 
-    <h2>3. Utilisation des données</h2>
-    <ul>
-      <li>Connexion via Twitch OAuth</li>
-      <li>Affichage du profil public</li>
-      <li>Fonctionnalités communautaires (dashboard, album, etc.)</li>
-      <li>Statistiques anonymisées (nombre de clics, vues, etc.)</li>
-    </ul>
+      <section class="legal-section">
+        <h2><i class="fas fa-clock"></i> Durée de conservation</h2>
+        <div class="legal-content">
+          <div class="legal-info-grid">
+            <div class="info-item">
+              <strong>Compte actif</strong>
+              <p>Durée illimitée tant que vous utilisez le service</p>
+            </div>
+            <div class="info-item">
+              <strong>Après inactivité</strong>
+              <p>3 ans après dernière connexion puis suppression</p>
+            </div>
+            <div class="info-item">
+              <strong>Logs techniques</strong>
+              <p>12 mois maximum</p>
+            </div>
+            <div class="info-item">
+              <strong>Données de navigation</strong>
+              <p>13 mois maximum</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>4. Cookies et traceurs</h2>
-    <p>Des cookies strictement nécessaires sont utilisés pour :</p>
-    <ul>
-      <li>Maintenir votre session ouverte</li>
-      <li>Stocker votre choix sur la bannière cookies</li>
-    </ul>
-    <p>Aucune publicité ni tracking tiers n’est utilisé. Votre consentement est demandé dès votre arrivée sur le site.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-users"></i> Destinataires des données</h2>
+        <div class="legal-content">
+          <p>Vos données ne sont <strong>jamais vendues, louées ou partagées</strong> à des fins commerciales. Seuls ont accès :</p>
+          <ul class="legal-list">
+            <li><strong>Notre équipe :</strong> Personnel autorisé pour gestion du service</li>
+            <li><strong>Hébergeur :</strong> OVH SAS (serveurs en France/UE)</li>
+            <li><strong>Twitch :</strong> Pour l'authentification OAuth uniquement</li>
+          </ul>
+        </div>
+      </section>
 
-    <h2>5. Durée de conservation</h2>
-    <p>Les données sont conservées tant que votre compte est actif. Vous pouvez demander leur suppression à tout moment par email.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-globe"></i> Transfert hors UE</h2>
+        <div class="legal-content">
+          <p>L'API Twitch peut impliquer des transferts de données vers les États-Unis. Ces transferts sont encadrés par :</p>
+          <ul class="legal-list">
+            <li>Clauses contractuelles types de la Commission européenne</li>
+            <li>Garanties appropriées selon l'article 46 RGPD</li>
+          </ul>
+        </div>
+      </section>
 
-    <h2>6. Sécurité des données</h2>
-    <p>Les données sont stockées sur un serveur sécurisé hébergé en France ou dans l’UE. Les échanges sont chiffrés via HTTPS.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-lock"></i> Sécurité</h2>
+        <div class="legal-content">
+          <p>Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données :</p>
+          <div class="cookie-types">
+            <div class="cookie-type">
+              <i class="fas fa-shield-alt" style="color: var(--primary);"></i>
+              <div>
+                <strong>Chiffrement HTTPS</strong>
+                <p>Toutes les communications sont chiffrées via SSL/TLS</p>
+              </div>
+            </div>
+            <div class="cookie-type">
+              <i class="fas fa-database" style="color: var(--primary);"></i>
+              <div>
+                <strong>Base de données sécurisée</strong>
+                <p>Accès restreint, mots de passe hashés (bcrypt)</p>
+              </div>
+            </div>
+            <div class="cookie-type">
+              <i class="fas fa-user-lock" style="color: var(--primary);"></i>
+              <div>
+                <strong>Contrôle d'accès</strong>
+                <p>Authentification forte, sessions sécurisées</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>7. Transfert hors UE</h2>
-    <p>Nous utilisons l’API Twitch, dont les serveurs peuvent être situés hors de l’Union européenne. Ces transferts sont encadrés par les clauses contractuelles types de la Commission européenne.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-balance-scale"></i> Vos droits RGPD</h2>
+        <div class="legal-content">
+          <div class="rights-grid">
+            <div class="right-card">
+              <i class="fas fa-eye"></i>
+              <h3>Droit d'accès</h3>
+              <p>Obtenir une copie de vos données</p>
+            </div>
+            <div class="right-card">
+              <i class="fas fa-edit"></i>
+              <h3>Droit de rectification</h3>
+              <p>Corriger vos informations</p>
+            </div>
+            <div class="right-card">
+              <i class="fas fa-trash-alt"></i>
+              <h3>Droit à l'effacement</h3>
+              <p>Supprimer votre compte et données</p>
+            </div>
+            <div class="right-card">
+              <i class="fas fa-pause-circle"></i>
+              <h3>Droit à la limitation</h3>
+              <p>Geler le traitement temporairement</p>
+            </div>
+            <div class="right-card">
+              <i class="fas fa-file-export"></i>
+              <h3>Droit à la portabilité</h3>
+              <p>Récupérer vos données (format JSON)</p>
+            </div>
+            <div class="right-card">
+              <i class="fas fa-hand-paper"></i>
+              <h3>Droit d'opposition</h3>
+              <p>S'opposer au traitement</p>
+            </div>
+          </div>
+          <div class="legal-cta-box">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Exercer vos droits</strong>
+              <p>Email : <a href="mailto:contact@stream-team.site">contact@stream-team.site</a></p>
+              <p>Objet : "Exercice de mes droits RGPD"</p>
+              <p>Délai de réponse : <strong>30 jours maximum</strong></p>
+            </div>
+          </div>
+          <p><strong>Réclamation CNIL :</strong> Si insatisfait, contactez la <a href="https://www.cnil.fr" target="_blank">CNIL</a></p>
+        </div>
+      </section>
 
-    <h2>8. Destinataires / Sous-traitants</h2>
-    <ul>
-      <li>Notre hébergeur (OVH ou équivalent)</li>
-      <li>Les services Twitch (OAuth et API Twitch)</li>
-    </ul>
+      <section class="legal-section legal-contact">
+        <h2><i class="fas fa-question-circle"></i> Questions ?</h2>
+        <div class="legal-content">
+          <div class="contact-methods">
+            <div class="contact-method">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:contact@stream-team.site">contact@stream-team.site</a>
+              </div>
+            </div>
+            <div class="contact-method">
+              <i class="fas fa-link"></i>
+              <div>
+                <strong>Formulaire</strong>
+                <a href="/contact">Nous contacter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>9. Vos droits</h2>
-    <p>Vous disposez des droits suivants :</p>
-    <ul>
-      <li>Droit d’accès</li>
-      <li>Droit de rectification</li>
-      <li>Droit à l’effacement</li>
-      <li>Droit à la portabilité</li>
-      <li>Droit d’opposition au traitement</li>
-    </ul>
-    <p>Vous pouvez exercer vos droits à tout moment en nous contactant à : <a href="mailto:support@stream-team.site">support@stream-team.site</a></p>
+    </article>
 
-    <h2>10. Mise à jour</h2>
-    <p>Cette politique de confidentialité peut être mise à jour à tout moment. Les utilisateurs seront informés des modifications importantes via le site.</p>
-        <h2>11. Dernière mise à jour</h2>
-    <p>Cette politique de confidentialité a été mise à jour le <strong>5 juillet 2025</strong>.</p>
-    <p>En utilisant notre site, vous acceptez cette politique de confidentialité. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.</p>
+    <section class="legal-quick-links">
+      <h3>Documents complémentaires</h3>
+      <div class="quick-links-grid">
+        <a href="/mentions-legales" class="quick-link-card"><i class="fas fa-gavel"></i><span>Mentions légales</span></a>
+        <a href="/cookies" class="quick-link-card"><i class="fas fa-cookie-bite"></i><span>Cookies</span></a>
+        <a href="/cgu" class="quick-link-card"><i class="fas fa-file-contract"></i><span>CGU</span></a>
+        <a href="/contact" class="quick-link-card"><i class="fas fa-envelope"></i><span>Contact</span></a>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer Universel -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-        <span class="footer-name">Stream Team</span>
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
       </div>
-      <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Confidentialité</a>
-        <a href="/conditions.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
-      </div>
-      <div class="footer-copy">
-        © 2025 Stream Team. Tous droits réservés.
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+     <!-- ========================================
+     🍪 BANNIÈRE RGPD COOKIES
+     À ajouter avant </body> dans TOUTES les pages
+     ======================================== -->
+
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
+        </div>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="/header-auth.js"></script>
+  <script src="/cookie-consent.js"></script>
+  <script src="script.js" defer></script>
+  <script>
+    const fa = document.getElementById('fontawesome-css');
+    if (fa) fa.media = 'all';
+  </script>
 </body>
 </html>
