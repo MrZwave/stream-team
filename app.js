@@ -2837,21 +2837,41 @@ app.post('/api/track-view', async (req, res) => {
     }
 
     const streamerId = streamer.id;
-    const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
     const visitorId = req.session?.user?.id || null;
 
-    // 1. Déterminer la source de trafic
-    let source = 'direct';
-    if (referrer) {
-      if (referrer.includes('google')) source = 'google';
-      else if (referrer.includes('twitch.tv')) source = 'twitch';
-      else if (referrer.includes('twitter.com') || referrer.includes('x.com')) source = 'twitter';
-      else if (referrer.includes('discord')) source = 'discord';
-      else if (referrer.includes('stream-team.site')) source = 'internal';
-      else source = 'other';
+    // =========================
+    // 1. Déterminer la source de trafic (SAFE)
+    // =========================
+    function getSourceFromReferrer(referrer) {
+      if (!referrer || typeof referrer !== 'string') return 'direct';
+
+      let url;
+      try {
+        url = new URL(referrer);
+      } catch {
+        return 'other';
+      }
+
+      if (!['http:', 'https:'].includes(url.protocol)) return 'other';
+
+      const host = url.hostname.toLowerCase();
+      const isHost = (domain) => host === domain || host.endsWith(`.${domain}`);
+
+      if (isHost('google.com')) return 'google';
+      if (isHost('twitch.tv')) return 'twitch';
+      if (isHost('twitter.com') || isHost('x.com')) return 'twitter';
+      if (isHost('discord.com') || isHost('discord.gg')) return 'discord';
+      if (isHost('stream-team.site')) return 'internal';
+
+      return 'other';
     }
 
-    // 2. Mettre à jour les stats quotidiennes (profile_views)
+    const source = getSourceFromReferrer(referrer);
+
+    // =========================
+    // 2. Mettre à jour les stats quotidiennes
+    // =========================
     await db.query(`
       INSERT INTO streamer_stats (streamer_id, date, profile_views, profile_views_unique)
       VALUES (?, ?, 1, 1)
@@ -2859,19 +2879,19 @@ app.post('/api/track-view', async (req, res) => {
         profile_views = profile_views + 1
     `, [streamerId, today]);
 
-    // 3. Mettre à jour le compteur unique si c'est un nouvel utilisateur aujourd'hui
+    // =========================
+    // 3. Gestion des vues uniques
+    // =========================
     if (visitorId) {
-      // Vérifier si c'est la première visite de ce user aujourd'hui
       const [[existingView]] = await db.query(`
         SELECT id FROM activity_feed 
         WHERE streamer_id = ? 
-        AND actor_id = ? 
-        AND activity_type = 'profile_view'
-        AND DATE(created_at) = ?
+          AND actor_id = ? 
+          AND activity_type = 'profile_view'
+          AND DATE(created_at) = ?
       `, [streamerId, visitorId, today]);
 
       if (!existingView) {
-        // C'est une nouvelle vue unique aujourd'hui
         await db.query(`
           UPDATE streamer_stats 
           SET profile_views_unique = profile_views_unique + 1
@@ -2880,20 +2900,26 @@ app.post('/api/track-view', async (req, res) => {
       }
     }
 
+    // =========================
     // 4. Enregistrer la source de trafic
+    // =========================
     await db.query(`
       INSERT INTO traffic_sources (streamer_id, date, source, visits)
       VALUES (?, ?, ?, 1)
       ON DUPLICATE KEY UPDATE visits = visits + 1
     `, [streamerId, today, source]);
 
-    // 5. Ajouter dans le flux d'activité
+    // =========================
+    // 5. Flux d'activité
+    // =========================
     await db.query(`
       INSERT INTO activity_feed (streamer_id, actor_id, activity_type, activity_data)
       VALUES (?, ?, 'profile_view', JSON_OBJECT('source', ?, 'referrer', ?))
     `, [streamerId, visitorId, source, referrer || null]);
 
-    // 6. Mettre à jour le compteur global (ancienne table)
+    // =========================
+    // 6. Compteur global legacy
+    // =========================
     await db.query(
       'UPDATE streamers SET clicks = clicks + 1 WHERE id = ?',
       [streamerId]
@@ -2915,7 +2941,6 @@ app.post('/api/track-view', async (req, res) => {
     });
   }
 });
-
 
 /**
  * API: Tracker une salve envoyée
@@ -4037,3 +4062,4 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log("📍 OAuth Twitch configuré");
   console.log("🔗 URL: " + (process.env.BASE_URL || "http://localhost:3000"));
 });
+
