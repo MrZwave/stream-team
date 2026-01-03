@@ -1,83 +1,791 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gestion des Cookies</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="stylesheet" href="style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5N53QMW3B2');
+</script>
+  <!-- Meta essentiels -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO -->
+  <title>Gestion des Cookies | Stream Team HQ</title>
+  <meta name="description" content="Politique de gestion des cookies de Stream Team HQ. Découvrez comment nous utilisons les cookies et comment les gérer.">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-fixes.css" />
+  <link rel="stylesheet" href="/header-auth.css" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css">
 </head>
-<body>
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+
+<body class="glow-bg">
+  <!-- Header Navigation -->
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+      <!-- Actions Droite -->
+      <div class="nav-actions loading">
+      </div>
+    </nav>
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
       </div>
     </div>
-  </div>
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <a href="/dashboard" class="dropdown-item">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="/referral" class="dropdown-item">
+        <i class="fas fa-users"></i> Parrainage
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+  </header>
 
-  <main style="max-width: 800px; margin: 5rem auto 3rem; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
-    <h1 style="color: var(--primary); text-shadow: 0 0 5px var(--primary-glow);">🍪 Gestion des Cookies</h1>
+  <!-- Main Content -->
+  <main class="legal-container">
+    <!-- Hero Section -->
+    <section class="legal-hero">
+      <div class="legal-hero-content">
+        <h1><i class="fas fa-cookie-bite"></i> Gestion des Cookies</h1>
+        <p class="legal-subtitle">Transparence sur l'utilisation des cookies et traceurs</p>
+        <div class="legal-badge">
+          <i class="fas fa-shield-alt"></i>
+          <span>Dernière mise à jour : 29 octobre 2025</span>
+        </div>
+      </div>
+    </section>
 
-    <p>Cette page vous informe sur l’usage des cookies sur le site <strong>Stream Team</strong> et vos droits en matière de gestion des données.</p>
+    <!-- Content Card -->
+    <article class="legal-card neon-border">
+      
+      <!-- Qu'est-ce qu'un cookie -->
+      <section class="legal-section">
+        <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'un cookie ?</h2>
+        <div class="legal-content">
+          <p>Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, smartphone, tablette) lors de la visite d'un site web. Il permet au site de mémoriser des informations sur votre visite, comme vos préférences ou votre session de navigation.</p>
+          
+          <div class="legal-info-box">
+            <i class="fas fa-info-circle"></i>
+            <div>
+              <strong>À savoir</strong>
+              <p>Les cookies ne sont pas des programmes et ne peuvent pas contenir de virus. Ils ne peuvent pas accéder aux informations de votre ordinateur.</p>
+            </div>
+          </div>
 
-    <h2>1. Qu'est-ce qu'un cookie ?</h2>
-    <p>Un cookie est un petit fichier stocké sur votre terminal (ordinateur, mobile, etc.) lors de la consultation d’un site. Il permet de reconnaître votre appareil et d’améliorer votre expérience utilisateur.</p>
+          <h3>Différence entre cookies et traceurs</h3>
+          <p><strong>Cookies :</strong> Fichiers stockés localement sur votre appareil.</p>
+          <p><strong>Traceurs :</strong> Technologies variées (pixels, balises, localStorage, etc.) permettant de collecter des informations sur votre navigation.</p>
+        </div>
+      </section>
 
-    <h2>2. Cookies utilisés sur Stream Team</h2>
-    <ul>
-      <li><strong>Cookies de session :</strong> nécessaires pour gérer votre connexion après l'authentification Twitch.</li>
-      <li><strong>Cookies de sécurité :</strong> pour assurer une navigation sécurisée.</li>
-      <li><strong>Cookies de personnalisation :</strong> (à venir) pour adapter certaines fonctionnalités selon vos préférences.</li>
-    </ul>
+      <!-- Types de cookies -->
+      <section class="legal-section">
+        <h2><i class="fas fa-list"></i> Cookies utilisés sur Stream Team HQ</h2>
+        <div class="legal-content">
+          
+          <div class="cookie-types">
+            <!-- Cookies essentiels -->
+            <div class="cookie-type">
+              <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+              <div>
+                <strong>1. Cookies strictement nécessaires</strong>
+                <p><span class="cookie-badge mandatory">Obligatoires</span></p>
+                <p>Ces cookies sont indispensables au fonctionnement du site. Ils ne peuvent pas être désactivés.</p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                  <li><strong>Session utilisateur :</strong> Maintient votre connexion après l'authentification Twitch</li>
+                  <li><strong>Sécurité CSRF :</strong> Protège contre les attaques de falsification de requêtes</li>
+                  <li><strong>Consentement cookies :</strong> Mémorise votre choix concernant les cookies facultatifs</li>
+                </ul>
+                <p><strong>Durée :</strong> Session (supprimés à la fermeture du navigateur) ou 24h maximum</p>
+              </div>
+            </div>
 
-    <h2>3. Consentement</h2>
-    <p>
-  Conformément au RGPD, seuls les cookies strictement nécessaires (comme ceux liés à l’authentification ou à la sécurité) sont déposés sans consentement préalable.<br>
-  Une bannière de cookies vous permet d’accepter ou refuser les cookies facultatifs si de tels services venaient à être ajoutés (comme des outils de statistiques ou des services tiers).
-  </p>
+            <!-- Cookies de performance -->
+            <div class="cookie-type">
+              <i class="fas fa-chart-line" style="color: var(--accent);"></i>
+              <div>
+                <strong>2. Cookies de performance et statistiques</strong>
+                <p><span class="cookie-badge optional">Facultatifs</span></p>
+                <p>Ces cookies nous aident à comprendre comment les visiteurs utilisent le site (pages visitées, temps passé, etc.). Les données sont anonymisées.</p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                  <li><strong>Pages vues :</strong> Nombre de visites par page</li>
+                  <li><strong>Durée de session :</strong> Temps passé sur le site</li>
+                  <li><strong>Navigation :</strong> Parcours utilisateur anonyme</li>
+                </ul>
+                <p><strong>Durée :</strong> 13 mois maximum</p>
+                <p><strong>Votre consentement est requis</strong> pour ces cookies.</p>
+              </div>
+            </div>
 
-    <h2>4. Gérer les cookies</h2>
-    <p>Vous pouvez gérer ou désactiver les cookies depuis les paramètres de votre navigateur :</p>
-    <ul>
-      <li>Chrome : <a href="https://support.google.com/chrome/answer/95647" target="_blank">support.google.com/chrome</a></li>
-      <li>Firefox : <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies" target="_blank">support.mozilla.org</a></li>
-      <li>Safari : <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank">support.apple.com</a></li>
-    </ul>
+            <!-- Cookies fonctionnels -->
+            <div class="cookie-type">
+              <i class="fas fa-sliders-h" style="color: var(--text-secondary);"></i>
+              <div>
+                <strong>3. Cookies de fonctionnalité</strong>
+                <p><span class="cookie-badge optional">Facultatifs</span></p>
+                <p>Ces cookies permettent au site de mémoriser vos choix et préférences pour améliorer votre expérience.</p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                  <li><strong>Préférences :</strong> Choix de thème, langue</li>
+                  <li><strong>Personnalisation :</strong> Affichage personnalisé du contenu</li>
+                </ul>
+                <p><strong>Durée :</strong> 6 mois maximum</p>
+                <p><strong>Votre consentement est requis</strong> pour ces cookies.</p>
+              </div>
+            </div>
 
-    <h2>5. Durée de vie des cookies</h2>
-    <p>Les cookies de session expirent automatiquement lorsque vous vous déconnectez ou quittez le site. Les autres (si présents) auront une durée maximale de 13 mois.</p>
-    <p>Pour en savoir plus sur la manière dont nous utilisons vos données personnelles, veuillez consulter notre <a href="/confidentialite.html">politique de confidentialité</a>.</p>
+            <!-- Pas de cookies tiers -->
+            <div class="cookie-type" style="border-color: rgba(0, 255, 159, 0.3); background: rgba(0, 255, 159, 0.05);">
+              <i class="fas fa-shield-alt" style="color: var(--primary);"></i>
+              <div>
+                <strong>🚫 Aucun cookie publicitaire ou tiers</strong>
+                <p>Stream Team HQ n'utilise <strong>aucun cookie de publicité, de réseaux sociaux ou de tracking tiers</strong>. Votre vie privée est respectée.</p>
+              </div>
+            </div>
+          </div>
 
-    <h2>6. Contact</h2>
-    <p>Pour toute question concernant notre politique de cookies, contactez-nous à : <a href="mailto:support@stream-team.site">support@stream-team.site</a></p>
+        </div>
+      </section>
+
+      <!-- Tableau détaillé des cookies -->
+      <section class="legal-section">
+        <h2><i class="fas fa-table"></i> Liste détaillée des cookies</h2>
+        <div class="legal-content">
+          <div class="cookie-table-responsive">
+            <table class="cookie-table">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Type</th>
+                  <th>Finalité</th>
+                  <th>Durée</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>connect.sid</code></td>
+                  <td><span class="cookie-badge mandatory">Essentiel</span></td>
+                  <td>Session utilisateur Twitch OAuth</td>
+                  <td>24 heures</td>
+                </tr>
+                <tr>
+                  <td><code>_csrf</code></td>
+                  <td><span class="cookie-badge mandatory">Essentiel</span></td>
+                  <td>Protection CSRF (sécurité)</td>
+                  <td>1 heure</td>
+                </tr>
+                <tr>
+                  <td><code>cookieConsent</code></td>
+                  <td><span class="cookie-badge mandatory">Essentiel</span></td>
+                  <td>Mémorisation de votre choix cookies</td>
+                  <td>365 jours</td>
+                </tr>
+                <tr>
+                  <td><code>_analytics</code></td>
+                  <td><span class="cookie-badge optional">Performance</span></td>
+                  <td>Statistiques anonymes de navigation</td>
+                  <td>13 mois</td>
+                </tr>
+                <tr>
+                  <td><code>userPrefs</code></td>
+                  <td><span class="cookie-badge optional">Fonctionnel</span></td>
+                  <td>Préférences d'affichage (thème, langue)</td>
+                  <td>6 mois</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Consentement -->
+      <section class="legal-section">
+        <h2><i class="fas fa-hand-paper"></i> Votre consentement</h2>
+        <div class="legal-content">
+          <p>Conformément au <strong>RGPD</strong> et à la directive <strong>ePrivacy</strong>, votre consentement est requis avant le dépôt de cookies non essentiels.</p>
+
+          <h3>Lors de votre première visite</h3>
+          <p>Une bannière apparaît pour vous permettre de :</p>
+          <ul class="legal-list">
+            <li><strong>Accepter tous les cookies :</strong> Cookies essentiels + performance + fonctionnels</li>
+            <li><strong>Refuser les cookies facultatifs :</strong> Seuls les cookies essentiels sont déposés</li>
+            <li><strong>Personnaliser vos choix :</strong> Choisir catégorie par catégorie</li>
+          </ul>
+
+          <h3>Retirer ou modifier votre consentement</h3>
+          <p>Vous pouvez à tout moment modifier vos préférences en cliquant sur le bouton <strong>"Gérer les cookies"</strong> en bas à droite de chaque page.</p>
+
+          <div class="legal-cta-box">
+            <i class="fas fa-cog"></i>
+            <div>
+              <strong>Gérer mes préférences maintenant</strong>
+              <p><button id="openCookieSettings" class="btn btn-primary" style="margin-top: 0.5rem;">
+                <i class="fas fa-cookie-bite"></i> Ouvrir les paramètres
+              </button></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gestion via le navigateur -->
+      <section class="legal-section">
+        <h2><i class="fas fa-browser"></i> Gérer les cookies via votre navigateur</h2>
+        <div class="legal-content">
+          <p>Vous pouvez également configurer votre navigateur pour accepter, refuser ou être averti lors du dépôt de cookies.</p>
+
+          <div class="browser-grid">
+            <div class="browser-card">
+              <i class="fab fa-chrome"></i>
+              <h3>Google Chrome</h3>
+              <p>Paramètres → Confidentialité et sécurité → Cookies</p>
+              <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Guide officiel
+              </a>
+            </div>
+
+            <div class="browser-card">
+              <i class="fab fa-firefox-browser"></i>
+              <h3>Mozilla Firefox</h3>
+              <p>Options → Vie privée et sécurité → Cookies</p>
+              <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Guide officiel
+              </a>
+            </div>
+
+            <div class="browser-card">
+              <i class="fab fa-safari"></i>
+              <h3>Safari</h3>
+              <p>Préférences → Confidentialité → Cookies</p>
+              <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Guide officiel
+              </a>
+            </div>
+
+            <div class="browser-card">
+              <i class="fab fa-edge"></i>
+              <h3>Microsoft Edge</h3>
+              <p>Paramètres → Confidentialité → Cookies</p>
+              <a href="https://support.microsoft.com/fr-fr/microsoft-edge/supprimer-les-cookies-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Guide officiel
+              </a>
+            </div>
+          </div>
+
+          <div class="legal-warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+              <strong>Attention</strong>
+              <p>Le blocage de tous les cookies peut empêcher le bon fonctionnement du site, notamment la connexion via Twitch et la sauvegarde de vos préférences.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Durée de conservation -->
+      <section class="legal-section">
+        <h2><i class="fas fa-clock"></i> Durée de conservation</h2>
+        <div class="legal-content">
+          <div class="legal-info-grid">
+            <div class="info-item">
+              <strong>Cookies essentiels</strong>
+              <p>Session ou 24 heures maximum</p>
+            </div>
+            <div class="info-item">
+              <strong>Cookies de performance</strong>
+              <p>13 mois maximum (délai CNIL)</p>
+            </div>
+            <div class="info-item">
+              <strong>Cookies fonctionnels</strong>
+              <p>6 mois maximum</p>
+            </div>
+            <div class="info-item">
+              <strong>Consentement</strong>
+              <p>6 mois (redemandé après expiration)</p>
+            </div>
+          </div>
+
+          <p>À l'expiration, les cookies sont automatiquement supprimés. Votre consentement sera redemandé après 6 mois pour les cookies facultatifs.</p>
+        </div>
+      </section>
+
+      <!-- Opposition et droits -->
+      <section class="legal-section">
+        <h2><i class="fas fa-user-shield"></i> Vos droits</h2>
+        <div class="legal-content">
+          <p>Vous disposez d'un <strong>droit d'opposition</strong> au dépôt de cookies non essentiels à tout moment.</p>
+
+          <h3>Comment exercer vos droits ?</h3>
+          <ul class="legal-list">
+            <li>Via le bouton "Gérer les cookies" en bas à droite du site</li>
+            <li>Via les paramètres de votre navigateur</li>
+            <li>En nous contactant à <a href="mailto:contact@stream-team.site">contact@stream-team.site</a></li>
+          </ul>
+
+          <p>Pour plus d'informations sur vos données personnelles, consultez notre <a href="/confidentialite">Politique de confidentialité</a>.</p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="legal-section legal-contact">
+        <h2><i class="fas fa-envelope"></i> Questions sur les cookies ?</h2>
+        <div class="legal-content">
+          <div class="contact-methods">
+            <div class="contact-method">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Par email</strong>
+                <a href="mailto:contact@stream-team.site">contact@stream-team.site</a>
+              </div>
+            </div>
+            
+            <div class="contact-method">
+              <i class="fas fa-link"></i>
+              <div>
+                <strong>Via le formulaire</strong>
+                <a href="/contact">Formulaire de contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Quick Links -->
+    <section class="legal-quick-links">
+      <h3>Documents complémentaires</h3>
+      <div class="quick-links-grid">
+        <a href="/mentions-legales" class="quick-link-card">
+          <i class="fas fa-gavel"></i>
+          <span>Mentions légales</span>
+        </a>
+        <a href="/confidentialite" class="quick-link-card">
+          <i class="fas fa-shield-alt"></i>
+          <span>Confidentialité</span>
+        </a>
+        <a href="/cgu" class="quick-link-card">
+          <i class="fas fa-file-contract"></i>
+          <span>CGU</span>
+        </a>
+        <a href="/contact" class="quick-link-card">
+          <i class="fas fa-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </div>
+    </section>
+
   </main>
 
+  <!-- Footer Universel -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-        <span class="footer-name">Stream Team</span>
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
       </div>
-      <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Confidentialité</a>
-        <a href="/cgu.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
-      </div>
-      <div class="footer-copy">
-        © 2025 Stream Team. Tous droits réservés.
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
       </div>
     </div>
   </footer>
 
-    <script src="script.js"></script>
+    <!-- ========================================
+     🍪 BANNIÈRE RGPD COOKIES
+     À ajouter avant </body> dans TOUTES les pages
+     ======================================== -->
+
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
+        </div>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="/header-auth.js"></script>
+  <script src="/cookie-consent.js"></script>
+  <script src="script.js" defer></script>
+  
+  <!-- Scripts -->
+  <script>
+    // Chargement lazy FontAwesome
+    const fa = document.getElementById('fontawesome-css');
+    if (fa) fa.media = 'all';
+
+    // Bouton pour ouvrir les paramètres cookies
+    document.getElementById('openCookieSettings')?.addEventListener('click', function() {
+      if (window.cookieConsent && window.cookieConsent.showSettings) {
+        window.cookieConsent.showSettings();
+      }
+    });
+  </script>
+
+  <style>
+    /* Styles spécifiques à la page cookies */
+    .cookie-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cookie-badge.mandatory {
+      background: rgba(0, 255, 159, 0.2);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .cookie-badge.optional {
+      background: rgba(127, 0, 255, 0.2);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .cookie-table-responsive {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .cookie-table thead {
+      background: rgba(0, 255, 159, 0.1);
+    }
+
+    .cookie-table th {
+      padding: 1rem;
+      text-align: left;
+      color: var(--primary);
+      font-weight: 600;
+      border-bottom: 2px solid rgba(0, 255, 159, 0.3);
+    }
+
+    .cookie-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 255, 159, 0.05);
+    }
+
+    .cookie-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cookie-table code {
+      background: rgba(0, 255, 159, 0.1);
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+      color: var(--primary);
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .browser-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .browser-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2rem 1.5rem;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 255, 159, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .browser-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 255, 159, 0.2);
+    }
+
+    .browser-card i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .browser-card h3 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin: 0 0 0.8rem 0;
+      padding: 0;
+      border: none;
+    }
+
+    .browser-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .browser-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .browser-card a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .cookie-table {
+        font-size: 0.85rem;
+      }
+
+      .cookie-table th,
+      .cookie-table td {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .browser-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </body>
 </html>
