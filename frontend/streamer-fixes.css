@@ -1,0 +1,686 @@
+/* ========================================
+   🔧 CORRECTIFS POUR STREAMER.HTML
+   Fix des clips, boutons et footer
+   ======================================== */
+
+/* ========================================
+   CLIPS SECTION - FIX GRILLE
+   ======================================== */
+.clips-section {
+  margin-top: 2rem;
+  padding: 0 20px;
+}
+
+.clips-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+.clips-header h2 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin: 0;
+}
+
+.view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.view-all-link:hover {
+  gap: 12px;
+  text-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* GRILLE DES CLIPS - FIX PRINCIPAL */
+.clips-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 25px !important;
+  padding: 10px 0;
+}
+
+.clip-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.clip-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px var(--primary-glow);
+  transform: translateY(-5px);
+}
+
+.clip-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.clip-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.clip-card:hover .clip-thumbnail img {
+  transform: scale(1.05);
+}
+
+.clip-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.clip-card:hover .clip-overlay {
+  opacity: 1;
+}
+
+.clip-overlay i {
+  font-size: 3rem;
+  color: var(--primary);
+  filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+.clip-views {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.clip-info {
+  padding: 15px;
+}
+
+.clip-title {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+}
+
+.clip-date {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.clip-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Message si pas de clips */
+.no-clips {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+.no-clips i {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.no-clips p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* ========================================
+   BOUTONS PROFILE - FIX STYLE
+   ======================================== */
+.profile-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+/* Bouton principal (Twitch) */
+.btn-primary,
+.btn-twitch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: var(--primary);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-primary:hover,
+.btn-twitch:hover {
+  background: var(--button-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--primary-glow);
+}
+
+.btn-primary i,
+.btn-twitch i {
+  font-size: 1.2rem;
+}
+
+/* Bouton secondaire (Salve) */
+.btn-secondary,
+.btn-salve {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: rgba(127, 0, 255, 0.2);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(127, 0, 255, 0.3);
+}
+
+.btn-secondary:hover,
+.btn-salve:hover {
+  background: rgba(127, 0, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(127, 0, 255, 0.5);
+}
+
+.btn-secondary i,
+.btn-salve i {
+  font-size: 1.2rem;
+}
+
+/* Bouton outline (Partager) */
+.btn-outline,
+.btn-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn-outline:hover,
+.btn-share:hover {
+  background: rgba(0, 255, 159, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-outline i,
+.btn-share i {
+  font-size: 1.1rem;
+}
+
+/* État désactivé pour les boutons */
+.btn-salve:disabled,
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-salve:disabled:hover,
+.btn-secondary:disabled:hover {
+  background: rgba(127, 0, 255, 0.2);
+  transform: none;
+}
+
+/* ========================================
+   STATS PROFILE - FIX MISE EN PAGE
+   ======================================== */
+.profile-stats {
+  margin: 30px 0;
+}
+
+.stats-title {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-item {
+  background: rgba(0, 255, 159, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.stat-item:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+  transform: translateY(-3px);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  color: var(--primary);
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 10px var(--primary-glow);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ========================================
+   FOOTER - FIX LIENS MANQUANTS
+   ======================================== 
+.site-footer {
+  margin-top: 80px;
+  background: rgba(5, 5, 15, 0.95);
+  border-top: 1px solid var(--border);
+  padding: 40px 20px 20px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.footer-logo {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+.footer-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-nav a:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.footer-copy {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}*/
+
+/* ========================================
+   PROFILE CARD - FIX GÉNÉRAL
+   ======================================== */
+.profile-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.profile-header {
+  text-align: center;
+  position: relative;
+  padding: 20px;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid var(--primary);
+  box-shadow: 0 0 30px var(--primary-glow);
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.live-badge-top {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff0000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.profile-name {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.profile-username {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.profile-bio {
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   PROFILE CTA - FIX
+   ======================================== */
+.profile-cta {
+  background: linear-gradient(135deg, var(--surface), var(--surface-hover));
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.cta-content p {
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 35px;
+  background: var(--primary);
+  color: #000;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  text-decoration: none;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--primary-glow);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .clips-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .profile-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .profile-buttons .btn-primary,
+  .profile-buttons .btn-secondary,
+  .profile-buttons .btn-outline {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .clips-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .clips-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-nav {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .profile-card {
+    padding: 20px;
+  }
+  
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .profile-name {
+    font-size: 1.6rem;
+  }
+}
+
+/* ========================================
+   🏅 BADGES STREAMER
+   ======================================== */
+
+.profile-badges {
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(20, 20, 40, 0.6);
+  border: 1px solid rgba(130, 80, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(130, 80, 255, 0.15);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  animation: fadeIn 0.8s ease;
+}
+
+.profile-badges .section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #c9a8ff;
+  margin-bottom: 18px;
+  text-shadow: 0 0 8px rgba(150, 80, 255, 0.6);
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  justify-items: center;
+}
+
+.badge-card {
+  background: rgba(15, 10, 30, 0.7);
+  border: 1px solid rgba(0, 255, 174, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 255, 174, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 140px;
+}
+
+.badge-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 174, 0.5);
+}
+
+.badge-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 120%, rgba(0, 255, 159, 0.25), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.badge-card:hover::before {
+  opacity: 1;
+}
+
+.badge-icon {
+  font-size: 1.6rem;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 0 5px rgba(0, 255, 159, 0.4));
+}
+
+.badge-info {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.badge-name {
+  font-weight: 700;
+  color: #00ff9f; /* 💎 Vert néon comme ton thème */
+  text-shadow: 0 0 6px rgba(0, 255, 159, 0.6);
+}
+
+.badge-date {
+  font-size: 0.8rem;
+  color: #bbb;
+  opacity: 0.8;
+}
+
+.badge-empty {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.badge-card .badge-icon img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0,255,174,0.6));
+  margin-bottom: 0.5rem;
+}
+
+.badge-info .badge-name {
+  display: block;
+  font-weight: bold;
+  color: #00ffae;
+  text-shadow: 0 0 8px rgba(0,255,174,0.5);
+}
+
+.badge-info .badge-date {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
