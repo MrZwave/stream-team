@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5N53QMW3B2');
+</script>
   <!-- Meta essentiels -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
+
   <!-- SEO dynamique (sera modifié par JS) -->
   <title>Profil Streamer | Stream Team HQ</title>
-  <meta name="description" content="Découvre ce streamer sur Stream Team HQ. Suis ses lives, regarde ses clips et rejoins sa communauté." id="meta-description" />
+  <meta name="description"
+    content="Découvre ce streamer sur Stream Team HQ. Suis ses lives, regarde ses clips et rejoins sa communauté."
+    id="meta-description" />
   <meta name="keywords" content="streamer twitch, clips twitch, stream team" id="meta-keywords" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://stream-team.site/streamer" id="canonical-url" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://stream-team.site/streamer" id="og-url" />
@@ -21,48 +33,98 @@
   <meta property="og:image" content="https://stream-team.site/assets/logo-stream-team-hq.webp" id="og-image" />
   <meta property="og:site_name" content="Stream Team HQ" />
   <meta property="og:locale" content="fr_FR" />
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Profil Streamer - Stream Team HQ" id="twitter-title" />
   <meta name="twitter:description" content="Découvre ce streamer sur Stream Team HQ" id="twitter-description" />
   <meta name="twitter:image" content="https://stream-team.site/assets/logo-stream-team-hq.webp" id="twitter-image" />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <meta name="theme-color" content="#00FF9F" />
-  
+
   <!-- Performance - Preconnect -->
   <link rel="preconnect" href="https://static-cdn.jtvnw.net" />
   <link rel="preconnect" href="https://clips-media-assets2.twitch.tv" crossorigin />
   <link rel="dns-prefetch" href="https://www.twitch.tv" />
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/streamer-fixes.css" />
+  <link rel="stylesheet" href="/header-auth.css" />
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#00ff9f">
-  
+
   <!-- FontAwesome - CSP compliant -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" media="print" id="fontawesome-css" />
   <meta name="csrf-token" content="">
 </head>
 
 <body class="glow-bg">
-  <!-- Header Navigation -->
-  <header class="streamer-header">
-    <nav class="streamer-nav" aria-label="Navigation principale">
-      <a href="/home" class="nav-back">
-        <i class="fas fa-arrow-left"></i> Retour au QG
-      </a>
-      <div class="nav-actions">
-        <a href="/home" class="nav-link">🏠 Accueil</a>
-        <a href="/watch" class="nav-link">🎥 Lives</a>
+  <!-- Header Universel -->
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+      <!-- Actions Droite -->
+      <div class="nav-actions loading">
       </div>
     </nav>
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
+      </div>
+    </div>
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <a href="/dashboard" class="dropdown-item">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="/referral" class="dropdown-item">
+        <i class="fas fa-users"></i> Parrainage
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+    <!-- Banner Roadmap -->
+    <div id="roadmap-alert" class="roadmap-banner" role="banner">
+      🆕 Une nouvelle mise à jour est dispo dans la <a href="/roadmap">roadmap</a> ! Va voir ce qui change 🚀
+    </div>
   </header>
 
   <!-- Loading State -->
@@ -77,17 +139,20 @@
     <article class="profile-card neon-border">
       <!-- Avatar -->
       <div class="profile-header">
-        <img 
-          id="profile-avatar"
-          src="/assets/logo-stream-team-hq.webp" 
-          alt="Avatar du streamer" 
-          class="profile-avatar"
-          width="150"
-          height="150"
-          loading="eager"
-        />
+        <img id="profile-avatar" src="/assets/logo-stream-team-hq.webp" alt="Avatar du streamer" class="profile-avatar"
+          width="150" height="150" loading="eager" />
         <span id="live-badge" class="live-badge-top" style="display: none;">🔴 EN DIRECT</span>
       </div>
+      <!-- 🏅 Badges -->
+<section class="profile-badges card-panel">
+  <h3 class="section-title">🏅 Badges débloqués</h3>
+  <div id="badge-list" class="badge-grid">
+    <!-- Badges insérés ici -->
+  </div>
+  <div id="badge-empty" class="badge-empty" style="display:none;">
+    Aucun badge débloqué pour le moment.
+  </div>
+</section>
 
       <!-- Info -->
       <h1 class="profile-name" id="profile-name">Chargement...</h1>
@@ -115,27 +180,15 @@
 
       <!-- Actions -->
       <div class="profile-buttons">
-        <a 
-          id="btn-twitch"
-          href="#" 
-          class="btn btn-primary btn-twitch" 
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a id="btn-twitch" href="#" class="btn btn-primary btn-twitch" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-twitch"></i> Suivre sur Twitch
         </a>
-        
-        <button 
-          id="btn-salve"
-          class="btn btn-secondary btn-salve"
-        >
+
+        <button id="btn-salve" class="btn btn-secondary btn-salve">
           <i class="fas fa-star"></i> Envoyer une Salve
         </button>
 
-        <button 
-          id="btn-share"
-          class="btn btn-outline btn-share"
-        >
+        <button id="btn-share" class="btn btn-outline btn-share">
           <i class="fas fa-share-alt"></i> Partager
         </button>
       </div>
@@ -145,13 +198,7 @@
     <section class="clips-section" aria-label="Clips du streamer">
       <div class="clips-header">
         <h2>🎬 Derniers Clips</h2>
-        <a 
-          id="link-all-clips"
-          href="#" 
-          target="_blank"
-          rel="noopener noreferrer"
-          class="view-all-link"
-        >
+        <a id="link-all-clips" href="#" target="_blank" rel="noopener noreferrer" class="view-all-link">
           Voir tous les clips <i class="fas fa-external-link-alt"></i>
         </a>
       </div>
@@ -173,18 +220,221 @@
     </section>
   </main>
 
-  <!-- Cookie Banner (contenu identique, je ne répète pas tout) -->
+    <!-- Footer Universel -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+          <a href="/dashboard">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- ========================================
+     🍪 BANNIÈRE RGPD COOKIES
+     À ajouter avant </body> dans TOUTES les pages
+     ======================================== -->
+
+  <!-- Bannière Cookies RGPD -->
   <div id="cookieBanner" class="cookie-banner" style="display: none;">
-    <!-- ... contenu identique à l'original ... -->
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
+    </div>
   </div>
 
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
+        </div>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
+
   <!-- Scripts -->
+  <script src="/header-auth.js"></script>
   <script src="/cookie-consent.js"></script>
+  <script src="/script.js" defer></script>
   <script>
     // Chargement lazy de FontAwesome (CSP-compliant)
     const fa = document.getElementById('fontawesome-css');
     if (fa) fa.media = 'all';
-    
+
     // Récupérer le login depuis l'URL
     const pathParts = window.location.pathname.split('/');
     const streamerLogin = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
@@ -194,22 +444,26 @@
       try {
         const response = await fetch(`/api/streamer/${streamerLogin}`);
         if (!response.ok) throw new Error('Streamer introuvable');
-        
+
         const data = await response.json();
-        
+
         // Mettre à jour les meta tags
         updateMetaTags(data.userData);
-        
+
         // Afficher les données
         displayStreamerData(data);
-        
+
         // Masquer le loading, afficher le contenu
         document.getElementById('loading-state').style.display = 'none';
         document.getElementById('profile-content').style.display = 'block';
-        
+        // Charger les badges du streamer
+        if (data.userData?.id) {
+          loadBadges(data.userData.id);
+        }
+
         // Tracking des vues
-        trackProfileView(streamerLogin);
-        
+        //trackProfileView(streamerLogin);
+
       } catch (error) {
         console.error('Erreur:', error);
         document.getElementById('loading-state').innerHTML = `
@@ -224,17 +478,17 @@
     function updateMetaTags(userData) {
       const title = `${userData.display_name} - Profil Streamer | Stream Team HQ`;
       const description = userData.description || `Découvre ${userData.display_name} sur Stream Team HQ. Streamer francophone sur Twitch.`;
-      
+
       document.title = title;
       document.getElementById('meta-description').content = description;
       document.getElementById('meta-keywords').content = `${userData.display_name}, ${userData.login}, streamer twitch, stream team`;
       document.getElementById('canonical-url').href = `https://stream-team.site/streamer/${userData.login}`;
-      
+
       document.getElementById('og-url').content = `https://stream-team.site/streamer/${userData.login}`;
       document.getElementById('og-title').content = title;
       document.getElementById('og-description').content = description;
       document.getElementById('og-image').content = userData.profile_image_url;
-      
+
       document.getElementById('twitter-title').content = title;
       document.getElementById('twitter-description').content = description;
       document.getElementById('twitter-image').content = userData.profile_image_url;
@@ -243,37 +497,37 @@
     // Afficher les données du streamer
     function displayStreamerData(data) {
       const { userData, userStats, clips } = data;
-      
+
       // Profile info
       document.getElementById('profile-avatar').src = userData.profile_image_url;
       document.getElementById('profile-avatar').alt = `Avatar de ${userData.display_name}`;
       document.getElementById('profile-name').textContent = userData.display_name;
       document.getElementById('profile-username').textContent = `@${userData.login}`;
-      
+
       if (userData.description) {
         document.getElementById('profile-bio').textContent = userData.description;
       }
-      
+
       // Live badge
       if (userData.is_live) {
         document.getElementById('live-badge').style.display = 'block';
       }
-      
+
       // Stats
       document.getElementById('stat-clicks').textContent = userStats.clicks || 0;
       document.getElementById('stat-salves').textContent = userStats.salves || 0;
-      
+
       if (userData.view_count) {
         document.getElementById('stat-views-container').style.display = 'block';
         document.getElementById('stat-views').textContent = Math.floor(userData.view_count / 1000) + 'K';
       }
-      
+
       // Boutons
       document.getElementById('btn-twitch').href = `https://twitch.tv/${userData.login}`;
       document.getElementById('btn-salve').dataset.login = userData.login;
       document.getElementById('btn-share').dataset.url = `https://stream-team.site/streamer/${userData.login}`;
       document.getElementById('link-all-clips').href = `https://twitch.tv/${userData.login}/clips`;
-      
+
       // Clips
       displayClips(clips, userData.login);
     }
@@ -281,7 +535,7 @@
     // Afficher les clips
     function displayClips(clips, login) {
       const container = document.getElementById('clips-container');
-      
+
       if (!clips || clips.length === 0) {
         container.innerHTML = `
           <div class="no-clips">
@@ -294,7 +548,7 @@
         `;
         return;
       }
-      
+
       const clipsHTML = clips.map((clip, index) => `
         <article class="clip-card">
           <a href="${clip.url}" target="_blank" rel="noopener noreferrer" class="clip-link">
@@ -327,74 +581,279 @@
           </a>
         </article>
       `).join('');
-      
+
       container.innerHTML = `<div class="clips-grid">${clipsHTML}</div>`;
     }
 
-    // Tracking des vues (non-bloquant)
-    function trackProfileView(login) {
-      fetch('/api/profile-click', {
+// ========================================
+// SYSTÈME DE SALVES AMÉLIORÉ
+// ========================================
+
+// État du bouton salve
+let salveCooldownActive = false;
+let salveCooldownTimer = null;
+
+// Vérifier le cooldown au chargement
+async function checkSalveCooldown() {
+  try {
+    const response = await fetch('/api/salve/cooldown');
+    const data = await response.json();
+    
+    if (data.success) {
+      updateSalveButton(data.data);
+    }
+  } catch (error) {
+    console.error('Erreur cooldown:', error);
+  }
+}
+
+// Mettre à jour le bouton
+function updateSalveButton(cooldownData) {
+  const btn = document.getElementById('btn-salve');
+  if (!btn) return;
+  
+  const { cooldownActive, remainingSeconds, dailyUsed, dailyLimit, canSend } = cooldownData;
+  
+  if (!canSend) {
+    btn.disabled = true;
+    btn.classList.add('cooldown');
+    
+    if (cooldownActive) {
+      btn.innerHTML = `<i class="fas fa-clock"></i> Cooldown: ${remainingSeconds}s`;
+      
+      // Décompte
+      if (salveCooldownTimer) clearInterval(salveCooldownTimer);
+      let remaining = remainingSeconds;
+      salveCooldownTimer = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+          clearInterval(salveCooldownTimer);
+          checkSalveCooldown();
+        } else {
+          btn.innerHTML = `<i class="fas fa-clock"></i> Cooldown: ${remaining}s`;
+        }
+      }, 1000);
+    } else {
+      btn.innerHTML = `<i class="fas fa-ban"></i> Limite atteinte (${dailyUsed}/${dailyLimit})`;
+    }
+  } else {
+    btn.disabled = false;
+    btn.classList.remove('cooldown');
+    btn.innerHTML = `<i class="fas fa-star"></i> Envoyer une Salve (${dailyUsed}/${dailyLimit})`;
+  }
+}
+
+// Animations de particules
+function createFireParticles(button) {
+  for (let i = 0; i < 10; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'fire-particle';
+    particle.textContent = '🔥';
+    
+    const rect = button.getBoundingClientRect();
+    particle.style.position = 'fixed';
+    particle.style.left = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100 + 'px';
+    particle.style.top = rect.top + rect.height / 2 + 'px';
+    particle.style.fontSize = '24px';
+    particle.style.pointerEvents = 'none';
+    particle.style.zIndex = '10000';
+    particle.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    
+    document.body.appendChild(particle);
+    
+    setTimeout(() => {
+      particle.style.opacity = '0';
+      particle.style.transform = 'translateY(-100px) rotate(360deg) scale(2)';
+    }, 10);
+    
+    setTimeout(() => particle.remove(), 1000);
+  }
+}
+
+// Notification
+function showSalveNotification(message, type = 'success') {
+  const notif = document.createElement('div');
+  notif.className = `salve-notification ${type}`;
+  notif.textContent = message;
+  notif.style.cssText = `
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: ${type === 'success' ? 'linear-gradient(135deg, #10b981 0%, #34d399 100%)' : 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)'};
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    z-index: 10001;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease;
+  `;
+  
+  document.body.appendChild(notif);
+  
+  setTimeout(() => {
+    notif.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => notif.remove(), 300);
+  }, 3000);
+}
+
+// Gestionnaire de clic amélioré
+document.addEventListener('click', async (e) => {
+  if (e.target.closest('.btn-salve')) {
+    const btn = e.target.closest('.btn-salve');
+    const login = btn.dataset.login;
+
+    if (btn.disabled) return;
+
+    btn.classList.add('sending');
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/salve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ login }),
+        body: JSON.stringify({ targetLogin: login }),
         credentials: 'include'
-      }).catch(err => {
-        // Échec silencieux - ne pas bloquer l'UX
-        console.debug('[Tracking] Vue non enregistrée:', err.message);
       });
-    }
 
-    // Bouton Salve
-    document.addEventListener('click', async (e) => {
-      if (e.target.closest('.btn-salve')) {
-        const btn = e.target.closest('.btn-salve');
-        const login = btn.dataset.login;
+      const data = await res.json();
+
+      if (data.success) {
+        // Animations de succès
+        createFireParticles(btn);
+        showSalveNotification(data.message || 'Salve envoyée ! 🔥', 'success');
         
-        try {
-          const res = await fetch('/api/salve', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ login }),
-            credentials: 'include'
-          });
-          
-          if (res.ok) {
-            btn.innerHTML = '<i class="fas fa-check"></i> Salve envoyée !';
-            btn.disabled = true;
-            setTimeout(() => location.reload(), 2000);
-          } else {
-            alert('Erreur lors de l\'envoi de la salve');
-          }
-        } catch (err) {
-          console.error('Erreur:', err);
-          alert('Erreur réseau');
+        // Si level up
+        if (data.data?.sender?.leveledUp) {
+          showSalveNotification(
+            `🎉 Level Up ! Tu es maintenant niveau ${data.data.sender.newLevel}`,
+            'levelup'
+          );
         }
+        
+        // Mettre à jour le compteur de salves
+        const salveCount = document.getElementById('stat-salves');
+        if (salveCount && data.data?.target?.totalSalves) {
+          salveCount.textContent = data.data.target.totalSalves;
+          salveCount.style.animation = 'pulse 0.5s ease';
+        }
+        
+        // Activer le cooldown
+        checkSalveCooldown();
+        
+      } else {
+        showSalveNotification(data.error || 'Erreur lors de l\'envoi', 'error');
+        btn.disabled = false;
       }
-      
+    } catch (err) {
+      console.error('Erreur:', err);
+      showSalveNotification('Erreur réseau', 'error');
+      btn.disabled = false;
+    } finally {
+      btn.classList.remove('sending');
+    }
+  }
+// Vérifier le cooldown au chargement
+window.addEventListener('load', () => {
+  setTimeout(checkSalveCooldown, 1000);
+});
+
+// Rafraîchir le cooldown régulièrement
+setInterval(checkSalveCooldown, 10000);
       // Bouton Partage
       if (e.target.closest('.btn-share')) {
-        const btn = e.target.closest('.btn-share');
-        const url = btn.dataset.url;
-        
-        if (navigator.share) {
-          navigator.share({
-            title: document.title,
-            text: 'Découvre ce streamer sur Stream Team HQ !',
-            url: url
-          }).catch(() => {});
-        } else {
-          navigator.clipboard.writeText(url).then(() => {
-            btn.innerHTML = '<i class="fas fa-check"></i> Lien copié !';
-            setTimeout(() => {
-              btn.innerHTML = '<i class="fas fa-share-alt"></i> Partager';
-            }, 2000);
-          });
-        }
+      const btn = e.target.closest('.btn-share');
+      const url = btn.dataset.url;
+
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: 'Découvre ce streamer sur Stream Team HQ !',
+          url: url
+        }).catch(() => { });
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          btn.innerHTML = '<i class="fas fa-check"></i> Lien copié !';
+          setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-share-alt"></i> Partager';
+          }, 2000);
+        });
       }
+    }
+  });
+  window.addEventListener('load', () => {
+    setTimeout(checkSalveCooldown, 1000);
+  });
+
+  // Rafraîchir le cooldown régulièrement
+setInterval(checkSalveCooldown, 10000);
+
+// ========================================
+// 🏅 BADGES DU STREAMER (version avec images personnalisées)
+// ========================================
+async function loadBadges(streamerId) {
+  try {
+    const res = await fetch(`/api/streamer/${streamerId}/badges`);
+    const data = await res.json();
+
+    const grid = document.getElementById('badge-list');
+    const empty = document.getElementById('badge-empty');
+    grid.innerHTML = '';
+
+    if (!data.success) throw new Error('Erreur API');
+
+    if (!data.badges || data.badges.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+
+    empty.style.display = 'none';
+
+    data.badges.forEach(b => {
+      const el = document.createElement('div');
+      el.className = 'badge-card';
+      
+      // ✅ Charger l'image du badge selon la clé
+      const badgeImage = `/assets/badges/${b.badge_key}.png`;
+
+      el.innerHTML = `
+        <div class="badge-icon">
+          <img src="${badgeImage}" alt="${escapeHtml(b.badge_name)}" loading="lazy">
+        </div>
+        <div class="badge-info">
+          <span class="badge-name">${escapeHtml(b.badge_name)}</span>
+          <span class="badge-date">${formatDate(b.earned_at)}</span>
+        </div>
+      `;
+      
+      grid.appendChild(el);
     });
 
-    // Charger les données au chargement de la page
-    loadStreamerData();
-  </script>
+  } catch (err) {
+    console.error('[loadBadges]', err);
+  }
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+}
+
+function escapeHtml(str = '') {
+  return str.replace(/[&<>"'`=\/]/g, s => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',
+    '\'':'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'
+  }[s]));
+}
+
+  // Charger les données au chargement de la page
+  loadStreamerData();
+</script>
+<script src="/tracking.js"></script>
 </body>
 </html>
