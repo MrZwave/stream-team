@@ -767,21 +767,18 @@ app.get("/api/all_dbs", async (req, res) => {
   }
 });
 
-app.post("/api/save", (req, res) => {
-  const { login } = req.body;
-  if (!login) return res.status(400).json({ error: "Login requis" });
+app.post("/api/save", async (req, res) => {
+  try {
+    const { login } = req.body;
+    if (!login) return res.status(400).json({ error: "Login requis" });
 
-  db.query(
-    "UPDATE streamers SET salves = salves + 1 WHERE login = ?",
-    [login],
-    (err) => {
-      if (err) {
-        console.error("[SAVE]", err);
-        return res.status(500).json({ error: "Erreur serveur" });
-      }
-      res.json({ success: true });
-    }
-  );
+    await db.query("UPDATE streamers SET salves = salves + 1 WHERE login = ?", [login]);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("[SAVE]", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
 app.get("/api/saved", (req, res) => {
@@ -4062,4 +4059,5 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log("📍 OAuth Twitch configuré");
   console.log("🔗 URL: " + (process.env.BASE_URL || "http://localhost:3000"));
 });
+
 
