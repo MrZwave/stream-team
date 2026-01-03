@@ -68,39 +68,88 @@ app.use(
   })
 );
 
+// =====================================
+// KeyGenerator for rate limiter
+// =====================================
+
+function ipKeyGenerator(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  const ip = forwarded ? forwarded.split(',')[0].trim() : req.ip;
+  return ip;
+}
+
+// =====================================
+// Rate Limiter
+// =====================================
+
 const pageLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 120,            // 120 requêtes/minute/IP
+  windowMs: 60 * 1000,
+  max: 120,
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: ipKeyGenerator,
 });
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300, // API globale
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: ipKeyGenerator,
+  message: 'Trop de requêtes, réessayez plus tard.',
+});
+
+const authLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: ipKeyGenerator,
+  message: 'Trop de tentatives, réessayez plus tard.',
+});
+
+app.use("/api", apiLimiter);
+app.use("/auth", authLimiter);
 
 // ========================================
 // 🆕 MIDDLEWARE RÉÉCRITURE D'URL (sans .html)
 // ========================================
+const FRONTEND_DIR = path.join(__dirname, 'frontend');
+const dynamicRoutes = ['/streamer/', '/api/', '/auth/', '/admin/'];
+
+function isSafePath(p) {
+  return typeof p === 'string'
+    && p.startsWith('/')
+    && !p.includes('\0')
+    && !p.includes('//')
+    && !p.includes('..')
+    && /^\/[a-zA-Z0-9/_-]*$/.test(p);
+}
+
 app.use((req, res, next) => {
-  // Si l'URL se termine par .html, rediriger vers l'URL sans extension
-  if (req.path.endsWith('.html')) {
-    const newPath = req.path.slice(0, -5);
-    return res.redirect(301, newPath);
-  }
-  
-  // Routes dynamiques à ignorer (laisse passer vers les routes Express)
-  const dynamicRoutes = ['/streamer/', '/api/', '/auth/', '/admin/'];
-  if (dynamicRoutes.some(route => req.path.startsWith(route))) {
+  const p = req.path;
+
+  if (dynamicRoutes.some(route => p.startsWith(route))) return next();
+
+  // /home.html -> /home (redirect interne uniquement)
+  if (p.endsWith('.html')) {
+    const newPath = p.slice(0, -5);
+    if (isSafePath(newPath) && newPath !== '') {
+      return res.redirect(301, newPath);
+    }
     return next();
   }
-  
-  // Si l'URL n'a pas d'extension et n'est pas la racine
-  if (!req.path.includes('.') && req.path !== '/') {
-    // Vérifie si un fichier .html existe dans frontend/
-    const htmlPath = path.join(__dirname, 'frontend', req.path + '.html');
-    
-    if (fs.existsSync(htmlPath)) {
-      return res.sendFile(htmlPath);
+
+  // /home -> sert frontend/home.html si existe
+  if (p !== '/' && !p.includes('.') && isSafePath(p)) {
+    const relative = p.replace(/^\/+/, '') + '.html';
+    const candidate = path.resolve(FRONTEND_DIR, relative);
+
+    if (candidate.startsWith(FRONTEND_DIR + path.sep) && fs.existsSync(candidate)) {
+      return res.sendFile(candidate);
     }
   }
-  
+
   next();
 });
 
@@ -187,33 +236,6 @@ app.use(helmet({
 }));
 
 // ========================================
-// RATE LIMITING - IPv6 SAFE
-// ========================================
-function ipKeyGenerator(req) {
-  const forwarded = req.headers['x-forwarded-for'];
-  const ip = forwarded ? forwarded.split(',')[0].trim() : req.ip;
-  return ip;
-}
-
-// ✅ Indique qu'on est derrière un proxy (NGINX)
-app.set('trust proxy', 1);
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 min
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-  keyGenerator: ipKeyGenerator, // ✅ compatible IPv4 / IPv6
-  message: 'Trop de requêtes depuis cette IP, réessayez dans 15 minutes.',
-  skip: (req) => {
-    // Pas de rate limit sur les pages statiques
-    return req.method === 'GET' && !req.path.startsWith('/api/');
-  }
-});
-
-app.use('/api/', limiter);
-
-// ========================================
 // CSRF PROTECTION - SIMPLE & STABLE (SESSION-BASED)
 // ========================================
 // ⚠️ IMPORTANT : express-session doit être configuré AVANT ce bloc
@@ -278,7 +300,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // ========================================
 // 🔐 AUTHENTIFICATION TWITCH OAUTH
 // ========================================
@@ -290,7 +311,7 @@ app.get("/auth/twitch", (req, res) => {
   );
 });
 
-app.get("/auth/twitch/callback", async (req, res) => {
+app.get("/auth/twitch/callback", authLimiter, async (req, res) => {
   const code = req.query.code;
   if (!code) return res.status(400).send("Missing code");
 
@@ -4066,6 +4087,7 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log("📍 OAuth Twitch configuré");
   console.log("🔗 URL: " + (process.env.BASE_URL || "http://localhost:3000"));
 });
+
 
 
 
