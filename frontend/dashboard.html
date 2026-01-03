@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5N53QMW3B2');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Stream Team HQ</title>
+  <meta name="robots" content="noindex, nofollow">
+  
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style-fixes.css" />
+  <link rel="stylesheet" href="/header-auth.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css">
+  
+  <!-- Chart.js pour les graphiques -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body class="glow-bg">
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+      <!-- Actions Droite -->
+      <div class="nav-actions loading">
+      </div>
+    </nav>
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
+      </div>
+    </div>
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <a href="/dashboard" class="dropdown-item">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="/referral" class="dropdown-item">
+        <i class="fas fa-users"></i> Parrainage
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+  </header>
+
+  <!-- Loading State -->
+  <div id="loading-state" class="loading-container">
+    <div class="spinner"></div>
+    <p>Chargement de ton dashboard...</p>
+  </div>
+
+  <!-- Dashboard Content -->
+  <main class="dashboard-container" id="dashboard-content" style="display: none;">
+
+  <!-- ========================================
+     💎 WIDGET TEAM COINS POUR DASHBOARD
+     À intégrer dans dashboard.html
+     ======================================== -->
+
+<!-- CSS pour le widget Team Coins -->
+<style>
+.team-coins-widget {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(75, 0, 130, 0.1));
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.team-coins-widget::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.team-coins-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.team-coins-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+}
+
+.team-coins-icon {
+  font-size: 2rem;
+  animation: spin-coin 3s linear infinite;
+}
+
+@keyframes spin-coin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.team-coins-balance {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.balance-amount {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+.balance-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.team-coins-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tc-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.tc-btn-primary {
+  background: linear-gradient(135deg, #8A2BE2, #4B0082);
+  color: white;
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+}
+
+.tc-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+}
+
+.tc-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tc-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.team-coins-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tc-stat {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tc-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.tc-stat-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.recent-transactions {
+  margin-top: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.transactions-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.transactions-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid;
+  transition: all 0.2s ease;
+}
+
+.transaction-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.transaction-item.earn {
+  border-left-color: #00ff88;
+}
+
+.transaction-item.spend {
+  border-left-color: #ff4444;
+}
+
+.transaction-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon {
+  font-size: 1.5rem;
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-name {
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.transaction-date {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.transaction-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.transaction-amount.positive {
+  color: #00ff88;
+}
+
+.transaction-amount.negative {
+  color: #ff4444;
+}
+
+.daily-bonus-card {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.daily-bonus-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #1a1a2e;
+  border: none;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.daily-bonus-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+}
+
+.daily-bonus-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.streak-info {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.streak-fire {
+  color: #ff6b35;
+  font-size: 1.2rem;
+}
+
+/* Scrollbar personnalisée */
+.transactions-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transactions-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.transactions-list::-webkit-scrollbar-thumb {
+  background: rgba(138, 43, 226, 0.5);
+  border-radius: 10px;
+}
+
+.transactions-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(138, 43, 226, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .balance-amount {
+    font-size: 2.5rem;
+  }
+  
+  .team-coins-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-coins-actions {
+    flex-direction: column;
+  }
+}
+</style>
+
+<!-- HTML du widget Team Coins -->
+<div class="team-coins-widget" id="teamCoinsWidget">
+  <!-- Header -->
+  <div class="team-coins-header">
+    <div class="team-coins-title">
+      <span class="team-coins-icon">💎</span>
+      Team Coins
+    </div>
+  </div>
+
+  <!-- Solde principal -->
+  <div class="team-coins-balance">
+    <div class="balance-amount" id="tcBalance">0</div>
+    <div class="balance-label">Team Coins</div>
+  </div>
+
+<!-- Bonus quotidien -->
+<div class="daily-bonus-card" id="dailyBonusCard">
+  <button class="daily-bonus-btn" id="dailyBonusBtn">
+    🎁 Réclamer le bonus quotidien
+  </button>
+  <div class="streak-info" id="streakInfo" style="display: none;">
+    <span class="streak-fire">🔥</span>
+    Série de <strong id="streakDays">0</strong> jours !
+  </div>
+  <div class="daily-bonus-msg" id="dailyBonusMsg"></div>
+</div>
+
+
+  <!-- Actions -->
+  <div class="team-coins-actions">
+    <button class="tc-btn tc-btn-primary" onclick="openEarnCoinsModal()">
+      ✨ Gagner plus de Team Coins
+    </button>
+    <button class="tc-btn tc-btn-secondary" onclick="openShopModal()">
+      🛒 Boutique
+    </button>
+    <button class="tc-btn tc-btn-secondary" onclick="openHistoryModal()">
+      📜 Historique
+    </button>
+  </div>
+
+  <!-- Stats rapides -->
+  <div class="team-coins-stats">
+    <div class="tc-stat">
+      <div class="tc-stat-value" id="tcTotalEarned">0</div>
+      <div class="tc-stat-label">Gagnés</div>
+    </div>
+    <div class="tc-stat">
+      <div class="tc-stat-value" id="tcTotalSpent">0</div>
+      <div class="tc-stat-label">Dépensés</div>
+    </div>
+    <div class="tc-stat">
+      <div class="tc-stat-value" id="tcRanking">-</div>
+      <div class="tc-stat-label">Classement</div>
+    </div>
+  </div>
+
+  <!-- Transactions récentes -->
+  <div class="recent-transactions">
+    <div class="transactions-header">
+      <div class="transactions-title">Transactions récentes</div>
+    </div>
+    <div class="transactions-list" id="recentTransactions">
+      <!-- Les transactions seront chargées dynamiquement -->
+      <div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">
+        Chargement...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript pour le widget Team Coins -->
+<script>
+// ========================================
+// GESTION DU WIDGET TEAM COINS
+// ========================================
+
+let teamCoinsData = {
+  balance: 0,
+  totalEarned: 0,
+  totalSpent: 0,
+  ranking: null,
+  streakDays: 0
+};
+
+// Charger les données Team Coins
+async function loadTeamCoinsData() {
+  try {
+    // Charger le solde
+    const balanceRes = await fetch('/api/team-coins/balance');
+    const balanceData = await balanceRes.json();
+    
+    if (balanceData.success) {
+      teamCoinsData.balance = balanceData.data.balance;
+      updateBalanceDisplay();
+    }
+    
+    // Charger les stats
+    const statsRes = await fetch('/api/team-coins/stats');
+    const statsData = await statsRes.json();
+    
+    if (statsData.success) {
+      teamCoinsData.totalEarned = statsData.data.totalEarned;
+      teamCoinsData.totalSpent = statsData.data.totalSpent;
+      updateStatsDisplay();
+    }
+    
+    // Charger les transactions récentes
+    const transactionsRes = await fetch('/api/team-coins/transactions?limit=5');
+    const transactionsData = await transactionsRes.json();
+    
+    if (transactionsData.success) {
+      displayRecentTransactions(transactionsData.data.transactions);
+    }
+    
+  } catch (err) {
+    console.error('Erreur chargement Team Coins:', err);
+  }
+}
+
+// Mettre à jour l'affichage du solde
+function updateBalanceDisplay() {
+  const balanceEl = document.getElementById('tcBalance');
+  
+  // Animation du compteur
+  animateNumber(balanceEl, parseInt(balanceEl.textContent), teamCoinsData.balance, 1000);
+}
+
+// Mettre à jour les stats
+function updateStatsDisplay() {
+  document.getElementById('tcTotalEarned').textContent = formatNumber(teamCoinsData.totalEarned);
+  document.getElementById('tcTotalSpent').textContent = formatNumber(teamCoinsData.totalSpent);
+  
+  if (teamCoinsData.ranking) {
+    document.getElementById('tcRanking').textContent = `#${teamCoinsData.ranking}`;
+  }
+}
+
+// Afficher les transactions récentes
+function displayRecentTransactions(transactions) {
+  const container = document.getElementById('recentTransactions');
+  
+  if (transactions.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">
+        Aucune transaction
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = transactions.map(t => {
+    const isEarn = t.type === 'earn';
+    const sign = isEarn ? '+' : '-';
+    const amountClass = isEarn ? 'positive' : 'negative';
+    const itemClass = isEarn ? 'earn' : 'spend';
+    
+    return `
+      <div class="transaction-item ${itemClass}">
+        <div class="transaction-info">
+          <div class="transaction-icon">${t.icon}</div>
+          <div class="transaction-details">
+            <div class="transaction-name">${t.sourceName}</div>
+            <div class="transaction-date">${formatDate(t.date)}</div>
+          </div>
+        </div>
+        <div class="transaction-amount ${amountClass}">
+          ${sign}${Math.abs(t.amount)} TC
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Gérer le bonus quotidien
+document.getElementById('dailyBonusBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('dailyBonusBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Chargement...';
+  
+  try {
+    const res = await fetch('/api/team-coins/daily-bonus', {
+      method: 'POST'
+    });
+    
+    const data = await res.json();
+    
+    if (data.success) {
+      // Animation de récompense
+      showRewardAnimation(data.data.bonus);
+      
+      // Mettre à jour le solde
+      teamCoinsData.balance = data.data.newBalance;
+      teamCoinsData.streakDays = data.data.streakDays;
+      updateBalanceDisplay();
+      
+      // Afficher la série
+      if (data.data.streakDays > 1) {
+        document.getElementById('streakInfo').style.display = 'block';
+        document.getElementById('streakDays').textContent = data.data.streakDays;
+      }
+      
+      // Message de succès
+      btn.textContent = `✅ ${data.data.message}`;
+      btn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+      
+      // Recharger les transactions
+      loadTeamCoinsData();
+      
+} else {
+  btn.disabled = true;
+  if (data.nextBonus) {
+    // Bonus déjà réclamé aujourd'hui : affichage countdown
+    const interval = setInterval(() => {
+      const now = new Date();
+      const tomorrow = new Date();
+      tomorrow.setDate(now.getDate() + 1);
+      tomorrow.setHours(0,0,0,0);
+
+      const diff = tomorrow - now;
+      if (diff <= 0) {
+        clearInterval(interval);
+        btn.disabled = false;
+        btn.textContent = '🎁 Réclamer le bonus quotidien';
+        return;
+      }
+
+      const hours = String(Math.floor(diff/1000/60/60)).padStart(2,'0');
+      const minutes = String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
+      const seconds = String(Math.floor((diff/1000)%60)).padStart(2,'0');
+
+      btn.textContent = `🎁 Bonus déjà pris - dispo dans ${hours}:${minutes}:${seconds}`;
+    }, 1000);
+  } else {
+    btn.textContent = '❌ ' + data.error;
+    setTimeout(() => {
+      btn.textContent = '🎁 Réclamer le bonus quotidien';
+      btn.disabled = false;
+    }, 3000);
+  }
+}
+
+    
+  } catch (err) {
+    console.error('Erreur bonus quotidien:', err);
+    btn.textContent = '❌ Erreur';
+    btn.disabled = false;
+  }
+});
+
+// Animation de récompense
+function showRewardAnimation(amount) {
+  const widget = document.getElementById('teamCoinsWidget');
+  const animation = document.createElement('div');
+  animation.style.cssText = `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 900;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    z-index: 1000;
+    animation: reward-pop 2s ease-out forwards;
+  `;
+  animation.textContent = `+${amount} TC! 🎉`;
+  widget.appendChild(animation);
+  
+  setTimeout(() => animation.remove(), 2000);
+}
+
+// Ouvrir les modals (à implémenter)
+function openEarnCoinsModal() {
+  alert('Modal "Gagner plus de Team Coins" - À implémenter');
+  // TODO: Afficher modal avec toutes les méthodes pour gagner des TC
+}
+
+function openShopModal() {
+  alert('Boutique Team Coins - À implémenter prochainement');
+  // TODO: Afficher modal boutique
+}
+
+function openHistoryModal() {
+  alert('Historique complet - À implémenter');
+  // TODO: Afficher modal avec historique complet des transactions
+}
+
+// Utilitaires
+function formatNumber(num) {
+  return new Intl.NumberFormat('fr-FR').format(num);
+}
+
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diff = now - date;
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+  
+  if (minutes < 1) return 'À l\'instant';
+  if (minutes < 60) return `Il y a ${minutes}min`;
+  if (hours < 24) return `Il y a ${hours}h`;
+  if (days < 7) return `Il y a ${days}j`;
+  
+  return date.toLocaleDateString('fr-FR');
+}
+
+function animateNumber(element, start, end, duration) {
+  const range = end - start;
+  const increment = range / (duration / 16);
+  let current = start;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+      current = end;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(current);
+  }, 16);
+}
+
+// Animation CSS reward-pop
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes reward-pop {
+    0% { 
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+    50% { 
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 1;
+    }
+    100% { 
+      transform: translate(-50%, -100%) scale(0.8);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// Charger les données au chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+  loadTeamCoinsData();
+  
+  // Rafraîchir toutes les 30 secondes
+  setInterval(loadTeamCoinsData, 30000);
+});
+</script>
+
+<!-- ========================================
+     FIN WIDGET TEAM COINS
+     ======================================== -->
+    
+    <!-- Header Profile -->
+    <section class="dashboard-header">
+      <div class="profile-info">
+        <img id="profile-avatar" src="/assets/logo-stream-team-hq.webp" alt="Avatar" class="profile-avatar-large">
+        <div class="profile-details">
+          <h1 id="profile-name">Chargement...</h1>
+          <p id="profile-rank" class="rank-badge">Recrue</p>
+        </div>
+      </div>
+      
+      <div class="level-progress">
+        <div class="level-info">
+          <span class="level-label">Niveau <strong id="current-level">1</strong></span>
+          <span class="xp-label"><span id="current-xp">0</span> / <span id="next-level-xp">100</span> XP</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="xp-progress" style="width: 0%"></div>
+        </div>
+        <div class="streak-info">
+          <i class="fas fa-fire"></i>
+          <span>Streak: <strong id="streak-days">0</strong> jours</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPIs Cards -->
+    <section class="kpis-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon views">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="kpi-content">
+          <h3>Vues du profil</h3>
+          <p class="kpi-value" id="kpi-views">0</p>
+          <p class="kpi-evolution" id="kpi-views-evolution">
+            <span class="trend-icon">↑</span> +0%
+          </p>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon salves">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="kpi-content">
+          <h3>Salves reçues</h3>
+          <p class="kpi-value" id="kpi-salves">0</p>
+          <p class="kpi-evolution" id="kpi-salves-evolution">
+            <span class="trend-icon">↑</span> +0
+          </p>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon referrals">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="kpi-content">
+          <h3>Filleuls actifs</h3>
+          <p class="kpi-value"><span id="kpi-referrals-active">0</span>/<span id="kpi-referrals-total">0</span></p>
+          <p class="kpi-evolution">
+            <span id="kpi-referrals-percentage">0%</span> d'activité
+          </p>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon ranking">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="kpi-content">
+          <h3>Classement</h3>
+          <p class="kpi-value" id="kpi-ranking">#-</p>
+          <p class="kpi-evolution" id="kpi-ranking-evolution">
+            <span class="trend-icon">→</span> Stable
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+      <div class="chart-card">
+        <h3><i class="fas fa-chart-line"></i> Vues du profil (7 derniers jours)</h3>
+        <canvas id="viewsChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3><i class="fas fa-chart-pie"></i> Sources de trafic</h3>
+        <canvas id="sourcesChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Activity & Quests Section -->
+    <section class="activity-quests-section">
+      
+      <!-- Recent Activity -->
+      <div class="activity-card">
+        <h3><i class="fas fa-bell"></i> Activité récente</h3>
+        <div id="activity-feed" class="activity-feed">
+          <!-- Sera rempli par JS -->
+        </div>
+      </div>
+
+      <!-- Quests Preview -->
+      <div class="quests-card">
+        <div class="quests-header">
+          <h3><i class="fas fa-tasks"></i> Quêtes du jour</h3>
+          <a href="/dashboard/quests" class="btn-link">Voir toutes</a>
+        </div>
+        
+        <div id="quests-daily" class="quests-list">
+          <!-- Sera rempli par JS -->
+        </div>
+
+        <div class="quest-weekly" id="quest-weekly-container" style="display: none;">
+          <h4>📅 Quête hebdomadaire</h4>
+          <div id="quest-weekly">
+            <!-- Sera rempli par JS -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer Universel -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+          <a href="/dashboard">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- ========================================
+     🍪 BANNIÈRE RGPD COOKIES
+     À ajouter avant </body> dans TOUTES les pages
+     ======================================== -->
+
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
+        </div>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="/header-auth.js"></script>
+  <script src="/cookie-consent.js"></script>
+  <script src="script.js" defer></script>
+
+  <script>
+    // Chargement FontAwesome
+    const fa = document.getElementById('fontawesome-css');
+    if (fa) fa.media = 'all';
+
+    // ========================================
+    // CHARGEMENT DES DONNÉES
+    // ========================================
+
+    let viewsChartInstance = null;
+    let sourcesChartInstance = null;
+
+    async function loadDashboard() {
+      try {
+        const response = await fetch('/api/dashboard/overview', {
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            // Non connecté → redirection
+            window.location.href = '/auth/twitch';
+            return;
+          }
+          throw new Error('Erreur lors du chargement');
+        }
+
+        const { data } = await response.json();
+
+        // Afficher le contenu
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('dashboard-content').style.display = 'block';
+
+        // Remplir les données
+        displayProfile(data.profile);
+        displayKPIs(data.kpis);
+        displayCharts(data.charts);
+        displayActivity(data.recentActivity);
+        displayQuests(data.quests);
+
+      } catch (error) {
+        console.error('Erreur:', error);
+        document.getElementById('loading-state').innerHTML = `
+          <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ff4444;"></i>
+          <p>Impossible de charger le dashboard</p>
+          <button onclick="location.reload()" class="btn btn-primary">Réessayer</button>
+        `;
+      }
+    }
+
+    // ========================================
+    // AFFICHAGE PROFIL
+    // ========================================
+
+    function displayProfile(profile) {
+      document.getElementById('profile-avatar').src = profile.avatar;
+      document.getElementById('profile-name').textContent = profile.displayName;
+      document.getElementById('profile-rank').textContent = `Niveau ${profile.level} - ${profile.rank}`;
+      
+      document.getElementById('current-level').textContent = profile.level;
+      document.getElementById('current-xp').textContent = profile.xp;
+      document.getElementById('next-level-xp').textContent = profile.xpForNextLevel;
+      document.getElementById('streak-days').textContent = profile.streak;
+
+      // Barre de progression
+      const progress = (profile.xp / profile.xpForNextLevel) * 100;
+      document.getElementById('xp-progress').style.width = `${Math.min(progress, 100)}%`;
+
+      // Update nav auth
+    /*  document.getElementById('nav-auth-container').innerHTML = `
+        <div class="user-menu">
+          <img src="${profile.avatar}" alt="${profile.displayName}" width="32" height="32" style="border-radius: 50%;">
+          <span>${profile.displayName}</span>
+        </div>
+      `;*/
+    }
+
+    // ========================================
+    // AFFICHAGE KPIS
+    // ========================================
+
+    function displayKPIs(kpis) {
+      // Vues
+    document.getElementById('kpi-views').textContent = kpis.views.value.toLocaleString();
+
+    // Vérifier que l'évolution n'est pas null
+    if (kpis.views.evolution !== null && kpis.views.evolution !== undefined && !isNaN(kpis.views.evolution)) {
+      document.getElementById('kpi-views-evolution').innerHTML = `
+        <span class="trend-icon ${kpis.views.trend}">${kpis.views.trend === 'up' ? '↑' : '↓'}</span>
+        ${kpis.views.evolution >= 0 ? '+' : ''}${kpis.views.evolution}%
+      `;
+    } else {
+      // Afficher un message alternatif
+      document.getElementById('kpi-views-evolution').innerHTML = `
+        <span style="color: #94a3b8; font-size: 0.85rem;">7 derniers jours</span>
+      `;
+    }
+
+    document.getElementById('kpi-salves').textContent = kpis.salves.value;
+
+    // Vérifier que l'évolution n'est pas null
+    if (kpis.salves.evolution !== null && kpis.salves.evolution !== undefined && !isNaN(kpis.salves.evolution)) {
+      document.getElementById('kpi-salves-evolution').innerHTML = `
+        <span class="trend-icon ${kpis.salves.trend}">${kpis.salves.trend === 'up' ? '↑' : '↓'}</span>
+        ${kpis.salves.evolution >= 0 ? '+' : ''}${kpis.salves.evolution}
+      `;
+    } else {
+      // Afficher un message alternatif
+      document.getElementById('kpi-salves-evolution').innerHTML = `
+        <span style="color: #94a3b8; font-size: 0.85rem;">7 derniers jours</span>
+      `;
+    }
+
+      // Filleuls
+      document.getElementById('kpi-referrals-active').textContent = kpis.referrals.active;
+      document.getElementById('kpi-referrals-total').textContent = kpis.referrals.total;
+      document.getElementById('kpi-referrals-percentage').textContent = `${kpis.referrals.percentage}%`;
+
+      // Ranking
+      if (kpis.ranking.position) {
+        document.getElementById('kpi-ranking').textContent = `#${kpis.ranking.position}`;
+      } else {
+        document.getElementById('kpi-ranking').textContent = '-';
+      }
+    }
+
+    // ========================================
+    // AFFICHAGE GRAPHIQUES
+    // ========================================
+
+    function displayCharts(charts) {
+      // Graphique des vues
+      const viewsCtx = document.getElementById('viewsChart').getContext('2d');
+      
+      if (viewsChartInstance) {
+        viewsChartInstance.destroy();
+      }
+
+      viewsChartInstance = new Chart(viewsCtx, {
+        type: 'line',
+        data: {
+          labels: charts.views.map(d => new Date(d.date).toLocaleDateString('fr-FR', { weekday: 'short' })),
+          datasets: [{
+            label: 'Vues',
+            data: charts.views.map(d => d.value),
+            borderColor: '#00FF9F',
+            backgroundColor: 'rgba(0, 255, 159, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+
+      // Graphique des sources
+      const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
+      
+      if (sourcesChartInstance) {
+        sourcesChartInstance.destroy();
+      }
+
+      const sourceLabels = {
+        'direct': 'Direct',
+        'referral': 'Parrainage',
+        'search': 'Recherche',
+        'social': 'Réseaux sociaux'
+      };
+
+      sourcesChartInstance = new Chart(sourcesCtx, {
+        type: 'doughnut',
+        data: {
+          labels: charts.sources.map(s => sourceLabels[s.source] || s.source),
+          datasets: [{
+            data: charts.sources.map(s => s.value),
+            backgroundColor: ['#00FF9F', '#7F00FF', '#FF00FF', '#00BFFF']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom' }
+          }
+        }
+      });
+    }
+
+    // ========================================
+    // AFFICHAGE ACTIVITÉ
+    // ========================================
+
+    function displayActivity(activities) {
+      const feed = document.getElementById('activity-feed');
+      
+      if (activities.length === 0) {
+        feed.innerHTML = '<p class="no-activity">Aucune activité récente</p>';
+        return;
+      }
+
+      feed.innerHTML = activities.map(activity => {
+        const icon = getActivityIcon(activity.type);
+        const message = getActivityMessage(activity);
+        
+        return `
+          <div class="activity-item">
+            <div class="activity-icon ${activity.type}">${icon}</div>
+            <div class="activity-content">
+              <p>${message}</p>
+              <span class="activity-time">${activity.timeAgo}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getActivityIcon(type) {
+      const icons = {
+        'salve': '💜',
+        'referral': '👥',
+        'achievement': '🏆',
+        'level_up': '⭐'
+      };
+      return icons[type] || '📌';
+    }
+
+    function getActivityMessage(activity) {
+      switch(activity.type) {
+        case 'salve':
+          return `<strong>${activity.actor.name}</strong> t'a envoyé une salve`;
+        case 'referral':
+          return `<strong>${activity.actor.name}</strong> a rejoint via ton lien`;
+        case 'achievement':
+          return `Badge débloqué : <strong>${activity.data.badge}</strong>`;
+        case 'level_up':
+          return `Niveau <strong>${activity.data.level}</strong> atteint !`;
+        default:
+          return activity.data.message || 'Activité';
+      }
+    }
+
+    // ========================================
+    // AFFICHAGE QUÊTES
+    // ========================================
+
+    function displayQuests(quests) {
+      const dailyContainer = document.getElementById('quests-daily');
+      
+      if (quests.daily.length === 0) {
+        dailyContainer.innerHTML = '<p class="no-quests">Aucune quête disponible</p>';
+      } else {
+        dailyContainer.innerHTML = quests.daily.map(quest => {
+          const progress = (quest.progression / quest.total) * 100;
+          const completed = quest.completed;
+          
+          return `
+            <div class="quest-item ${completed ? 'completed' : ''}">
+              <div class="quest-info">
+                <h4>${completed ? '✅' : '⏳'} ${quest.title} (${quest.progression}/${quest.total})</h4>
+                <p>${quest.description}</p>
+              </div>
+              <div class="quest-progress">
+                <div class="progress-bar-small">
+                  <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <span class="quest-reward">+${quest.reward.xp} XP</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Quête hebdomadaire
+      if (quests.weekly.length > 0) {
+        const weekly = quests.weekly[0];
+        const progress = (weekly.progression / weekly.total) * 100;
+        
+        document.getElementById('quest-weekly-container').style.display = 'block';
+        document.getElementById('quest-weekly').innerHTML = `
+          <div class="quest-item">
+            <div class="quest-info">
+              <h4>${weekly.title} (${weekly.progression}/${weekly.total})</h4>
+              <p>${weekly.description}</p>
+            </div>
+            <div class="quest-progress">
+              <div class="progress-bar-small">
+                <div class="progress-fill" style="width: ${progress}%"></div>
+              </div>
+              <span class="quest-reward">+${weekly.reward.xp} XP + ${weekly.reward.additional || 'Récompense'}</span>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // ========================================
+    // INIT
+    // ========================================
+
+    loadDashboard();
+  </script>
+</body>
+</html>
