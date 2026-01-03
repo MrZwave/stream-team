@@ -1,101 +1,539 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Conditions Générales d'Utilisation</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5N53QMW3B2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5N53QMW3B2');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions Générales d'Utilisation | Stream Team HQ</title>
+  <meta name="description" content="CGU de Stream Team HQ. Règles d'utilisation de la plateforme pour streamers Twitch.">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" media="print" id="fontawesome-css">
 </head>
-<body>
-  <div class="dropdown-container">
-    <div class="dropdown-wrapper" id="auth-wrapper">
-      <button id="auth-button" class="dropdown-trigger">⚙️ Options</button>
-      <div class="dropdown-menu" id="auth-dropdown">
-        <a href="/home.html" class="dropdown-item">🏠 Accueil</a>
-                <a href="#" id="profileButton" class="dropdown-item">👤 Profil</a>
-        <a href="/watch.html" class="dropdown-item">🎥 Regarder des Lives</a>
-        <a href="/album.html" class="dropdown-item">🎴 Mon Album</a>
-        <a href="/roadmap.html" class="dropdown-item">🗺️ Roadmap</a>
-        <a href="/logout" class="dropdown-item">🚪 Déconnexion</a>
+<body class="glow-bg">
+  <header class="universal-header">
+    <nav class="universal-nav">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <img src="/assets/logo-stream-team-hq.webp" alt="Stream Team HQ" width="40" height="40" />
+      </div>
+      <!-- Titre Central -->
+      <div class="nav-center">
+        <h1 class="nav-title" id="pageTitle"><i class="fas fa-home"></i> Accueil</h1>
+      </div>
+      <!-- Actions Droite -->
+      <div class="nav-actions loading">
+      </div>
+    </nav>
+    <!-- Panneau Notifications -->
+    <div id="notifPanel" class="notif-panel">
+      <div class="notif-header">
+        <h3><i class="fas fa-bell"></i> Notifications</h3>
+        <button id="closeNotif" class="notif-close-btn" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notif-list">
+        <p style="color: #94a3b8; padding: 20px; text-align: center;">Chargement...</p>
       </div>
     </div>
-  </div>
-  <main style="max-width: 800px; margin: 5rem auto; padding: 2rem; background: var(--surface); border-radius: 10px; box-shadow: 0 0 20px var(--shadow);">
-    <h1>📘 Conditions Générales d'Utilisation (CGU)</h1>
+    <!-- Menu Dropdown -->
+    <div id="menuDropdown" class="menu-dropdown">
+      <a href="/home" class="dropdown-item">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a href="#" id="profileButton" class="dropdown-item">
+        <i class="fas fa-user"></i> Mon Profil
+      </a>
+      <a href="/watch" class="dropdown-item">
+        <i class="fas fa-video"></i> Lives
+      </a>
+      <a href="/album" class="dropdown-item">
+        <i class="fas fa-images"></i> Album
+      </a>
+      <a href="/roadmap" class="dropdown-item">
+        <i class="fas fa-map"></i> Roadmap
+      </a>
+      <a href="/dashboard" class="dropdown-item">
+        <i class="fas fa-chart-line"></i> Dashboard
+      </a>
+      <a href="/referral" class="dropdown-item">
+        <i class="fas fa-users"></i> Parrainage
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="/logout" class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </div>
+  </header>
 
-    <p>Les présentes Conditions Générales d’Utilisation (CGU) régissent l’accès et l’utilisation du site <strong>Stream Team</strong> accessible à l’adresse : <a href="https://stream-team.site">https://stream-team.site</a></p>
+  <main class="legal-container">
+    <section class="legal-hero">
+      <div class="legal-hero-content">
+        <h1><i class="fas fa-file-contract"></i> Conditions Générales d'Utilisation</h1>
+        <p class="legal-subtitle">Règles d'utilisation de Stream Team HQ</p>
+        <div class="legal-badge"><i class="fas fa-calendar"></i><span>Mise à jour : 29 octobre 2025</span></div>
+      </div>
+    </section>
 
-    <h2>1. Acceptation des conditions</h2>
-    <p>En accédant et en naviguant sur le site, l’utilisateur accepte sans réserve les présentes CGU. Si vous êtes en désaccord avec tout ou partie des CGU, vous devez quitter le site immédiatement.</p>
+    <article class="legal-card neon-border">
+      
+      <section class="legal-section">
+        <h2><i class="fas fa-handshake"></i> Acceptation des conditions</h2>
+        <div class="legal-content">
+          <p>En accédant et en utilisant <strong>Stream Team HQ</strong> (<a href="https://stream-team.site">https://stream-team.site</a>), vous acceptez sans réserve les présentes Conditions Générales d'Utilisation (CGU).</p>
+          <div class="legal-warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+              <strong>Important</strong>
+              <p>Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser le service.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>2. Services proposés</h2>
-    <p>Le site Stream Team permet aux streamers Twitch de :</p>
-    <ul>
-      <li>Suivre leurs statistiques de streaming</li>
-      <li>Afficher leur profil public</li>
-      <li>Accéder à un album personnel et des cartes à collectionner</li>
-      <li>Participer à des événements communautaires</li>
-    </ul>
+      <section class="legal-section">
+        <h2><i class="fas fa-star"></i> Présentation du service</h2>
+        <div class="legal-content">
+          <p><strong>Stream Team HQ</strong> est une plateforme communautaire pour streamers Twitch francophones, proposant :</p>
+          <div class="legal-data-box">
+            <div class="data-category">
+              <h4><i class="fas fa-user-circle"></i> Profil Streamer</h4>
+              <ul>
+                <li>Page profil publique</li>
+                <li>Statistiques de vues</li>
+                <li>Système de salves</li>
+              </ul>
+            </div>
+            <div class="data-category">
+              <h4><i class="fas fa-video"></i> Clips & Lives</h4>
+              <ul>
+                <li>Consultation de clips</li>
+                <li>Découverte de lives</li>
+                <li>Album personnel</li>
+              </ul>
+            </div>
+            <div class="data-category">
+              <h4><i class="fas fa-trophy"></i> Quêtes & Récompenses</h4>
+              <ul>
+                <li>Défis communautaires</li>
+                <li>Progression</li>
+                <li>Cartes à collectionner</li>
+              </ul>
+            </div>
+          </div>
+          <p><strong>Nature du service :</strong> Aide aux streamers, hébergé en France</p>
+        </div>
+      </section>
 
-    <h2>3. Compte utilisateur</h2>
-    <p>L’authentification s’effectue via le service OAuth de Twitch. En vous connectant, vous autorisez Stream Team à accéder à certaines données de votre profil Twitch (identifiant, login, image de profil, etc.). Ces données sont nécessaires au fonctionnement du site.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-user-plus"></i> Création de compte</h2>
+        <div class="legal-content">
+          <h3>Conditions d'inscription</h3>
+          <ul class="legal-list">
+            <li><strong>Âge minimum :</strong> 13 ans (conformément aux CGU de Twitch)</li>
+            <li><strong>Compte Twitch requis :</strong> L'authentification se fait via OAuth Twitch</li>
+            <li><strong>Unicité :</strong> Un seul compte par personne</li>
+            <li><strong>Informations exactes :</strong> Les données fournies doivent être véridiques</li>
+          </ul>
 
-    <h2>4. Obligations des utilisateurs</h2>
-    <p>L’utilisateur s’engage à :</p>
-    <ul>
-      <li>Ne pas publier de contenu illégal, offensant, haineux ou diffamatoire</li>
-      <li>Respecter les autres membres de la communauté</li>
-      <li>Ne pas tenter de compromettre la sécurité ou le bon fonctionnement du site</li>
-    </ul>
+          <h3>Autorisation OAuth Twitch</h3>
+          <p>En vous connectant, vous autorisez Stream Team HQ à accéder à :</p>
+          <ul class="legal-list">
+            <li>Votre identifiant et nom d'affichage Twitch</li>
+            <li>Votre photo de profil</li>
+            <li>Votre adresse email (si autorisée)</li>
+          </ul>
+          <p>Ces données sont nécessaires au fonctionnement du service. Voir notre <a href="/confidentialite">Politique de confidentialité</a>.</p>
+        </div>
+      </section>
 
-    <h2>5. Données personnelles (RGPD)</h2>
-    <p>Stream Team collecte et traite certaines données personnelles pour le bon fonctionnement du site. Ces données sont traitées conformément au Règlement Général sur la Protection des Données (RGPD).</p>
-    <p>Voir la <a href="/confidentialite.html">Politique de Confidentialité</a> pour connaître les finalités, la durée de conservation, les droits d’accès, de rectification, de suppression, et de portabilité des données.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-gavel"></i> Obligations des utilisateurs</h2>
+        <div class="legal-content">
+          <p>En utilisant Stream Team HQ, vous vous engagez à :</p>
+          
+          <div class="cookie-types">
+            <div class="cookie-type">
+              <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+              <div>
+                <strong>Respecter la communauté</strong>
+                <p>Comportement courtois, pas de harcèlement, pas de propos haineux ou discriminatoires</p>
+              </div>
+            </div>
+            <div class="cookie-type">
+              <i class="fas fa-shield-alt" style="color: var(--primary);"></i>
+              <div>
+                <strong>Respecter la sécurité</strong>
+                <p>Ne pas tenter de compromettre le site, pas de spam, pas d'utilisation de bots ou scripts malveillants</p>
+              </div>
+            </div>
+            <div class="cookie-type">
+              <i class="fas fa-balance-scale" style="color: var(--primary);"></i>
+              <div>
+                <strong>Respecter la loi</strong>
+                <p>Pas de contenu illégal, diffamatoire, violent ou pornographique. Respect de la propriété intellectuelle</p>
+              </div>
+            </div>
+          </div>
 
-    <h2>6. Cookies et traceurs</h2>
-    <p>Des cookies peuvent être utilisés à des fins techniques, de mesure d’audience ou pour améliorer l’expérience utilisateur. Vous pouvez accepter ou refuser ces cookies via la bannière affichée lors de votre première visite.</p>
+          <div class="legal-warning-box">
+            <i class="fas fa-ban"></i>
+            <div>
+              <strong>Comportements interdits</strong>
+              <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li>Usurpation d'identité</li>
+                <li>Manipulation des statistiques ou classements</li>
+                <li>Partage non autorisé de contenu protégé</li>
+                <li>Utilisation commerciale sans autorisation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>7. Propriété intellectuelle</h2>
-    <p>Les éléments visuels, textuels et techniques du site Stream Team (logo, design, code, textes) sont protégés par les lois en vigueur sur la propriété intellectuelle. Toute reproduction, diffusion ou utilisation sans autorisation est interdite.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-copyright"></i> Propriété intellectuelle</h2>
+        <div class="legal-content">
+          <h3>Propriété de Stream Team HQ</h3>
+          <p>Le site, son design, son code, ses graphismes et son contenu original sont la propriété exclusive de Stream Team HQ et protégés par le droit d'auteur.</p>
 
-    <h2>8. Transfert de données hors UE</h2>
-    <p>Le site utilise l’API Twitch, dont les serveurs sont situés en dehors de l’Union européenne. Vos données peuvent donc être transférées hors UE. Ces transferts sont encadrés par des garanties contractuelles appropriées fournies par Twitch.</p>
+          <h3>Contenu tiers</h3>
+          <ul class="legal-list">
+            <li><strong>Twitch :</strong> Les marques, logos et API Twitch appartiennent à Amazon/Twitch Interactive Inc.</li>
+            <li><strong>Clips :</strong> Les clips restent la propriété de leurs créateurs et sont affichés via l'API publique Twitch</li>
+            <li><strong>Avatars :</strong> Les images de profil appartiennent aux utilisateurs Twitch</li>
+          </ul>
 
-    <h2>9. Disponibilité et responsabilité</h2>
-    <p>Le site est fourni "en l’état", sans garantie quant à sa disponibilité, son accessibilité ou son fonctionnement ininterrompu. Stream Team décline toute responsabilité en cas de perte de données, de bug ou d’indisponibilité temporaire.</p>
+          <p><strong>Utilisation autorisée :</strong> Usage personnel et non commercial uniquement. Toute reproduction, diffusion ou exploitation à des fins commerciales est interdite sans autorisation écrite.</p>
+        </div>
+      </section>
 
-    <h2>10. Suspension de compte</h2>
-    <p>Stream Team se réserve le droit de suspendre ou supprimer tout compte ne respectant pas ces conditions, sans préavis.</p>
+      <section class="legal-section">
+        <h2><i class="fas fa-exclamation-circle"></i> Responsabilité et garanties</h2>
+        <div class="legal-content">
+          <h3>Disponibilité du service</h3>
+          <p>Stream Team HQ est fourni <strong>"en l'état"</strong> sans garantie de disponibilité continue. Nous nous réservons le droit d'interrompre temporairement le service pour maintenance.</p>
 
-    <h2>11. Modifications</h2>
-    <p>Les présentes CGU peuvent être modifiées à tout moment. Les utilisateurs seront informés des modifications via une notification sur le site ou par email si applicable.</p>
+          <h3>Limitation de responsabilité</h3>
+          <p>Stream Team HQ ne saurait être tenu responsable :</p>
+          <ul class="legal-list">
+            <li>Des interruptions de service (pannes, maintenance, problèmes tiers)</li>
+            <li>De la perte de données ou de contenus</li>
+            <li>Des dommages directs ou indirects liés à l'utilisation du service</li>
+            <li>Du contenu des clips et streams Twitch affichés</li>
+            <li>Des liens externes vers des sites tiers</li>
+          </ul>
 
-    <h2>12. Contact</h2>
-    <p>Pour toute question, vous pouvez nous contacter à : <a href="mailto:support@stream-team.site">support@stream-team.site</a></p>
-        <h2>11. Dernière mise à jour</h2>
-    <p>Ces CGU ont été mises à jour le <strong>5 juillet 2025</strong>.</p>
-    <p>En utilisant le site, vous acceptez ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.</p>
+          <h3>Obligations de l'utilisateur</h3>
+          <p>L'utilisateur est seul responsable de :</p>
+          <ul class="legal-list">
+            <li>La sécurité de son compte Twitch</li>
+            <li>Son utilisation du service</li>
+            <li>Tout contenu qu'il partage ou publie</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="legal-section">
+        <h2><i class="fas fa-user-times"></i> Suspension et résiliation</h2>
+        <div class="legal-content">
+          <h3>Suspension de compte</h3>
+          <p>Stream Team HQ se réserve le droit de suspendre ou supprimer tout compte :</p>
+          <ul class="legal-list">
+            <li>En cas de violation des présentes CGU</li>
+            <li>En cas de comportement abusif ou nuisible</li>
+            <li>Sur demande de l'utilisateur</li>
+            <li>Pour des raisons techniques ou de sécurité</li>
+          </ul>
+          <p>La suspension peut être temporaire ou définitive, avec ou sans préavis selon la gravité.</p>
+
+          <h3>Suppression de compte par l'utilisateur</h3>
+          <p>Vous pouvez demander la suppression de votre compte à tout moment en contactant <a href="mailto:contact@stream-team.site">contact@stream-team.site</a>. Vos données seront supprimées conformément à notre politique de confidentialité.</p>
+        </div>
+      </section>
+
+      <section class="legal-section">
+        <h2><i class="fas fa-shield-alt"></i> Données personnelles</h2>
+        <div class="legal-content">
+          <p>Le traitement de vos données personnelles est régi par notre <a href="/confidentialite">Politique de confidentialité</a>, conforme au RGPD.</p>
+          <p><strong>Vous disposez de droits</strong> (accès, rectification, suppression, portabilité, opposition) que vous pouvez exercer à tout moment.</p>
+        </div>
+      </section>
+
+      <section class="legal-section">
+        <h2><i class="fas fa-sync-alt"></i> Modification des CGU</h2>
+        <div class="legal-content">
+          <p>Stream Team HQ se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs seront informés des modifications importantes par :</p>
+          <ul class="legal-list">
+            <li>Notification sur le site</li>
+            <li>Email (si applicable)</li>
+            <li>Bannière lors de la connexion</li>
+          </ul>
+          <p>L'utilisation continue du service après modification vaut acceptation des nouvelles conditions.</p>
+        </div>
+      </section>
+
+      <section class="legal-section">
+        <h2><i class="fas fa-landmark"></i> Droit applicable</h2>
+        <div class="legal-content">
+          <p>Les présentes CGU sont régies par le <strong>droit français</strong>.</p>
+          <p>En cas de litige, une résolution amiable sera recherchée en priorité. À défaut, les tribunaux français seront seuls compétents.</p>
+        </div>
+      </section>
+
+      <section class="legal-section legal-contact">
+        <h2><i class="fas fa-envelope"></i> Contact</h2>
+        <div class="legal-content">
+          <p>Pour toute question concernant ces CGU :</p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:contact@stream-team.site">contact@stream-team.site</a>
+              </div>
+            </div>
+            <div class="contact-method">
+              <i class="fas fa-link"></i>
+              <div>
+                <strong>Formulaire</strong>
+                <a href="/contact">Nous contacter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </article>
+
+    <section class="legal-quick-links">
+      <h3>Documents complémentaires</h3>
+      <div class="quick-links-grid">
+        <a href="/mentions-legales" class="quick-link-card"><i class="fas fa-gavel"></i><span>Mentions légales</span></a>
+        <a href="/confidentialite" class="quick-link-card"><i class="fas fa-shield-alt"></i><span>Confidentialité</span></a>
+        <a href="/cookies" class="quick-link-card"><i class="fas fa-cookie-bite"></i><span>Cookies</span></a>
+        <a href="/contact" class="quick-link-card"><i class="fas fa-envelope"></i><span>Contact</span></a>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer Universel -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="/assets/logo-stream-team-hq.webp" alt="Logo" class="footer-logo" />
-        <span class="footer-name">Stream Team</span>
+        <img src="/assets/logo-stream-team-hq.webp" alt="Logo Stream Team HQ" class="footer-logo" width="50" height="50"
+          loading="lazy" />
+        <div class="footer-brand-text">
+          <span class="footer-name">Stream Team HQ</span>
+          <span class="footer-tagline">Le QG des streamers d'élite</span>
+        </div>
       </div>
-      <div class="footer-nav">
-        <a href="/mentions-legales.html">📜 Mentions Légales</a>
-        <a href="/confidentialite.html">🔒 Confidentialité</a>
-        <a href="/conditions.html">📘 Conditions</a>
-        <a href="/cookies.html">🍪 Cookies</a>
-        <a href="/contact.html">📩 Contact</a>
-      </div>
-      <div class="footer-copy">
-        © 2025 Stream Team. Tous droits réservés.
+
+      <nav class="footer-nav" aria-label="Navigation footer">
+        <div class="footer-nav-section">
+          <h4>Légal</h4>
+          <a href="/mentions-legales">
+            <i class="fas fa-file-alt"></i> Mentions Légales
+          </a>
+          <a href="/confidentialite">
+            <i class="fas fa-shield-alt"></i> Confidentialité
+          </a>
+          <a href="/cgu">
+            <i class="fas fa-book"></i> CGU
+          </a>
+          <a href="/cookies">
+            <i class="fas fa-cookie-bite"></i> Cookies
+          </a>
+        </div>
+
+        <div class="footer-nav-section">
+          <h4>Communauté</h4>
+          <a href="/watch">
+            <i class="fas fa-video"></i> Lives
+          </a>
+          <a href="/album">
+            <i class="fas fa-images"></i> Album
+          </a>
+          <a href="/roadmap">
+            <i class="fas fa-map"></i> Roadmap
+          </a>
+          <a href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Stream Team HQ. Tous droits réservés.
+        </div>
+        <div class="footer-badges">
+          <span class="badge-item">
+            <i class="fas fa-shield-check"></i> Site Sécurisé
+          </span>
+          <span class="badge-item">
+            <i class="fas fa-cookie"></i> RGPD Conforme
+          </span>
+        </div>
       </div>
     </div>
   </footer>
-  <script src="script.js"></script>
+   <!-- ========================================
+     🍪 BANNIÈRE RGPD COOKIES
+     À ajouter avant </body> dans TOUTES les pages
+     ======================================== -->
+
+  <!-- Bannière Cookies RGPD -->
+  <div id="cookieBanner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h3>Utilisation des cookies</h3>
+        <p>
+          Nous utilisons des cookies essentiels pour le fonctionnement du site (authentification, sessions).
+          En continuant, vous acceptez notre <a href="/cookies">politique de cookies</a> et notre
+          <a href="/confidentialite">politique de confidentialité</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept">
+          <i class="fas fa-check"></i> Accepter
+        </button>
+        <button id="cookieDecline" class="btn-cookie-decline">
+          <i class="fas fa-times"></i> Refuser
+        </button>
+        <button id="cookieCustomize" class="btn-cookie-customize">
+          <i class="fas fa-cog"></i> Personnaliser
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de personnalisation des cookies -->
+  <div id="cookieModal" class="cookie-modal" style="display: none;">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h2><i class="fas fa-cookie-bite"></i> Gestion des cookies</h2>
+        <button id="closeCookieModal" class="cookie-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cookie-modal-body">
+        <!-- Cookies essentiels (obligatoires) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieEssential" checked disabled>
+              <label for="cookieEssential">
+                <strong>Cookies essentiels</strong>
+                <span class="cookie-required">(Obligatoires)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="essentialDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="essentialDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies sont nécessaires au fonctionnement du site. Ils permettent :
+            </p>
+            <ul>
+              <li>Authentification via Twitch OAuth</li>
+              <li>Maintien de la session utilisateur</li>
+              <li>Sécurité CSRF</li>
+              <li>Mémorisation des préférences de cookies</li>
+            </ul>
+            <p><strong>Durée :</strong> Session ou jusqu'à 30 jours</p>
+          </div>
+        </div>
+
+        <!-- Cookies de performance (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookiePerformance">
+              <label for="cookiePerformance">
+                <strong>Cookies de performance</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="performanceDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="performanceDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies nous aident à améliorer le site en collectant des statistiques anonymes :
+            </p>
+            <ul>
+              <li>Pages visitées</li>
+              <li>Temps passé sur le site</li>
+              <li>Erreurs rencontrées</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+
+        <!-- Cookies de fonctionnalité (optionnels) -->
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <div class="cookie-category-title">
+              <input type="checkbox" id="cookieFunctional">
+              <label for="cookieFunctional">
+                <strong>Cookies de fonctionnalité</strong>
+                <span class="cookie-optional">(Optionnels)</span>
+              </label>
+            </div>
+            <button class="cookie-toggle" data-target="functionalDetails">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="functionalDetails" class="cookie-details" style="display: none;">
+            <p>
+              Ces cookies permettent d'améliorer votre expérience :
+            </p>
+            <ul>
+              <li>Mémorisation du thème (clair/sombre)</li>
+              <li>Préférences de langue</li>
+              <li>État des panneaux (ouvert/fermé)</li>
+            </ul>
+            <p><strong>Durée :</strong> 1 an</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cookie-modal-footer">
+        <button id="cookieSavePreferences" class="btn-cookie-save">
+          <i class="fas fa-save"></i> Enregistrer mes préférences
+        </button>
+        <button id="cookieAcceptAll" class="btn-cookie-accept-all">
+          <i class="fas fa-check-double"></i> Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton flottant pour rouvrir les paramètres cookies -->
+  <button id="cookieSettings" class="cookie-settings-btn" title="Paramètres des cookies">
+    <i class="fas fa-cookie-bite"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="/header-auth.js"></script>
+  <script src="/cookie-consent.js"></script>
+  <script src="script.js" defer></script>
+  
+  <script>
+    const fa = document.getElementById('fontawesome-css');
+    if (fa) fa.media = 'all';
+  </script>
 </body>
 </html>
