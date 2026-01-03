@@ -1,10 +1,10 @@
 {
   "name": "stream-team",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Backend pour le site Stream Team",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "axios": "^1.6.0",
